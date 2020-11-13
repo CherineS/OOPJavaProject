@@ -14,7 +14,7 @@ public class Produit
     private String m_nom;
     private double m_prix;
     private int m_quantite;
-    private int m_promo;
+    private double m_promo;
     
     public Produit(String nom,double prix, int quantite,int promo)
     {
@@ -22,6 +22,11 @@ public class Produit
         m_prix = prix;
         m_quantite = quantite;
         m_promo = promo;
+    }
+    
+    public String getName()
+    {
+        return m_nom;
     }
 
     public void setNom(String m_nom)
@@ -34,7 +39,7 @@ public class Produit
         this.m_prix = m_prix;
     }
 
-    public void setPromo(int m_promo)
+    public void setPromo(double m_promo)
     {
         this.m_promo = m_promo;
     }
@@ -43,5 +48,5 @@ public class Produit
     {
         this.m_quantite = m_quantite;
     }
-    
+     
 }
