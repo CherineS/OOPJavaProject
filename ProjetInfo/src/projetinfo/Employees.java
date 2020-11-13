@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class Employees extends People
 {
     
-    public Employees(String firstName, String lastName, String password, String email, String status)
+    public Employees(String firstName, String lastName, String password, String email)
     {
-        super(firstName,lastName,password,email,status);
+        super(firstName,lastName,password,email);
     }
     
     public void addProducts(Product newProduct,Shop shop)

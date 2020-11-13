@@ -4,35 +4,48 @@
  * and open the template in the editor.
  */
 package projetinfo;
+
 import java.sql.*;
 import javax.sql.*;
 
-
 /**
  *
- * @author antoine 
+ * @author antoine
  */
-
 public class ProjetInfo
 {
-    
-    public static void createDatabaseProduct()
+
+    public static void createDatabase()
     {
         try
         {
-        String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
-        Connection con = DriverManager.getConnection(url, "root", "");
-        Statement stmt = con.createStatement();
-        String sqlStatement = "INSERT INTO product " + "(name, price, promotion, quantity)" + " VALUES " + "('Banane',1,12,100)";
-        String sqlStatement2 = "INSERT INTO product " + "(name, price, promotion, quantity)" + " VALUES " + "('Kiwi',1.20,14,100)";
-        stmt.executeUpdate(sqlStatement);
-        stmt.executeUpdate(sqlStatement2);
-        con.close();
-        }
-        catch (SQLException error)
+            String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+            Connection con = DriverManager.getConnection(url, "root", "");
+            Statement stmt = con.createStatement();
+            String sqlStatementProduct1 = "INSERT INTO product " + "(name, price, promotion, quantity)" + " VALUES " + "('Banane',1,12,100)";
+            String sqlStatementProduct2 = "INSERT INTO product " + "(name, price, promotion, quantity)" + " VALUES " + "('Kiwi',1.20,14,100)";
+            stmt.executeUpdate(sqlStatementProduct1);
+            stmt.executeUpdate(sqlStatementProduct2);
+            con.close();
+        } catch (SQLException error)
         {
-            System.out.println("Database déjà à jour");
-        }  
+            System.out.println("Database PRODUIT déjà à jour");
+        }
+
+        try
+        {
+            String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+            Connection con = DriverManager.getConnection(url, "root", "");
+            Statement stmt = con.createStatement();
+            String sqlStatementPeople1 = "INSERT INTO people " + "(email, firstName, lastName, password, status)" + " VALUES " + "('gaetan.bouchy@yahoo.fr','Gaetan','Bouchy','holibani','employee')";
+            String sqlStatementPeople2 = "INSERT INTO people " + "(email, firstName, lastName, password, status)" + " VALUES " + "('antoine.stutzmann@edu.ece.fr','Antoine','Stutzmann','Test','people')";
+            stmt.executeUpdate(sqlStatementPeople1);
+            stmt.executeUpdate(sqlStatementPeople2);
+            con.close();
+        } catch (SQLException error)
+        {
+            System.out.println("Database PEOPLE déjà à jour");
+        }
     }
 
     /**
@@ -40,7 +53,7 @@ public class ProjetInfo
      */
     public static void main(String[] args)
     {
-        createDatabaseProduct();
+        createDatabase();
     }
 
 }

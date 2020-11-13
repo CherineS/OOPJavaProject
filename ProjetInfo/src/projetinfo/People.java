@@ -15,15 +15,13 @@ public class People
     private final String m_lastName;
     private final String m_password;
     private final String m_email;
-    private final String m_status;
 
-    public People(String firstName,String lastName,String password,String email, String status)
+    public People(String firstName,String lastName,String password,String email)
     {
         m_firstName = firstName;
         m_lastName = lastName;
         m_password = password;
         m_email = email;
-        m_status=status;
     }
 
     public String getFirstName()
@@ -44,11 +42,6 @@ public class People
     public String getEmail()
     {
         return m_email;
-    }
-    
-    public String getStatus()
-    {
-        return m_status;
     }
     
 }

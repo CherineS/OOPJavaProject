@@ -16,7 +16,7 @@ public class Product
     private int m_quantity;
     private double m_promotion;
     
-    public Product(String name,double price, int quantity,int promotion)
+    public Product(String name,double price, int quantity, double promotion)
     {
         m_name = name;
         m_price = price;
