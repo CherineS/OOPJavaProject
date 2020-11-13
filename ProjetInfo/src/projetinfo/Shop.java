@@ -5,7 +5,6 @@
  */
 package projetinfo;
 
-import com.sun.webkit.dom.KeyboardEventImpl;
 import java.sql.*;
 import javax.sql.*;
 import java.util.ArrayList;
@@ -18,58 +17,58 @@ import java.util.Scanner;
 public class Shop
 {
 
-    private ArrayList<Produit> m_reserve;
-    private ArrayList<Personne> m_personne;
+    private ArrayList<Product> m_products = new ArrayList<>();
+    private ArrayList<People> m_people = new ArrayList<>();
 
-    public Shop(ArrayList<Produit> reserve, ArrayList<Personne> personne)
+    public Shop(ArrayList<Product> products, ArrayList<People> people)
     {
-        m_personne = personne;
-        m_reserve = reserve;
+        m_products = products;
+        m_people = people;
     }
 
-    public ArrayList<Personne> getPersonne()
+    public ArrayList<People> getPeople()
     {
-        return m_personne;
+        return m_people;
     }
 
-    public ArrayList<Produit> getReserve()
+    public ArrayList<Product> getProducts()
     {
-        return m_reserve;
+        return m_products;
     }
 
-    public void setQuantity()
+    public void setQuantityEmploye()
     {
         Scanner keyboard = new Scanner(System.in);
-        
+
         // Condition à rajouter pour le fait que ce soit un employé et pas un client
-        
         String name;
-        String begin = "\'";
-        String end = "\'";
         int quantity;
         System.out.println("Choisir le nom de l'objet à modifier");
-        name=keyboard.next();
+        name = keyboard.next();
         System.out.println("Choisir la quantité à mettre");
-        quantity=keyboard.nextInt();
-        name = begin.concat(name);
-        name = name.concat(end);
-        
-        
-        for (int i = 0; i < m_reserve.size(); i++)
-            if (name.equals(m_reserve.get(i).getName()))
+        quantity = keyboard.nextInt();
+
+        for (int i = 0; i < m_products.size(); i++)
+            if (name.equals(m_products.get(i).getName()))
                 try
                 {
+                    String begin = "\'";
+                    String end = "\'";
+                    name = begin.concat(name);
+                    name = name.concat(end);
                     String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
                     Connection con = DriverManager.getConnection(url, "root", "");
                     Statement stmt = con.createStatement();
-                    
+//                    System.out.println("name:" + name);
+//                    System.out.println("quantity:" + quantity);
                     String sqlStatement = "UPDATE product" + "SET quantity = " + quantity + " WHERE " + "name = " + name;
-                    
+                    stmt.executeUpdate(sqlStatement);
                     con.close();
+
                 } catch (SQLException error)
                 {
                     System.out.println("Fail setQuantity SHOP");
                 }
-    }
 
+    }
 }

@@ -9,15 +9,16 @@ import java.util.ArrayList;
  *
  * @author antoi
  */
-public class Customers extends Personne
+public class Customers extends People
 {
     
-    private ArrayList<Commande> m_mescommandes;
-    private double m_solde;
-    public Customers(String prenom, String nom, String mdp, String adressemail,double solde)
+    private ArrayList<Orders> m_orders;
+    private double m_account;
+    
+    public Customers(String firstName, String name, String password, String email, String status, double account)
     {
-        super(prenom, nom, mdp, adressemail);
-        m_solde = solde;
+        super(firstName,name,password,email,status);
+        m_account = account;
     }
     
 }
