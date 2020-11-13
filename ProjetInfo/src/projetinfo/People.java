@@ -11,10 +11,10 @@ package projetinfo;
  */
 public class People
 {
-    private final String m_firstName;
-    private final String m_lastName;
-    private final String m_password;
-    private final String m_email;
+    private String m_firstName;
+    private String m_lastName;
+    private String m_password;
+    private String m_email;
 
     public People(String firstName,String lastName,String password,String email)
     {
@@ -42,6 +42,26 @@ public class People
     public String getEmail()
     {
         return m_email;
+    }
+    
+    public void setFirstName(String firstName)
+    {
+        m_firstName=firstName;
+    }
+      
+    public void setLastName(String lastName)
+    {
+        m_lastName=lastName;
+    }
+    
+    public void setPassword(String password)
+    {
+        m_password=password;
+    }
+
+    public void setEmail(String email)
+    {
+       m_email=email;
     }
     
 }

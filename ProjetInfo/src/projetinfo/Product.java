@@ -28,25 +28,42 @@ public class Product
     {
         return m_name;
     }
+    
+    public double getPrice()
+    {
+        return m_price;
+    }
+    
+    public int getQuantity()
+    {
+        return m_quantity;
+    }
+    
+    public double getPromotion()
+    {
+        return m_promotion;
+    }
 
-    public void setNom(String name)
+    public void setName(String name)
     {
         m_name = name;
     }
 
-    public void setPrix(double price)
+    public void setPrice(double price)
     {
         m_price = price;
     }
+    
+    public void setQuantity(int quantity)
+    {
+        m_quantity = quantity;
+    }
 
-    public void setPromo(double promotion)
+    public void setPromotion(double promotion)
     {
         m_promotion = promotion;
     }
 
-    public void setQuantite(int quantity)
-    {
-        m_quantity = quantity;
-    }
+
    
 }

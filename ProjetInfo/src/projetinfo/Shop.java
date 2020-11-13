@@ -18,15 +18,15 @@ public class Shop
 {
 
     private ArrayList<Product> m_products = new ArrayList<>();
-    private ArrayList<People> m_people = new ArrayList<>();
+    private People m_people;
 
-    public Shop(ArrayList<Product> products, ArrayList<People> people)
+    public Shop(ArrayList<Product> products, People people)
     {
         m_products = products;
         m_people = people;
     }
 
-    public ArrayList<People> getPeople()
+    public People getPeople()
     {
         return m_people;
     }
