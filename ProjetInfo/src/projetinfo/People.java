@@ -11,10 +11,10 @@ package projetinfo;
  */
 public class People
 {
-    private String m_firstName;
-    private String m_lastName;
-    private String m_password;
-    private String m_email;
+    protected String m_firstName;
+    protected String m_lastName;
+    protected String m_password;
+    protected String m_email;
 
     public People(String firstName,String lastName,String password,String email)
     {

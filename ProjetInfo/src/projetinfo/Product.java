@@ -11,17 +11,26 @@ package projetinfo;
  */
 public class Product
 {
+    private int m_productNo;
     private String m_name;
     private double m_price;
     private int m_quantity;
-    private double m_promotion;
+    private int m_minimumPromotion;
+    private double m_valuePromotion;
     
-    public Product(String name,double price, int quantity, double promotion)
+    public Product(int productNo, String name,double price, int quantity, int minimumPromotion, double valuePromotion)
     {
+        m_productNo=productNo;
         m_name = name;
         m_price = price;
         m_quantity = quantity;
-        m_promotion = promotion;
+        m_minimumPromotion=minimumPromotion;
+        m_valuePromotion = valuePromotion;
+    }
+    
+    public int getProductNo()
+    {
+        return m_productNo;
     }
     
     public String getName()
@@ -39,9 +48,19 @@ public class Product
         return m_quantity;
     }
     
-    public double getPromotion()
+    public int getminimumPromotion()
     {
-        return m_promotion;
+        return m_minimumPromotion;
+    }
+    
+    public double getValuePromotion()
+    {
+        return m_valuePromotion;
+    }
+    
+    public void setProductNo(int productNo)
+    {
+        m_productNo=productNo;
     }
 
     public void setName(String name)
@@ -58,12 +77,15 @@ public class Product
     {
         m_quantity = quantity;
     }
-
-    public void setPromotion(double promotion)
+    
+    public void setminimumPromotion(int minimumPromotion)
     {
-        m_promotion = promotion;
+        m_minimumPromotion=minimumPromotion;
     }
 
-
+    public void setValuePromotion(double valuePromotion)
+    {
+        m_valuePromotion = valuePromotion;
+    }
    
 }
