@@ -27,14 +27,6 @@ public class Orders
         m_products = products;
     }
     
-    public void totalPrice()
-    {    
-        for(int i=0; i<m_products.size(); i++)
-        {       
-             m_totalPrice=(m_products.get(i).getQuantity()/m_products.get(i).getminimumPromotion()*(m_products.get(i).getPrice()-m_products.get(i).getValuePromotion())) + (m_products.get(i).getQuantity()%m_products.get(i).getminimumPromotion()*(m_products.get(i).getPrice()));
-        }
-    }
-
     public int getOrderNumber()
     {
         return m_orderNumber;
@@ -73,6 +65,11 @@ public class Orders
     public void setTotalPrice(double totalPrice)
     {
         m_totalPrice = totalPrice;
+    }
+    
+    public void display()
+    {
+        System.out.print("");
     }
 
 }

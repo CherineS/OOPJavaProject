@@ -87,5 +87,11 @@ public class Product
     {
         m_valuePromotion = valuePromotion;
     }
+    
+    public void display()
+    {
+        System.out.println("ProductNo:" + m_productNo + "  Name:" + m_name + "  Price:" + m_price + "  Quantity:" + m_quantity
+                            + "  MinimumPromotion:" + m_minimumPromotion + "  ValuePromotion:" + m_valuePromotion);
+    }
    
 }

@@ -7,6 +7,7 @@ package projetinfo;
 
 import java.sql.*;
 import javax.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -69,6 +70,12 @@ public class ProjetInfo
     public static void main(String[] args)
     {
 //        createDatabase();
+//        ArrayList<Product> databaseProducts = new ArrayList<>();
+//        ProductDAO myobj = new ProductDAO();
+//        myobj.readElements();
+//        databaseProducts=myobj.getDatabaseProducts();
+//        for(int i=0; i<databaseProducts.size(); i++)
+//            databaseProducts.get(i).display();
     }
 
 }
