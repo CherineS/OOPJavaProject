@@ -13,41 +13,6 @@ import javax.sql.*;
  */
 public class ProductDAO extends TablesDAO
 {
-    private ArrayList<Product> m_databaseProducts = new ArrayList<>();
-    
-    @Override
-    public void readElements()
-    {  
-        getConnection();
-        try
-        {
-            ResultSet res = stmt.executeQuery("SELECT* FROM product");
-            while (res.next())
-            {
-                
-                Product myProduct = new Product(res.getInt("productNo"),res.getString("name"), res.getDouble("price"),
-                                        res.getInt("quantity"),res.getInt("minimumPromotion"),res.getDouble("valuePromotion"));
-                m_databaseProducts.add(myProduct);
-            }
-        } 
-        catch (SQLException error)
-        {
-            System.out.println("Error readElements ProductDAO");
-        }
-        closeConnection();
-    }
-    
-    public ArrayList<Product> getDatabaseProducts()
-    {
-        return m_databaseProducts;
-    }
-
-    @Override
-    public void addElement()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public void deleteAllElements()
     {
@@ -63,16 +28,33 @@ public class ProductDAO extends TablesDAO
         }
         closeConnection();
     }
-
+    
     @Override
-    public void deleteElement()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setElement()
+    public void addElement()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
+
+
+//    @Override
+//    public void readElements()
+//    {  
+//        getConnection();
+//        try
+//        {
+//            ResultSet res = stmt.executeQuery("SELECT* FROM product");
+//            while (res.next())
+//            {
+//                
+//                Product myProduct = new Product(res.getInt("productNo"),res.getString("name"), res.getDouble("price"),
+//                                        res.getInt("quantity"),res.getInt("minimumPromotion"),res.getDouble("valuePromotion"));
+//                //m_databaseProducts.add(myProduct);
+//            }
+//        } 
+//        catch (SQLException error)
+//        {
+//            System.out.println("Error readElements ProductDAO");
+//        }
+//        closeConnection();
+//    }

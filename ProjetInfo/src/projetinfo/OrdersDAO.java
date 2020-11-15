@@ -8,33 +8,24 @@ package projetinfo;
 import java.util.ArrayList;
 import java.sql.*;
 import javax.sql.*;
+
 /**
  *
  * @author Gaëtan
  */
 public class OrdersDAO extends TablesDAO
 {
-    private ArrayList<Orders> m_databaseOrders = new ArrayList<>();
-    private ArrayList<Product> m_databaseProducts = new ArrayList<>();
-
     @Override
-    public void readElements()
-    {  
+    public void deleteAllElements()
+    {
         getConnection();
         try
         {
-            ResultSet res = stmt.executeQuery("SELECT* FROM people");
-            while (res.next())
-            {
-                Product myProduct = new Product(res.getInt("productNo"),null,res.getDouble("totalPrice"),res.getInt("quantity"),0,0);
-                m_databaseProducts.add(myProduct);
-                Orders myOrders = new Orders(res.getInt("orderNo"),res.getDate("date"),m_databaseProducts);
-                m_databaseOrders.add(myOrders);
-            }
-        } 
-        catch (SQLException error)
+            String sqlStatement = "DELETE FROM orders";
+            stmt.executeUpdate(sqlStatement);
+        } catch (SQLException error)
         {
-            System.out.println("Error readElements OrdersDAO");
+            System.out.println("Error deleteAllElements OrdersDAO");
         }
         closeConnection();
     }
@@ -44,35 +35,8 @@ public class OrdersDAO extends TablesDAO
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+}
 
-    @Override
-    public void deleteElement()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deleteAllElements()
-    {
-        getConnection();
-        try
-        {
-            String sqlStatement = "DELETE FROM orders";
-            stmt.executeUpdate(sqlStatement);
-        } 
-        catch (SQLException error)
-        {
-            System.out.println("Error deleteAllElements OrdersDAO");
-        }
-        closeConnection();
-    }
-
-    @Override
-    public void setElement()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 //    public void totalPrice()
 //    {    
 //        for(int i=0; i<m_products.size(); i++)
@@ -80,4 +44,38 @@ public class OrdersDAO extends TablesDAO
 //             m_totalPrice=(m_products.get(i).getQuantity()/m_products.get(i).getminimumPromotion()*(m_products.get(i).getPrice()-m_products.get(i).getValuePromotion())) + (m_products.get(i).getQuantity()%m_products.get(i).getminimumPromotion()*(m_products.get(i).getPrice()));
 //        }
 //    }
-}
+
+//    @Override
+//    public void readElements()
+//    {
+//        getConnection();
+//        try
+//        {
+//            ResultSet res = stmt.executeQuery("SELECT* FROM people");
+////            
+//            while (res.next())
+//            {
+//                int stock = res.getInt("orderNo");
+//                do
+//                {
+//                    for (int i = 0; i < m_allProducts.size(); i++)
+//                        if (res.getInt("ProductNo") == m_allProducts.get(i).getProductNo())
+//                        {
+//                            Product myProduct = new Product(m_allProducts.get(i).getProductNo(), m_allProducts.get(i).getName(),
+//                                    m_allProducts.get(i).getPrice(), res.getInt("quantity"),
+//                                    m_allProducts.get(i).getminimumPromotion(), m_allProducts.get(i).getValuePromotion());
+//                            
+//                            m_databaseProducts.add(myProduct);
+//                        }
+//
+//                } while (res.getInt("OrderNo") == stock);
+//
+//                Orders myOrders = new Orders(res.getInt("orderNo"), res.getDate("date"), m_databaseProducts);
+//                m_databaseOrders.add(myOrders);
+//            }
+//        } catch (SQLException error)
+//        {
+//            System.out.println("Error readElements OrdersDAO");
+//        }
+//        closeConnection();
+//    }

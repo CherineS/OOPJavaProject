@@ -46,11 +46,7 @@ public abstract class TablesDAO
     }
 
     
-    public abstract void readElements(); // 1 méthode pour lire ==> Au début du programme, lire chaque table
-    public abstract void addElement(); // 1 méthode pour ajouter un élément, nécessite les attributs de l'élément en question 
-    // 2 options ==> Scanner ou Passer en paramètres
-    public abstract void deleteElement(); // Supprimer un élément en fonction de la clé primaire
+    public abstract void addElement();
     public abstract void deleteAllElements(); // 1 méthode pour tout delete
-    public abstract void setElement(); // Modifier un élément en fonction de la clé primaire
-
+    
 }

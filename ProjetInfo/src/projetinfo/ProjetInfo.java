@@ -53,8 +53,8 @@ public class ProjetInfo
             String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
             Connection con = DriverManager.getConnection(url, "root", "");
             Statement stmt = con.createStatement();
-            String sqlStatementOrders1 = "INSERT INTO orders " + "(orderNo, productNo, quantity, totalPrice, date)" + " VALUES " + "(0,0,30,40,'2018-09-24')";
-            String sqlStatementOrders2 = "INSERT INTO orders " + "(orderNo, productNo, quantity, totalPrice, date)" + " VALUES " + "(1,1,30,40,'2018-09-24')";
+            String sqlStatementOrders1 = "INSERT INTO orders " + "(orderNo, productNo, quantity, date)" + " VALUES " + "(0,0,30,'2018-09-24')";
+            String sqlStatementOrders2 = "INSERT INTO orders " + "(orderNo, productNo, quantity, date)" + " VALUES " + "(1,1,30,'2018-09-24')";
             stmt.executeUpdate(sqlStatementOrders1);
             stmt.executeUpdate(sqlStatementOrders2);
             con.close();
@@ -64,14 +64,13 @@ public class ProjetInfo
         }
     }
     
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args)
     {
 //        createDatabase();
 //        ArrayList<Product> databaseProducts = new ArrayList<>();
 //        ProductDAO myobj = new ProductDAO();
+//        myobj.deleteElement();
 //        myobj.readElements();
 //        databaseProducts=myobj.getDatabaseProducts();
 //        for(int i=0; i<databaseProducts.size(); i++)
@@ -79,56 +78,3 @@ public class ProjetInfo
     }
 
 }
-
-//        try
-//        {
-////            int value = 13;
-////            String begin = "\'";
-////            String end = "\'";
-////            String name = "Banane";
-////            name = begin.concat(name);
-////            name = name.concat(end);
-////            System.out.println("" + name);
-//
-//            // Class.forName("com.mysql.cj.jdbc.Driver"); // Pas nécéssaire
-//            String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
-//            // localhost::3306 = port par défaut de mySQL
-//            // Format à suivre : jdbc:mysql://localhost:3306/nom_database puis rajouter ?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC 
-//            // Pour l'erreur concernant les fuseaux horaires
-//            Connection con = DriverManager.getConnection(url, "root", "");
-//            // Format à suivre : URL,"Nom utilisateur", "MDP"
-//
-//            Statement stmt = con.createStatement();
-////            ResultSet res = stmt.executeQuery("SELECT* FROM dept");
-////            while (res.next())
-////            {
-////                String name = res.getString("loc");
-////                System.out.println(name);
-////            }
-//
-//            String sqlStatement = "INSERT INTO product " + "(name, price, promotion, quantity)" + " VALUES " + "('Kiwi',1.20,14,100)";
-//            // Insérer un nouvelle élément dans la table dept 
-//            // String sqlStatement = "DELETE FROM dept WHERE loc = 'Paris'";
-//            // Supprimer un élément de la table en fonction d'un critère
-//            // String sqlStatement = "DELETE FROM dept";
-//            // Supprime tous les éléments
-//            //String sqlStatement = "UPDATE product " + "SET quantity = " + value + " WHERE " + "name = " + name;
-//            int rows = stmt.executeUpdate(sqlStatement);
-//            System.out.println("nombre:" + rows);
-//
-//            con.close();
-//            // Fermer la communication
-//
-//        } //        catch(ClassNotFoundException ex)
-//        //        {
-//        //            System.out.println(ex.getMessage());
-//        //            Logger.getLogger(TESTPROJET.class.getName()).log(Level.SEVERE, null, ex);
-//        //            System.out.println("Fail class not found ");    
-//        //        }   // Code pas spécialement nécessaire, permets de savoir l'erreur précise
-//        catch (SQLException error)
-//        {
-////            Logger.getLogger(TESTPROJET.class.getName()).log(Level.SEVERE, null, ex);
-////            Code pas spécialement nécessaire, permets de savoir l'erreur précise
-//            System.out.println("Fail SQL");
-//        }
-//    }
