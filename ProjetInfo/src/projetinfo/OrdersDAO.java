@@ -95,7 +95,7 @@ public class OrdersDAO extends TablesDAO
                 myOrders.remove(i);
     }
 
-    public void addOrders() // PAS DE REDUC
+    public void addOrders() // PRIX A VOIR
     {
         getConnection();
         
@@ -185,7 +185,7 @@ public class OrdersDAO extends TablesDAO
         closeConnection();
     }
 
-    public void searchOrder(JTextField email)
+    public ArrayList<Orders> searchOrder(JTextField email) // A VOIR POUR LE PRODUIT RECUP LES INFOS
     {
         ArrayList<Orders> myOrdersSearch = new ArrayList<>();
         String inputEmail = email.getText();
@@ -197,11 +197,11 @@ public class OrdersDAO extends TablesDAO
             while (res.next())
             {
                 if(inputEmail==res.getString("email"))
-                {         
+                {   
                    java.util.Date dateJAVA = new java.util.Date(res.getDate("date").getTime());
                    Product product = new Product(res.getInt("productNo"), res.getInt("quantity"));
                    Orders order = new Orders(res.getInt("orderNo"),dateJAVA, product, res.getDouble("price"), inputEmail);
-                   myOrdersSearch.add(order);
+                   myOrdersSearch.add(order);    
                 }
             }
         } catch (SQLException error)
@@ -210,9 +210,6 @@ public class OrdersDAO extends TablesDAO
         }
         closeConnection();
         
-        for(int i=0; i<myOrdersSearch.size(); i++)
-        {
-            myOrdersSearch.get(i).display();
-        }
+        return myOrdersSearch;
     }
 }
