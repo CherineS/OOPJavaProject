@@ -8,6 +8,7 @@ package projetinfo;
 import java.util.ArrayList;
 import java.sql.*;
 import javax.sql.*;
+import javax.swing.JTextField;
 
 /**
  *
@@ -15,12 +16,63 @@ import javax.sql.*;
  */
 public class PeopleDAO extends TablesDAO
 {
-    @Override
-    public void addElement()
+    public void addElement(JTextField email,JTextField FirstName,JTextField lastName,JTextField password,JTextField status)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        String inputEmail = email.getText();
+        String inputFirstName = FirstName.getText();
+        String inputlastName = lastName.getText();
+        String inputpassword = password.getText();
+        String inputstatus = password.getText();
+        getConnection();
+        try
+        {   
+          stmt.executeUpdate("INSERT INTO people" + "(email, firstName, lastName, password, status)" +  " VALUES "  + "('" + inputEmail + "','" + inputFirstName + "','" + inputlastName + "','" + inputpassword + "','" +  inputstatus + "')");
+        }
+       catch (SQLException error)
+        {
+            System.out.println("People already exist in the Data Base");
+        }
+        closeConnection();
+    } 
+    
+    public void changeElement(JTextField element, JTextField modification, String email)
+    {
+        String inputElement = element.getText();
+        String inputmodification = modification.getText();
 
+        getConnection();
+        try
+        {
+            if (inputElement.equals("password"))
+                stmt.executeUpdate("UPDATE people " + "SET password  = '" + inputmodification + "' " + "WHERE" + " email = '" + email + "' ");
+            if (inputElement.equals("firstname"))
+                stmt.executeUpdate("UPDATE people " + "SET firstname = '" + inputmodification + "' " + "WHERE" + " email = '" + email + "' ");
+            if (inputElement.equals("lastname"))
+                stmt.executeUpdate("UPDATE people " + "SET lastname  = '" + inputmodification + "' " + "WHERE" + " email = '" + email + "' ");
+        } catch (SQLException error)
+        {
+            System.out.println("Modification impossible");
+        }
+        closeConnection();
+    }
+    
+    public void deleteElements(JTextField email)
+    {
+        String inputEmail = email.getText();
+        getConnection();
+        try
+        { 
+          String sqlStatement = "DELETE FROM people where email =  '" + inputEmail + "' ";
+          stmt.executeUpdate(sqlStatement);
+       
+        }
+       catch (SQLException error)
+        {
+            System.out.println("Error People don't exist");
+        }
+       closeConnection();
+    }
+    
     @Override
     public void deleteAllElements()
     {
@@ -29,35 +81,11 @@ public class PeopleDAO extends TablesDAO
         {
             String sqlStatement = "DELETE FROM people";
             stmt.executeUpdate(sqlStatement);
-        } 
-        catch (SQLException error)
+        } catch (SQLException error)
         {
             System.out.println("Error deleteAllElements PeopleDAO");
         }
         closeConnection();
-    }   
+    }
 }
 
-
-//    @Override
-//    public void readElements()
-//    {  
-//        getConnection();
-//        try
-//        {
-//            ResultSet res = stmt.executeQuery("SELECT* FROM people");
-//            while (res.next())
-//            {
-//                //if(res.getString("email").equals(email))
-//                
-//                People myPeople = new People(res.getString("firstName"),res.getString("lastName"),res.getString("password"),
-//                                             res.getString("email"), res.getString("status"));
-//                //m_databasePeoples.add(myPeople);
-//            }
-//        } 
-//        catch (SQLException error)
-//        {
-//            System.out.println("Error readElements PeopleDAO");
-//        }
-//        closeConnection();
-//    }

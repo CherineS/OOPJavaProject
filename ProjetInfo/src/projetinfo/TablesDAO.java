@@ -8,6 +8,8 @@ package projetinfo;
 import java.sql.*;
 import javax.sql.*;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
 
 /**
  *
@@ -44,9 +46,14 @@ public abstract class TablesDAO
             System.out.println("Error close connection");
         }
     }
+    
+    public String getDate()
+    {  
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+        Date date = new Date();  
+        return formatter.format(date);
+    }
 
-    
-    public abstract void addElement();
-    public abstract void deleteAllElements(); // 1 méthode pour tout delete
-    
+    public abstract void deleteAllElements(); 
+ 
 }

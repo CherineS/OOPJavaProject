@@ -5,26 +5,27 @@
  */
 package projetinfo;
 
-import java.util.ArrayList;
-import java.sql.Date;
-
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
 /**
  *
  * @author antoi
  */
 public class Orders
 {
-
     private int m_orderNumber;
     private Date m_date;
-    private ArrayList<Product> m_products;
-    private double m_totalPrice;
+    private Product m_products;
+    private double m_price;
+    private String m_email;
 
-    public Orders(int orderNumber, Date date, ArrayList<Product> products)
+    public Orders(int orderNumber, Date date, Product products, double price, String email)
     {
         m_orderNumber = orderNumber;
         m_date = date;
         m_products = products;
+        m_price=price;
+        m_email=email;
     }
     
     public int getOrderNumber()
@@ -37,14 +38,14 @@ public class Orders
         return m_date;
     }
 
-    public ArrayList<Product> getProducts()
+    public Product getProducts()
     {
         return m_products;
     }
 
-    public double getTotalPrice()
+    public double getPrice()
     {
-        return m_totalPrice;
+        return m_price;
     }
 
     public void setOrderNumber(int orderNumber)
@@ -57,19 +58,29 @@ public class Orders
         m_date = date;
     }
 
-    public void setProducts(ArrayList<Product> products)
+    public void setProducts(Product products)
     {
         m_products = products;
     }
 
-    public void setTotalPrice(double totalPrice)
+    public void setTotalPrice(double price)
     {
-        m_totalPrice = totalPrice;
+        m_price = price;
+    }
+
+    public String getEmail()
+    {
+        return m_email;
+    }
+    
+    public void setEmail(String email)
+    {
+        m_email=email;
     }
     
     public void display()
     {
-        System.out.print("");
+        System.out.println("OrderNumber:" + m_orderNumber + "Date:" + m_date + "Price:" + m_price + "Email:" + m_email);
+        m_products.display();
     }
-
 }

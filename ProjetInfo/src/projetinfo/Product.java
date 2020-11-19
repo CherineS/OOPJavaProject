@@ -20,12 +20,18 @@ public class Product
     
     public Product(int productNo, String name,double price, int quantity, int minimumPromotion, double valuePromotion)
     {
-        m_productNo=productNo;
+        m_productNo = productNo;
         m_name = name;
         m_price = price;
         m_quantity = quantity;
         m_minimumPromotion=minimumPromotion;
         m_valuePromotion = valuePromotion;
+    }
+    
+    public Product(int productNo, int quantity)
+    {
+        m_productNo = productNo;
+        m_quantity = quantity;
     }
     
     public int getProductNo()
@@ -93,5 +99,4 @@ public class Product
         System.out.println("ProductNo:" + m_productNo + "  Name:" + m_name + "  Price:" + m_price + "  Quantity:" + m_quantity
                             + "  MinimumPromotion:" + m_minimumPromotion + "  ValuePromotion:" + m_valuePromotion);
     }
-   
 }
