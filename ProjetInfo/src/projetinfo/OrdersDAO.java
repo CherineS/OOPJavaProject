@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -19,13 +21,13 @@ import java.util.Scanner;
  */
 public class OrdersDAO extends TablesDAO
 {
+
     private ArrayList<Orders> myOrders = new ArrayList<>();
     private ArrayList<Product> myProductSearch = new ArrayList<>();
 
-    public void AddShop(JTextField quantity, JTextField email, JTextField productNumber)
+    public void AddShop(JTextField quantity, String email, JTextField productNumber)
     {
         String inputQuantity = quantity.getText();
-        String inputEmail = email.getText();
         String inputProductNumber = productNumber.getText();
         String inputDate = getDate();
         Product myProduct = null;
@@ -73,7 +75,7 @@ public class OrdersDAO extends TablesDAO
         }
         closeConnection();
 
-        Orders Order = new Orders(OrderNo, date, myProduct, ((double) myProduct.getQuantity() * myProduct.getPrice()), inputEmail);
+        Orders Order = new Orders(OrderNo, date, myProduct, ((double) myProduct.getQuantity() * myProduct.getPrice()), email);
         for (int i = 0; i < myOrders.size(); i++)
             if (Order.getProducts().getProductNo() == myOrders.get(i).getProducts().getProductNo())
             {
@@ -95,25 +97,36 @@ public class OrdersDAO extends TablesDAO
                 myOrders.remove(i);
     }
 
-    public void addOrders() // PRIX A VOIR
+    public void addOrders()
     {
         getConnection();
-        
+
         for (int i = 0; i < myOrders.size(); i++)
         {
-            double price = (myOrders.get(i).getProducts().getQuantity()/myOrders.get(i).getProducts().getminimumPromotion())
-                    *(myOrders.get(i).getProducts().getPrice()-myOrders.get(i).getProducts().getValuePromotion())*myOrders.get(i).getProducts().getminimumPromotion()
-                    +(myOrders.get(i).getProducts().getQuantity()%myOrders.get(i).getProducts().getminimumPromotion())*(myOrders.get(i).getProducts().getPrice());
+            double price = (myOrders.get(i).getProducts().getQuantity() / myOrders.get(i).getProducts().getminimumPromotion())
+                    * (myOrders.get(i).getProducts().getPrice() * (1 - (myOrders.get(i).getProducts().getValuePromotion() * 0.01))) * myOrders.get(i).getProducts().getminimumPromotion()
+                    + (myOrders.get(i).getProducts().getQuantity() % myOrders.get(i).getProducts().getminimumPromotion()) * (myOrders.get(i).getProducts().getPrice());
+            
+            DecimalFormat df = new DecimalFormat("#.####");
+            df.setRoundingMode(RoundingMode.HALF_UP);
+            String stringPrice = df.format(price);
+
+            char[] myPrice = stringPrice.toCharArray();
+            for (int j = 0; j < myPrice.length; j++)
+                if (myPrice[j] == ',')
+                    myPrice[j] = '.';
+            
+            price = Double.parseDouble(String.copyValueOf(myPrice));
 
             String orderProductNo = "" + myOrders.get(i).getOrderNumber() + "-" + myOrders.get(i).getProducts().getProductNo();
             java.sql.Date dateSQL = new java.sql.Date(myOrders.get(i).getDate().getTime());
-            
+
             try
             {
                 stmt.execute("INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)"
                         + " VALUES "
-                        + "('" + orderProductNo + "','" + myOrders.get(i).getOrderNumber() + "','" + myOrders.get(i).getProducts().getProductNo() 
-                        + "','" + myOrders.get(i).getEmail() + "','" + myOrders.get(i).getProducts().getQuantity() + "', '" 
+                        + "('" + orderProductNo + "','" + myOrders.get(i).getOrderNumber() + "','" + myOrders.get(i).getProducts().getProductNo()
+                        + "','" + myOrders.get(i).getEmail() + "','" + myOrders.get(i).getProducts().getQuantity() + "', '"
                         + price + "','" + dateSQL + "')");
             } catch (SQLException error)
             {
@@ -185,10 +198,10 @@ public class OrdersDAO extends TablesDAO
         closeConnection();
     }
 
-    public ArrayList<Orders> searchOrder(JTextField email) // A VOIR POUR LE PRODUIT RECUP LES INFOS
+    public ArrayList<Orders> searchOrder(String email)
     {
         ArrayList<Orders> myOrdersSearch = new ArrayList<>();
-        String inputEmail = email.getText();
+
         getConnection();
         try
         {
@@ -196,20 +209,56 @@ public class OrdersDAO extends TablesDAO
 
             while (res.next())
             {
-                if(inputEmail==res.getString("email"))
-                {   
-                   java.util.Date dateJAVA = new java.util.Date(res.getDate("date").getTime());
-                   Product product = new Product(res.getInt("productNo"), res.getInt("quantity"));
-                   Orders order = new Orders(res.getInt("orderNo"),dateJAVA, product, res.getDouble("price"), inputEmail);
-                   myOrdersSearch.add(order);    
+                if (email.equals(res.getString("email")))
+                {
+                    java.util.Date dateJAVA = new java.util.Date(res.getDate("date").getTime());
+                    int productNo = res.getInt("productNo");
+                    int quantity = res.getInt("quantity");
+                    int orderNo = res.getInt("orderNo");
+                    double price = res.getDouble("price");
+                    Product product = null;
+
+                    try
+                    {
+                        Statement stmt2 = con.createStatement();
+                        ResultSet result = stmt2.executeQuery("SELECT* FROM product");
+
+                        while (result.next())
+                        {
+                            if (productNo == result.getInt("productNo"))
+                                product = new Product(result.getInt("productNo"), result.getString("name"), result.getDouble("price"),
+                                        quantity, result.getInt("minimumPromotion"), result.getDouble("valuePromotion"));
+                        }
+                    } catch (SQLException error)
+                    {
+                        System.out.println("Error searchOrder OrdersDAO (Product)");
+                    }
+
+                    Orders order = new Orders(orderNo, dateJAVA, product, price, email);
+                    myOrdersSearch.add(order);
                 }
             }
         } catch (SQLException error)
         {
-            System.out.println("Error searchOrder OrdersDAO");
+            System.out.println("Error searchOrder OrdersDAO (Orders)");
         }
         closeConnection();
-        
+
+        for (int i = 0; i < myOrdersSearch.size(); i++)
+        {   
+//            DecimalFormat df = new DecimalFormat("#.####");
+//            df.setRoundingMode(RoundingMode.HALF_UP);
+//            String stringPrice = df.format(myOrdersSearch.get(i).getPrice());
+//
+//            char[] myPrice = stringPrice.toCharArray();
+//            for (int j = 0; j < myPrice.length; j++)
+//                if (myPrice[j] == ',')
+//                    myPrice[j] = '.';
+//            
+//            myOrdersSearch.get(i).setPrice(Double.parseDouble(String.copyValueOf(myPrice)));
+            myOrdersSearch.get(i).display();
+        }
+
         return myOrdersSearch;
     }
 }

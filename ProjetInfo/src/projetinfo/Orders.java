@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;  
 /**
  *
- * @author antoi
+ * @author antoine
  */
 public class Orders
 {
@@ -63,7 +63,7 @@ public class Orders
         m_products = products;
     }
 
-    public void setTotalPrice(double price)
+    public void setPrice(double price)
     {
         m_price = price;
     }
@@ -80,7 +80,8 @@ public class Orders
     
     public void display()
     {
-        System.out.println("OrderNumber:" + m_orderNumber + "Date:" + m_date + "Price:" + m_price + "Email:" + m_email);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("OrderNumber:" + m_orderNumber + "  Date:" + formatter.format(m_date) + "  Price:" + m_price + "  Email:" + m_email);
         m_products.display();
     }
 }
