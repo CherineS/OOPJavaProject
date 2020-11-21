@@ -14,6 +14,7 @@ import javax.swing.JTextField;
  *
  * @author Gaëtan
  */
+
 public class PeopleDAO extends TablesDAO
 {
     public void addElement(JTextField email,JTextField FirstName,JTextField lastName,JTextField password,JTextField status)
@@ -22,53 +23,51 @@ public class PeopleDAO extends TablesDAO
         String inputFirstName = FirstName.getText();
         String inputlastName = lastName.getText();
         String inputpassword = password.getText();
-        String inputstatus = password.getText();
+        String inputstatus = status.getText();
         getConnection();
+        
         try
         {   
           stmt.executeUpdate("INSERT INTO people" + "(email, firstName, lastName, password, status)" +  " VALUES "  + "('" + inputEmail + "','" + inputFirstName + "','" + inputlastName + "','" + inputpassword + "','" +  inputstatus + "')");
         }
        catch (SQLException error)
         {
-            System.out.println("People already exist in the Data Base");
+            System.out.println("Error addElement PeopleDAO");
         }
         closeConnection();
     } 
     
-    public void changeElement(JTextField element, JTextField modification, String email)
+    public void changeElement(String element, JTextField modification, String email)
     {
-        String inputElement = element.getText();
         String inputmodification = modification.getText();
 
         getConnection();
         try
         {
-            if (inputElement.equals("password"))
+            if (element.equals("password"))
                 stmt.executeUpdate("UPDATE people " + "SET password  = '" + inputmodification + "' " + "WHERE" + " email = '" + email + "' ");
-            if (inputElement.equals("firstname"))
+            if (element.equals("firstName"))
                 stmt.executeUpdate("UPDATE people " + "SET firstname = '" + inputmodification + "' " + "WHERE" + " email = '" + email + "' ");
-            if (inputElement.equals("lastname"))
+            if (element.equals("lastName"))
                 stmt.executeUpdate("UPDATE people " + "SET lastname  = '" + inputmodification + "' " + "WHERE" + " email = '" + email + "' ");
         } catch (SQLException error)
         {
-            System.out.println("Modification impossible");
+            System.out.println("Error changeElement PeopleDAO");
         }
         closeConnection();
     }
     
-    public void deleteElements(JTextField email)
+    public void deleteElements(String email)
     {
-        String inputEmail = email.getText();
         getConnection();
         try
         { 
-          String sqlStatement = "DELETE FROM people where email =  '" + inputEmail + "' ";
+          String sqlStatement = "DELETE FROM people where email =  '" + email + "' ";
           stmt.executeUpdate(sqlStatement);
-       
         }
        catch (SQLException error)
         {
-            System.out.println("Error People don't exist");
+            System.out.println("Error deleteElements PeopleDAO");
         }
        closeConnection();
     }

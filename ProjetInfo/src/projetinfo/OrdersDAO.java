@@ -25,16 +25,13 @@ public class OrdersDAO extends TablesDAO
     private ArrayList<Orders> myOrders = new ArrayList<>();
     private ArrayList<Product> myProductSearch = new ArrayList<>();
 
-    public void AddShop(JTextField quantity, String email, JTextField productNumber)
+    public void AddShop(JTextField quantity, String email, int productNo)
     {
-        String inputQuantity = quantity.getText();
-        String inputProductNumber = productNumber.getText();
         String inputDate = getDate();
         Product myProduct = null;
         Date date = null;
         int OrderNo = 0, condition = 0;
-        int quantityInt = Integer.parseInt(inputQuantity);
-        int productNo = Integer.parseInt(inputProductNumber);
+        int quantityInt = Integer.parseInt(quantity.getText());
 
         try
         {
@@ -67,7 +64,7 @@ public class OrdersDAO extends TablesDAO
 
             while (res.next())
             {
-                OrderNo = res.getInt("orderNo") + 1;
+                OrderNo = res.getInt("orderNo")+1;
             }
         } catch (SQLException error)
         {
@@ -87,11 +84,8 @@ public class OrdersDAO extends TablesDAO
             myOrders.add(Order);
     }
 
-    public void deleteShop(JTextField productNumber)
+    public void deleteShop(int productNo)
     {
-        String inputProductNumber = productNumber.getText();
-        int productNo = Integer.parseInt(inputProductNumber);
-
         for (int i = 0; i < myOrders.size(); i++)
             if (productNo == myOrders.get(i).getProducts().getProductNo())
                 myOrders.remove(i);
@@ -244,8 +238,8 @@ public class OrdersDAO extends TablesDAO
         }
         closeConnection();
 
-        for (int i = 0; i < myOrdersSearch.size(); i++)
-        {   
+//        for (int i = 0; i < myOrdersSearch.size(); i++)
+//        {   
 //            DecimalFormat df = new DecimalFormat("#.####");
 //            df.setRoundingMode(RoundingMode.HALF_UP);
 //            String stringPrice = df.format(myOrdersSearch.get(i).getPrice());
@@ -256,8 +250,8 @@ public class OrdersDAO extends TablesDAO
 //                    myPrice[j] = '.';
 //            
 //            myOrdersSearch.get(i).setPrice(Double.parseDouble(String.copyValueOf(myPrice)));
-            myOrdersSearch.get(i).display();
-        }
+//            myOrdersSearch.get(i).display();
+//        }
 
         return myOrdersSearch;
     }

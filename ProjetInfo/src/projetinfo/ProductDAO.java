@@ -59,7 +59,7 @@ public class ProductDAO extends TablesDAO
             stmt.executeUpdate(sqlStatement);
         } catch (SQLException error)
         {
-            System.out.println("Error addElements ProductDAO");
+            System.out.println("Error addElement ProductDAO");
         }
         closeConnection();
     }
@@ -118,11 +118,12 @@ public class ProductDAO extends TablesDAO
     {
         ArrayList<Integer> results = new ArrayList<>();
         String name = myName.getText();
+        name = "%" + name + "%";
 
         getConnection();
         try
         {
-            String sqlStatement = "SELECT productNo FROM product WHERE name LIKE %'"+ name +"'%";
+            String sqlStatement = "SELECT productNo FROM product WHERE name LIKE '"+ name +"'";
             ResultSet res = stmt.executeQuery(sqlStatement);
 
             while (res.next())
@@ -132,7 +133,7 @@ public class ProductDAO extends TablesDAO
 
         } catch (SQLException error)
         {
-            System.out.println("Error setElements ProductDAO");
+            System.out.println("Error searchElement ProductDAO");
         }
         closeConnection();
 

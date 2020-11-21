@@ -28,12 +28,6 @@ public class Product
         m_valuePromotion = valuePromotion;
     }
     
-    public Product(int productNo, int quantity)
-    {
-        m_productNo = productNo;
-        m_quantity = quantity;
-    }
-    
     public int getProductNo()
     {
         return m_productNo;
