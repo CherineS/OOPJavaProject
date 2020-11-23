@@ -5,11 +5,15 @@
  */
 package projetinfo;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.sql.*;
 import javax.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,13 +38,14 @@ public class ProductDAO extends TablesDAO
     }
 
     //Ajoute un produit dans la BDD
-    public void addElement(JTextField jName, JTextField jPrice, JTextField jQuantity, JTextField jMinPromotion, JTextField jPromotion)
+    public void addElement(JTextField jName, JTextField jPrice, JTextField jQuantity, JTextField jMinPromotion, JTextField jPromotion, JTextField jImage)
     {
         String name = jName.getText();
         double price = Double.parseDouble(jPrice.getText());
         int quantity = Integer.parseInt(jQuantity.getText());
         double valuePromotion = Double.parseDouble(jMinPromotion.getText());
         int minPromotion = Integer.parseInt(jPromotion.getText());
+        String imageURL = jPromotion.getText();
 
         getConnection();
         try
@@ -54,13 +59,14 @@ public class ProductDAO extends TablesDAO
                 productNo++;
             }
 
-            sqlStatement = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion)"
-                    + " VALUES (" + productNo + ", '" + name + "', " + price + ", " + quantity + ", " + minPromotion + ", " + valuePromotion + ")";
+            sqlStatement = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL)"
+                    + " VALUES (" + productNo + ", '" + name + "', " + price + ", " + quantity + ", " + minPromotion + ", " + valuePromotion + ", '"+ imageURL +"')";
             stmt.executeUpdate(sqlStatement);
         } catch (SQLException error)
         {
             System.out.println("Error addElement ProductDAO");
         }
+        
         closeConnection();
     }
 
@@ -138,5 +144,30 @@ public class ProductDAO extends TablesDAO
         closeConnection();
 
         return results;
+    }
+    
+    public Product createJavaProduct(int productNo)
+    {
+        Product newJavaProduct = new Product();
+        
+        getConnection();
+        try
+        {
+            ResultSet res = stmt.executeQuery("SELECT* FROM product WHERE productNo = "+ productNo);
+            while (res.next())
+            {
+                
+                newJavaProduct = new Product(res.getInt("productNo"),res.getString("name"), res.getDouble("price"),
+                                        res.getInt("quantity"),res.getInt("minimumPromotion"),res.getDouble("valuePromotion"),
+                                        res.getString("lienURL"));
+            }
+        } 
+        catch (SQLException error)
+        {
+            System.out.println("Error readElements ProductDAO");
+        }
+        closeConnection();
+        
+        return newJavaProduct;
     }
 }

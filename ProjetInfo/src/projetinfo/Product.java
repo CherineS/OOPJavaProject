@@ -17,8 +17,20 @@ public class Product
     private int m_quantity;
     private int m_minimumPromotion;
     private double m_valuePromotion;
+    private String m_imageUrl;
+
+    public Product()
+    {
+        m_productNo = -1;
+        m_name = "N/A";
+        m_price = 0;
+        m_quantity = 0;
+        m_minimumPromotion = 0;
+        m_valuePromotion = 0;
+        m_imageUrl = null;
+    }
     
-    public Product(int productNo, String name,double price, int quantity, int minimumPromotion, double valuePromotion)
+    public Product(int productNo, String name, double price, int quantity, int minimumPromotion, double valuePromotion, String imageUrl)
     {
         m_productNo = productNo;
         m_name = name;
@@ -26,6 +38,7 @@ public class Product
         m_quantity = quantity;
         m_minimumPromotion=minimumPromotion;
         m_valuePromotion = valuePromotion;
+        m_imageUrl = imageUrl;
     }
     
     public int getProductNo()
@@ -56,6 +69,11 @@ public class Product
     public double getValuePromotion()
     {
         return m_valuePromotion;
+    }
+    
+    public String getURL()
+    {
+        return m_imageUrl;
     }
     
     public void setProductNo(int productNo)
