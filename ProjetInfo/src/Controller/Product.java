@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetinfo;
+package Controller;
 
 /**
  *
@@ -28,6 +28,16 @@ public class Product
         m_minimumPromotion = 0;
         m_valuePromotion = 0;
         m_imageUrl = null;
+    }
+    
+    public Product(int productNo, String name, double price, int quantity, int minimumPromotion, double valuePromotion)
+    {
+        m_productNo = productNo;
+        m_name = name;
+        m_price = price;
+        m_quantity = quantity;
+        m_minimumPromotion=minimumPromotion;
+        m_valuePromotion = valuePromotion;
     }
     
     public Product(int productNo, String name, double price, int quantity, int minimumPromotion, double valuePromotion, String imageUrl)

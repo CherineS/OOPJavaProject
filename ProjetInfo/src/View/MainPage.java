@@ -47,7 +47,7 @@ public class MainPage extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Main menu");
+        jLabel1.setText("Shop name");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         searchBar.setText("Search...");
@@ -76,34 +76,34 @@ public class MainPage extends javax.swing.JFrame
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(750, 750, 750)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonAddProduct)
                 .addGap(27, 27, 27)
                 .addComponent(jButtonDeleteProduct)
-                .addGap(45, 45, 45))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(326, Short.MAX_VALUE)
+                .addGap(41, 41, 41))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(330, 330, 330)
                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(27, 27, 27)
                 .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(331, 331, 331))
+                .addContainerGap(329, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jButtonAddProduct)
                     .addComponent(jButtonDeleteProduct))
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSearch))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,51 +116,78 @@ public class MainPage extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 568, Short.MAX_VALUE))
+                .addGap(0, 652, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSearchActionPerformed
-    {//GEN-HEADEREND:event_jButtonSearchActionPerformed
-        ProductDAO productDAOSearched = new ProductDAO();
-        ArrayList<Integer> listResults = new ArrayList<>();
-        
-        jPanel2.removeAll();
-        
-        listResults = productDAOSearched.searchElement(searchBar);
-        
-        if(!listResults.isEmpty())
-        {
-            for (Integer i : listResults)
-                jPanel2.add(new ProduitEnListe(i));
-        }
-        else{
-            JLabel noResults = new JLabel("No Result");
-            noResults.setPreferredSize(new Dimension(300, 280));
-            noResults.setFont(new Font("Arial",Font.PLAIN,20));
-            noResults.setHorizontalAlignment(JLabel.CENTER);
-            noResults.setVerticalAlignment(JLabel.CENTER);
-            jPanel2.add(noResults);
-        }
-        add(jPanel2);
-        System.out.println("replaced");
-        revalidate();
-        repaint();
-    }//GEN-LAST:event_jButtonSearchActionPerformed
-
     private void jButtonAddProductActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddProductActionPerformed
     {//GEN-HEADEREND:event_jButtonAddProductActionPerformed
-        jPanel2.removeAll();
         
-        jPanel2.add(new AddProductPage());
-        add(jPanel2);
-        System.out.println("add");
-        revalidate();
-        repaint();
     }//GEN-LAST:event_jButtonAddProductActionPerformed
 
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSearchActionPerformed
+    {//GEN-HEADEREND:event_jButtonSearchActionPerformed
+
+    }//GEN-LAST:event_jButtonSearchActionPerformed
+
+    public void addPanelInFrame(JPanel newPanel)
+    {
+        add(newPanel);
+    }
+    
+    public void emptyPanel2()
+    {
+        jPanel2.removeAll();
+    }
+    
+    public JPanel getPanel2()
+    {
+        return jPanel2;
+    }
+    
+    public void addInPanel2(ProduitEnListe newProduct)
+    {
+        jPanel2.add(newProduct);
+    }
+    
+    public void addInPanel2(AddProductPage newProductPage)
+    {
+        jPanel2.add(newProductPage);
+    }
+    
+    public JTextField getSearchBar()
+    {
+        return searchBar;
+    }
+    
+    public void noResult() //Display "No Result" message
+    {
+        JLabel noResults = new JLabel("No Result");
+        noResults.setPreferredSize(new Dimension(300, 280));
+        noResults.setFont(new Font("Arial",Font.PLAIN,20));
+        noResults.setHorizontalAlignment(JLabel.CENTER);
+        noResults.setVerticalAlignment(JLabel.CENTER);
+        jPanel2.add(noResults);
+    }
+    
+    //Buttons
+    public JButton getButtonSearch()
+    {
+        return jButtonSearch;
+    }
+
+    public JButton getButtonDeleteProduct()
+    {
+        return jButtonDeleteProduct;
+    }
+    
+        public JButton getButtonAddProduct()
+    {
+        return jButtonAddProduct;
+    }
+    
     /**
      * @param args the command line arguments
      */

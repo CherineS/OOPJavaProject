@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import Controller.Product;
 
 /**
  *

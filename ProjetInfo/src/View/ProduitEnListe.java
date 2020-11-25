@@ -4,16 +4,19 @@
  * and open the template in the editor.
  */
 package View;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Image;
-import java.io.IOException;
 import projetinfo.*;
+import Controller.Product;
+import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+
+/*
+Sources :
+Read image from URL : https://www.codeflow.site/fr/article/java__how-to-read-an-image-from-file-or-url
+Resize image : https://www.baeldung.com/java-resize-image
+*/
 
 /**
  *
@@ -21,7 +24,6 @@ import javax.swing.JPanel;
  */
 public class ProduitEnListe extends javax.swing.JPanel
 {
-
     /**
      * Creates new form FicheProduitClient
      */
@@ -35,6 +37,9 @@ public class ProduitEnListe extends javax.swing.JPanel
     public ProduitEnListe(int productNo)
     {
         initComponents();
+        imageDisplay.setLayout(new FlowLayout());
+        imageDisplay.setPreferredSize(new Dimension(146,146));
+        
         ProductDAO javaProductDAO = new ProductDAO();
         Product searchedProduct = javaProductDAO.createJavaProduct(productNo);
         
@@ -46,7 +51,8 @@ public class ProduitEnListe extends javax.swing.JPanel
         
         try {
             URL url = new URL(searchedProduct.getURL());
-            image = ImageIO.read(url);
+            Image imageBeforeResize = ImageIO.read(url);
+            image = imageBeforeResize.getScaledInstance(140, 140, Image.SCALE_SMOOTH);
         } catch (IOException error) {
             System.out.println("Erreur image");
         }
@@ -55,8 +61,6 @@ public class ProduitEnListe extends javax.swing.JPanel
         if(image!=null)
         {
             label = new JLabel(new ImageIcon(image));
-            label.setPreferredSize(new Dimension(100, 100));
-            System.out.println("imaged");
         }
         else 
             label= new JLabel();

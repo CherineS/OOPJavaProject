@@ -5,6 +5,7 @@
  */
 package projetinfo;
 
+import Controller.Product;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.sql.*;

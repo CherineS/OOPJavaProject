@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package projetinfo;
-
+import Controller.Product;
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
 /**

@@ -7,9 +7,24 @@ package View;
 
 /**
  *
- * @author Gaëtan
+ * @author Utilisateur
  */
 public class View
 {
+    MainPage myMainPage = new MainPage();
     
+    public View()
+    {
+        
+    }
+    
+    public void setVisibleMainpage()
+    {
+        myMainPage.setVisible(true);
+    }
+    
+    public MainPage getMainPage()
+    {
+       return myMainPage; 
+    }
 }
