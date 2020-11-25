@@ -71,7 +71,6 @@ public class Controller
             else if (e.getSource() == myButton.get(1)) //Bouton add
             {
                 myView.getMainPage().emptyPanel2();
-        
                 myView.getMainPage().addInPanel2(new AddProductPage());
                 myView.getMainPage().addPanelInFrame(myView.getMainPage().getPanel2());
                 myView.getMainPage().revalidate();

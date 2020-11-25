@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.Scanner;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import Controller.Product;
 
 /**
  *
@@ -26,11 +25,12 @@ public class OrdersDAO extends TablesDAO
     private ArrayList<Orders> myOrders = new ArrayList<>();
     private ArrayList<Product> myProductSearch = new ArrayList<>();
 
-    public void AddShop(JTextField quantity, String email, int productNo)
+    public boolean AddShop(JTextField quantity, String email, int productNo)
     {
         String inputDate = getDate();
         Product myProduct = null;
         Date date = null;
+        boolean result = false;
         int OrderNo = 0, condition = 0;
         int quantityInt = Integer.parseInt(quantity.getText());
 
@@ -46,11 +46,19 @@ public class OrdersDAO extends TablesDAO
         try
         {
             ResultSet res = stmt.executeQuery("SELECT* FROM product");
+            Statement stmt2 = con.createStatement();
+
             while (res.next())
             {
-                if (productNo == res.getInt("productNo"))
+                if ((productNo == res.getInt("productNo")) && (quantityInt <= res.getInt("quantity")))
+                {
+                    int quantitySQL = res.getInt("quantity") - quantityInt;
                     myProduct = new Product(productNo, res.getString("name"), res.getDouble("price"), quantityInt,
                             res.getInt("minimumPromotion"), res.getDouble("valuePromotion"));
+
+                    stmt2.executeUpdate("UPDATE product " + "SET quantity = " + quantitySQL + " WHERE productNo = " + productNo);
+                    result = true;
+                }
             }
         } catch (SQLException error)
         {
@@ -65,7 +73,7 @@ public class OrdersDAO extends TablesDAO
 
             while (res.next())
             {
-                OrderNo = res.getInt("orderNo")+1;
+                OrderNo = res.getInt("orderNo") + 1;
             }
         } catch (SQLException error)
         {
@@ -73,23 +81,56 @@ public class OrdersDAO extends TablesDAO
         }
         closeConnection();
 
-        Orders Order = new Orders(OrderNo, date, myProduct, ((double) myProduct.getQuantity() * myProduct.getPrice()), email);
-        for (int i = 0; i < myOrders.size(); i++)
-            if (Order.getProducts().getProductNo() == myOrders.get(i).getProducts().getProductNo())
-            {
-                myOrders.get(i).getProducts().setQuantity((quantityInt + myOrders.get(i).getProducts().getQuantity()));
-                condition++;
-            }
+        if (myProduct != null)
+        {
+            Orders Order = new Orders(OrderNo, date, myProduct, ((double) myProduct.getQuantity() * myProduct.getPrice()), email);
 
-        if (condition == 0)
-            myOrders.add(Order);
+            if (result == true)
+            {
+                for (int i = 0; i < myOrders.size(); i++) /// Si déjà un produit, augmenté quantité simplement, n'en créer pas un autre
+                    if (Order.getProducts().getProductNo() == myOrders.get(i).getProducts().getProductNo())
+                    {
+                        myOrders.get(i).getProducts().setQuantity((quantityInt + myOrders.get(i).getProducts().getQuantity()));
+                        condition++;
+                    }
+
+                if (condition == 0)
+                    myOrders.add(Order);
+            }
+        }
+
+        return result;
     }
 
     public void deleteShop(int productNo)
     {
+        getConnection();
+
         for (int i = 0; i < myOrders.size(); i++)
             if (productNo == myOrders.get(i).getProducts().getProductNo())
+            {
+                try
+                {
+                    ResultSet res = stmt.executeQuery("SELECT* FROM product");
+                    Statement stmt2 = con.createStatement();
+
+                    while (res.next())
+                    {
+                        if (productNo == res.getInt("productNo"))
+                        {
+                            int quantitySQL = res.getInt("quantity") + myOrders.get(i).getProducts().getQuantity();
+                            stmt2.executeUpdate("UPDATE product " + "SET quantity = " + quantitySQL + " WHERE productNo = " + productNo);
+                        }
+                    }
+                } catch (SQLException error)
+                {
+                    System.out.println("Error deleteShop OrdersDAO");
+                }
+
                 myOrders.remove(i);
+            }
+
+        closeConnection();
     }
 
     public void addOrders()
@@ -101,8 +142,8 @@ public class OrdersDAO extends TablesDAO
             double price = (myOrders.get(i).getProducts().getQuantity() / myOrders.get(i).getProducts().getminimumPromotion())
                     * (myOrders.get(i).getProducts().getPrice() * (1 - (myOrders.get(i).getProducts().getValuePromotion() * 0.01))) * myOrders.get(i).getProducts().getminimumPromotion()
                     + (myOrders.get(i).getProducts().getQuantity() % myOrders.get(i).getProducts().getminimumPromotion()) * (myOrders.get(i).getProducts().getPrice());
-            
-            DecimalFormat df = new DecimalFormat("#.####");
+
+            DecimalFormat df = new DecimalFormat("#.##");
             df.setRoundingMode(RoundingMode.HALF_UP);
             String stringPrice = df.format(price);
 
@@ -110,7 +151,7 @@ public class OrdersDAO extends TablesDAO
             for (int j = 0; j < myPrice.length; j++)
                 if (myPrice[j] == ',')
                     myPrice[j] = '.';
-            
+
             price = Double.parseDouble(String.copyValueOf(myPrice));
 
             String orderProductNo = "" + myOrders.get(i).getOrderNumber() + "-" + myOrders.get(i).getProducts().getProductNo();
@@ -137,6 +178,7 @@ public class OrdersDAO extends TablesDAO
     public void deleteAllElements()
     {
         getConnection();
+
         try
         {
             String sqlStatement = "DELETE FROM orders";
@@ -211,6 +253,7 @@ public class OrdersDAO extends TablesDAO
                     int quantity = res.getInt("quantity");
                     int orderNo = res.getInt("orderNo");
                     double price = res.getDouble("price");
+                    
                     Product product = null;
 
                     try
@@ -238,21 +281,6 @@ public class OrdersDAO extends TablesDAO
             System.out.println("Error searchOrder OrdersDAO (Orders)");
         }
         closeConnection();
-
-//        for (int i = 0; i < myOrdersSearch.size(); i++)
-//        {   
-//            DecimalFormat df = new DecimalFormat("#.####");
-//            df.setRoundingMode(RoundingMode.HALF_UP);
-//            String stringPrice = df.format(myOrdersSearch.get(i).getPrice());
-//
-//            char[] myPrice = stringPrice.toCharArray();
-//            for (int j = 0; j < myPrice.length; j++)
-//                if (myPrice[j] == ',')
-//                    myPrice[j] = '.';
-//            
-//            myOrdersSearch.get(i).setPrice(Double.parseDouble(String.copyValueOf(myPrice)));
-//            myOrdersSearch.get(i).display();
-//        }
 
         return myOrdersSearch;
     }

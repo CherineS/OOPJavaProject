@@ -5,7 +5,7 @@
  */
 package View;
 import projetinfo.*;
-import Controller.Product;
+import projetinfo.Product;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
