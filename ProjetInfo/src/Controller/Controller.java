@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import projetinfo.ProductDAO;
 
+
 /**
  *
  * @author Gaëtan
@@ -60,10 +61,14 @@ public class Controller
                     {
                         for (Integer i : listResults)
                             myView.getMainPage().addInPanel2(new ProduitEnListe(i));
+                            
+                        myView.getMainPage().showScroll();
                     }
                     else{
                         myView.getMainPage().noResult();
+                        myView.getMainPage().hideScroll();
                     }
+                    
                     myView.getMainPage().addPanelInFrame(myView.getMainPage().getPanel2());
                     myView.getMainPage().revalidate();
                     myView.getMainPage().repaint();
@@ -71,6 +76,7 @@ public class Controller
             else if (e.getSource() == myButton.get(1)) //Bouton add
             {
                 myView.getMainPage().emptyPanel2();
+                myView.getMainPage().hideScroll();
                 myView.getMainPage().addInPanel2(new AddProductPage());
                 myView.getMainPage().addPanelInFrame(myView.getMainPage().getPanel2());
                 myView.getMainPage().revalidate();

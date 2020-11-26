@@ -9,6 +9,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import projetinfo.ProductDAO;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import javax.swing.*;
+import static javax.swing.BorderFactory.createEmptyBorder;
+import static javax.swing.ScrollPaneConstants.*;
 
 /**
  *
@@ -26,7 +33,12 @@ public class MainPage extends javax.swing.JFrame
         setLocationRelativeTo(null);
         setLayout(new FlowLayout());
         jPanel2 = new JPanel();
-        jPanel2.setPreferredSize(new Dimension(1500,1000));
+        jPanel2.setPreferredSize(new Dimension(1500,1000)); 
+        scroll = new JScrollPane(jPanel2);
+        
+        scroll.setPreferredSize(new Dimension(1500,550));
+        scroll.setBorder(createEmptyBorder());
+        scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 
     /**
@@ -116,7 +128,7 @@ public class MainPage extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 652, Short.MAX_VALUE))
+                .addGap(0, 598, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,7 +146,17 @@ public class MainPage extends javax.swing.JFrame
 
     public void addPanelInFrame(JPanel newPanel)
     {
-        add(newPanel);
+        add(scroll);
+    }
+    
+    public void hideScroll()
+    {
+        scroll.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER);
+    }
+    
+    public void showScroll()
+    {
+        scroll.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
     }
     
     public void emptyPanel2()
@@ -153,7 +175,7 @@ public class MainPage extends javax.swing.JFrame
     }
     
     public void addInPanel2(AddProductPage newProductPage)
-    {
+    {   
         jPanel2.add(newProductPage);
     }
     
@@ -201,4 +223,5 @@ public class MainPage extends javax.swing.JFrame
     private javax.swing.JTextField searchBar;
     // End of variables declaration//GEN-END:variables
     private JPanel jPanel2;
+    private JScrollPane scroll;
 }
