@@ -36,10 +36,10 @@ public class Controller
 
     public void addAllButtons()
     {
-        myView.setVisibleMainpage();
-        menuButton.add(myView.getMainPage().getButtonSearch());
-        menuButton.add(myView.getMainPage().getButtonManageProduct());
-        menuButton.add(myView.getMainPage().getButtonShop());
+        myView.setVisibleFrame();
+        menuButton.add(myView.getFrame().getMainPage().getButtonSearch());
+        menuButton.add(myView.getFrame().getMainPage().getButtonManageProduct());
+        menuButton.add(myView.getFrame().getMainPage().getButtonShop());
 
         for (int i = 0; i < menuButton.size(); i++)
             menuButton.get(i).addActionListener(new RadioButtonListener());
@@ -61,26 +61,26 @@ public class Controller
                     ProductDAO productDAOSearched = new ProductDAO();
                     ArrayList<Integer> listResults = new ArrayList<>();
 
-                    myView.getMainPage().emptyPanel2();
+                    myView.getFrame().getMainPage().emptyPanel2();
                     
-                    listResults = productDAOSearched.searchElement(myView.getMainPage().getSearchBar());
+                    listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getSearchBar());
 
                     ProductListResults(listResults);
             }
             else if (e.getSource() == menuButton.get(1)) //Bouton manage
             {
-                myView.getMainPage().emptyPanel2();
-                myView.getMainPage().hideScroll();
-                myView.getMainPage().addInPanel2(new AddProductPage());
-                myView.getMainPage().addPanelInFrame(myView.getMainPage().getPanel2());
-                myView.getMainPage().revalidate();
-                myView.getMainPage().repaint();
+                myView.getFrame().getMainPage().emptyPanel2();
+                myView.getFrame().getMainPage().hideScroll();
+                myView.getFrame().getMainPage().addInPanel2(new AddProductPage());
+                myView.getFrame().getMainPage().addPanelInFrame();
+                myView.getFrame().getMainPage().revalidate();
+                myView.getFrame().getMainPage().repaint();
             }
             else if (e.getSource() == menuButton.get(2)) //Bouton shop
             {
                 ProductDAO productDAO = new ProductDAO();
 
-                myView.getMainPage().emptyPanel2();
+                myView.getFrame().getMainPage().emptyPanel2();
 
                 ProductListResults(productDAO.returnAllElement());
             }
@@ -95,24 +95,24 @@ public class Controller
         {
             for (Integer i : listResults)
             {
-                myView.getMainPage().addInPanel2(new ProduitEnListe(i));
+                myView.getFrame().getMainPage().addInPanel2(new ProduitEnListe(i));
                 yPanel+=210;
             }
 
-            myView.getMainPage().showScroll();
+            myView.getFrame().getMainPage().showScroll();
         }
         else{
-            myView.getMainPage().noResult();
-            myView.getMainPage().hideScroll();
+            myView.getFrame().getMainPage().noResult();
+            myView.getFrame().getMainPage().hideScroll();
         }
 
         if(yPanel<700)
-            myView.getMainPage().hideScroll();
+            myView.getFrame().getMainPage().hideScroll();
 
-        myView.getMainPage().getPanel2().setPreferredSize(new Dimension(1600, yPanel));
-        myView.getMainPage().addPanelInFrame(myView.getMainPage().getPanel2());
-        myView.getMainPage().revalidate();
-        myView.getMainPage().repaint();
+        myView.getFrame().getMainPage().getPanel2().setPreferredSize(new Dimension(1600, yPanel));
+        myView.getFrame().getMainPage().addPanelInFrame();
+        myView.getFrame().getMainPage().revalidate();
+        myView.getFrame().getMainPage().repaint();
     }
     
 }
