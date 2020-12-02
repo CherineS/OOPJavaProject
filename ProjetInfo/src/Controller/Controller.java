@@ -36,57 +36,57 @@ public class Controller
     public void addAllButtons()
     {
         myView.setVisibleMainpage();
-        myButton.add(myView.getMainPage().getButtonSearch());
-        myButton.add(myView.getMainPage().getButtonAddProduct());
-
-        for (int i = 0; i < myButton.size(); i++)
-        {
-            myButton.get(i).addActionListener(new RadioButtonListener());
-        }
+//        myButton.add(myView.getMainPage().getButtonSearch());
+//        myButton.add(myView.getMainPage().getButtonAddProduct());
+//
+//        for (int i = 0; i < myButton.size(); i++)
+//        {
+//            myButton.get(i).addActionListener(new RadioButtonListener());
+//        }
     }
 
-    private class RadioButtonListener implements ActionListener
-    {
-
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            if (e.getSource() == myButton.get(0)) //Bouton search
-            {
-                    ProductDAO productDAOSearched = new ProductDAO();
-                    ArrayList<Integer> listResults = new ArrayList<>();
-
-                    myView.getMainPage().emptyPanel2();
-                    
-                    listResults = productDAOSearched.searchElement(myView.getMainPage().getSearchBar());
-
-                    if(!listResults.isEmpty())
-                    {
-                        for (Integer i : listResults)
-                            myView.getMainPage().addInPanel2(new ProduitEnListe(i));
-                            
-                        myView.getMainPage().showScroll();
-                    }
-                    else{
-                        myView.getMainPage().noResult();
-                        myView.getMainPage().hideScroll();
-                    }
-                    
-                    myView.getMainPage().addPanelInFrame(myView.getMainPage().getPanel2());
-                    myView.getMainPage().revalidate();
-                    myView.getMainPage().repaint();
-            }
-            else if (e.getSource() == myButton.get(1)) //Bouton add
-            {
-                myView.getMainPage().emptyPanel2();
-                myView.getMainPage().hideScroll();
-                myView.getMainPage().addInPanel2(new AddProductPage());
-                myView.getMainPage().addPanelInFrame(myView.getMainPage().getPanel2());
-                myView.getMainPage().revalidate();
-                myView.getMainPage().repaint();
-            }
-        }
-    }
+//    private class RadioButtonListener implements ActionListener
+//    {
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e)
+//        {
+//            if (e.getSource() == myButton.get(0)) //Bouton search
+//            {
+//                    ProductDAO productDAOSearched = new ProductDAO();
+//                    ArrayList<Integer> listResults = new ArrayList<>();
+//
+//                    myView.getMainPage().emptyPanel2();
+//                    
+//                    listResults = productDAOSearched.searchElement(myView.getMainPage().getSearchBar());
+//
+//                    if(!listResults.isEmpty())
+//                    {
+//                        for (Integer i : listResults)
+//                            myView.getMainPage().addInPanel2(new ProduitEnListe(i));
+//                            
+//                        myView.getMainPage().showScroll();
+//                    }
+//                    else{
+//                        myView.getMainPage().noResult();
+//                        myView.getMainPage().hideScroll();
+//                    }
+//                    
+//                    myView.getMainPage().addPanelInFrame(myView.getMainPage().getPanel2());
+//                    myView.getMainPage().revalidate();
+//                    myView.getMainPage().repaint();
+//            }
+//            else if (e.getSource() == myButton.get(1)) //Bouton add
+//            {
+//                myView.getMainPage().emptyPanel2();
+//                myView.getMainPage().hideScroll();
+//                myView.getMainPage().addInPanel2(new AddProductPage());
+//                myView.getMainPage().addPanelInFrame(myView.getMainPage().getPanel2());
+//                myView.getMainPage().revalidate();
+//                myView.getMainPage().repaint();
+//            }
+//        }
+//    }
     
     
 }

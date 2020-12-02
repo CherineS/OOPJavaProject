@@ -15,10 +15,10 @@ import javax.swing.JTextField;
  *
  * @author Gaëtan
  */
-
 public class PeopleDAO extends TablesDAO
 {
-    public void addElement(JTextField email,JTextField FirstName,JTextField lastName,JTextField password,JTextField status)
+
+    public void addElement(JTextField email, JTextField FirstName, JTextField lastName, JTextField password, JTextField status)
     {
         String inputEmail = email.getText();
         String inputFirstName = FirstName.getText();
@@ -26,18 +26,17 @@ public class PeopleDAO extends TablesDAO
         String inputpassword = password.getText();
         String inputstatus = status.getText();
         getConnection();
-        
+
         try
-        {   
-          stmt.executeUpdate("INSERT INTO people" + "(email, firstName, lastName, password, status)" +  " VALUES "  + "('" + inputEmail + "','" + inputFirstName + "','" + inputlastName + "','" + inputpassword + "','" +  inputstatus + "')");
-        }
-       catch (SQLException error)
+        {
+            stmt.executeUpdate("INSERT INTO people" + "(email, firstName, lastName, password, status)" + " VALUES " + "('" + inputEmail + "','" + inputFirstName + "','" + inputlastName + "','" + inputpassword + "','" + inputstatus + "')");
+        } catch (SQLException error)
         {
             System.out.println("Error addElement PeopleDAO");
         }
         closeConnection();
-    } 
-    
+    }
+
     public void changeElement(String element, JTextField modification, String email)
     {
         String inputmodification = modification.getText();
@@ -57,67 +56,68 @@ public class PeopleDAO extends TablesDAO
         }
         closeConnection();
     }
-    
+
     public void deleteElements(String email)
     {
         getConnection();
         try
-        { 
-          String sqlStatement = "DELETE FROM people where email =  '" + email + "' ";
-          stmt.executeUpdate(sqlStatement);
-        }
-       catch (SQLException error)
+        {
+            String sqlStatement = "DELETE FROM people where email =  '" + email + "' ";
+            stmt.executeUpdate(sqlStatement);
+        } catch (SQLException error)
         {
             System.out.println("Error deleteElements PeopleDAO");
         }
-       closeConnection();
+        closeConnection();
     }
-    
-    public boolean  Connection(JTextField myemail,JPasswordField mypassword)
+
+    public boolean Connection(JTextField myemail, JPasswordField mypassword)
     {
         String email = myemail.getText();
-        String password = mypassword.getText();
+        String thePassword = mypassword.getText();
+        
         getConnection();
-             if(testEmail(email)==true)
-             {
-                String testpassword = "SELECT password FROM people WHERE email LIKE '"+ email +"'"; 
-                    if(testpassword.equals(password))
-                    {
-                         return true;
-                    }
-             }
-        closeConnection();
-        return false;
-    }
-    
-    public boolean testEmail(String email)
-    {
-        int compteur = 0;
-        getConnection();  
         try
-        { 
+        {
             String sqlStatement = "SELECT* FROM people";
             ResultSet res = stmt.executeQuery(sqlStatement);
             
+            while (res.next())
+            {
+                if (email.equals(res.getString("email"))&&thePassword.equals(res.getString("password")))
+                    return true;
+            }
+   
+        } catch (SQLException error)
+        {
+            System.out.println("Error Connection");
+        }
+      
+        closeConnection();
+   return false;
+    }
+
+    public boolean testEmail(String email)
+    {
+        getConnection();
+        try
+        {
+            String sqlStatement = "SELECT* FROM people";
+            ResultSet res = stmt.executeQuery(sqlStatement);
 
             while (res.next())
             {
-                if(email.equals(res.getString("email")))
-                {
+                if (email.equals(res.getString("email")))
                     return true;
-                }
-                    compteur++;
-            }        
-        }
-       catch (SQLException error)
+            }
+        } catch (SQLException error)
         {
-            System.out.println("Error,this email do not exist");
+            System.out.println("Error testEmail");
         }
-       closeConnection();
-       return false;
+        closeConnection();
+        return false;
     }
 
-    
     @Override
     public void deleteAllElements()
     {
@@ -133,4 +133,3 @@ public class PeopleDAO extends TablesDAO
         closeConnection();
     }
 }
-
