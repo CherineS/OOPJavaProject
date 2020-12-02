@@ -8,6 +8,7 @@ package projetinfo;
 import java.util.ArrayList;
 import java.sql.*;
 import javax.sql.*;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -71,6 +72,51 @@ public class PeopleDAO extends TablesDAO
         }
        closeConnection();
     }
+    
+    public boolean  Connection(JTextField myemail,JPasswordField mypassword)
+    {
+        String email = myemail.getText();
+        String password = mypassword.getText();
+        getConnection();
+             if(testEmail(email)==true)
+             {
+                String testpassword = "SELECT password FROM people WHERE email LIKE '"+ email +"'"; 
+                    if(testpassword.equals(password))
+                    {
+                         return true;
+                    }
+             }
+        closeConnection();
+        return false;
+    }
+    
+    public boolean testEmail(String email)
+    {
+        int compteur = 0;
+        getConnection();  
+        try
+        { 
+            String sqlStatement = "SELECT* FROM people";
+            ResultSet res = stmt.executeQuery(sqlStatement);
+            
+
+            while (res.next())
+            {
+                if(email.equals(res.getString("email")))
+                {
+                    return true;
+                }
+                    compteur++;
+            }        
+        }
+       catch (SQLException error)
+        {
+            System.out.println("Error,this email do not exist");
+        }
+       closeConnection();
+       return false;
+    }
+
     
     @Override
     public void deleteAllElements()
