@@ -29,14 +29,27 @@ public class MainPage extends javax.swing.JFrame
     public MainPage()
     {
         initComponents();
+        manualInitComponents();
+    }
+    
+    public void manualInitComponents()
+    {
+        //Suppression des bords des boutons
+        shopButton.setBorderPainted(false);
+        trendButton.setBorderPainted(false);
+        salesButton.setBorderPainted(false);
+        pastOrdersButton.setBorderPainted(false);
+        parametersButton.setBorderPainted(false);
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new FlowLayout());
         jPanel2 = new JPanel();
-        jPanel2.setPreferredSize(new Dimension(1500,1000)); 
+        jPanel2.setBackground(Color.white);
+        jPanel2.setPreferredSize(new Dimension(1600,700)); 
         scroll = new JScrollPane(jPanel2);
         
-        scroll.setPreferredSize(new Dimension(1500,550));
+        scroll.setPreferredSize(new Dimension(1600,700));
         scroll.setBorder(createEmptyBorder());
         scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
@@ -53,10 +66,18 @@ public class MainPage extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
         searchBar = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
-        jButtonAddProduct = new javax.swing.JButton();
-        jButtonDeleteProduct = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        shopButton = new javax.swing.JButton();
+        trendButton = new javax.swing.JButton();
+        salesButton = new javax.swing.JButton();
+        pastOrdersButton = new javax.swing.JButton();
+        parametersButton = new javax.swing.JButton();
+        jButtonManageProduct = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Shop name");
@@ -73,49 +94,98 @@ public class MainPage extends javax.swing.JFrame
             }
         });
 
-        jButtonAddProduct.setText("Add a product");
-        jButtonAddProduct.addActionListener(new java.awt.event.ActionListener()
+        jPanel3.setBackground(new java.awt.Color(255, 102, 51));
+
+        shopButton.setBackground(new java.awt.Color(255, 102, 51));
+        shopButton.setForeground(new java.awt.Color(255, 255, 255));
+        shopButton.setText("Shop");
+
+        trendButton.setBackground(new java.awt.Color(255, 102, 51));
+        trendButton.setForeground(new java.awt.Color(255, 255, 255));
+        trendButton.setText("On trend");
+        trendButton.setPreferredSize(new java.awt.Dimension(140, 41));
+
+        salesButton.setBackground(new java.awt.Color(255, 102, 51));
+        salesButton.setForeground(new java.awt.Color(255, 255, 255));
+        salesButton.setText("Sales");
+        salesButton.setPreferredSize(new java.awt.Dimension(140, 41));
+
+        pastOrdersButton.setBackground(new java.awt.Color(255, 102, 51));
+        pastOrdersButton.setForeground(new java.awt.Color(255, 255, 255));
+        pastOrdersButton.setText("Past orders");
+        pastOrdersButton.setToolTipText("");
+        pastOrdersButton.setPreferredSize(new java.awt.Dimension(140, 41));
+
+        parametersButton.setBackground(new java.awt.Color(255, 102, 51));
+        parametersButton.setForeground(new java.awt.Color(255, 255, 255));
+        parametersButton.setText("Account parameters");
+        parametersButton.setPreferredSize(new java.awt.Dimension(140, 41));
+
+        jButtonManageProduct.setBackground(new java.awt.Color(255, 102, 51));
+        jButtonManageProduct.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonManageProduct.setText("Manage products");
+        jButtonManageProduct.setPreferredSize(new java.awt.Dimension(170, 25));
+        jButtonManageProduct.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButtonAddProductActionPerformed(evt);
+                jButtonManageProductActionPerformed(evt);
             }
         });
 
-        jButtonDeleteProduct.setText("Delete a product");
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(shopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(trendButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pastOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(parametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonManageProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(shopButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(trendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(pastOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(parametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonManageProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAddProduct)
-                .addGap(27, 27, 27)
-                .addComponent(jButtonDeleteProduct)
-                .addGap(41, 41, 41))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(330, 330, 330)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(329, Short.MAX_VALUE))
+                .addGap(383, 383, 383))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButtonAddProduct)
-                    .addComponent(jButtonDeleteProduct))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSearch))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonSearch)
+                        .addComponent(jLabel1)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,16 +198,16 @@ public class MainPage extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 598, Short.MAX_VALUE))
+                .addGap(0, 707, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAddProductActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddProductActionPerformed
-    {//GEN-HEADEREND:event_jButtonAddProductActionPerformed
+    private void jButtonManageProductActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonManageProductActionPerformed
+    {//GEN-HEADEREND:event_jButtonManageProductActionPerformed
         
-    }//GEN-LAST:event_jButtonAddProductActionPerformed
+    }//GEN-LAST:event_jButtonManageProductActionPerformed
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSearchActionPerformed
     {//GEN-HEADEREND:event_jButtonSearchActionPerformed
@@ -199,15 +269,15 @@ public class MainPage extends javax.swing.JFrame
     {
         return jButtonSearch;
     }
-
-    public JButton getButtonDeleteProduct()
+    
+    public JButton getButtonManageProduct()
     {
-        return jButtonDeleteProduct;
+        return jButtonManageProduct;
     }
     
-        public JButton getButtonAddProduct()
+    public JButton getButtonShop()
     {
-        return jButtonAddProduct;
+        return shopButton;
     }
     
     /**
@@ -215,12 +285,17 @@ public class MainPage extends javax.swing.JFrame
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAddProduct;
-    private javax.swing.JButton jButtonDeleteProduct;
+    private javax.swing.JButton jButtonManageProduct;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton parametersButton;
+    private javax.swing.JButton pastOrdersButton;
+    private javax.swing.JButton salesButton;
     private javax.swing.JTextField searchBar;
+    private javax.swing.JButton shopButton;
+    private javax.swing.JButton trendButton;
     // End of variables declaration//GEN-END:variables
     private JPanel jPanel2;
     private JScrollPane scroll;

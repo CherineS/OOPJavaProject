@@ -52,7 +52,7 @@ public class ProduitEnListe extends javax.swing.JPanel
         try {
             URL url = new URL(searchedProduct.getURL());
             Image imageBeforeResize = ImageIO.read(url);
-            image = imageBeforeResize.getScaledInstance(140, 140, Image.SCALE_SMOOTH);
+            image = imageBeforeResize.getScaledInstance(138, 138, Image.SCALE_SMOOTH);
         } catch (IOException error) {
             System.out.println("Erreur image");
         }
@@ -84,15 +84,17 @@ public class ProduitEnListe extends javax.swing.JPanel
         imageDisplay = new javax.swing.JPanel();
         jButtonAddToCart = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        name.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        name.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         name.setText("Name");
         name.setToolTipText("");
 
         price.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         price.setText("Price");
 
+        imageDisplay.setBackground(new java.awt.Color(255, 255, 255));
         imageDisplay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout imageDisplayLayout = new javax.swing.GroupLayout(imageDisplay);
@@ -119,7 +121,7 @@ public class ProduitEnListe extends javax.swing.JPanel
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 357, Short.MAX_VALUE))
+                        .addGap(0, 403, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
