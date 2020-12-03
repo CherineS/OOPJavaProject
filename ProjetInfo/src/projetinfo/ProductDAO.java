@@ -43,9 +43,9 @@ public class ProductDAO extends TablesDAO
         String name = jName.getText();
         double price = Double.parseDouble(jPrice.getText());
         int quantity = Integer.parseInt(jQuantity.getText());
-        double valuePromotion = Double.parseDouble(jMinPromotion.getText());
-        int minPromotion = Integer.parseInt(jPromotion.getText());
-        String imageURL = jPromotion.getText();
+        double valuePromotion = Double.parseDouble(jPromotion.getText());
+        int minPromotion = Integer.parseInt(jMinPromotion.getText());
+        String imageURL = jImage.getText();
 
         getConnection();
         try
@@ -117,6 +117,31 @@ public class ProductDAO extends TablesDAO
             System.out.println("Error deleteElements ProductDAO");
         }
         closeConnection();
+    }
+    
+    //Retourne toutes clés primaires des produits
+    public ArrayList<Integer> returnAllElement()
+    {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        getConnection();
+        try
+        {
+            String sqlStatement = "SELECT productNo FROM product WHERE quantity != 0";
+            ResultSet res = stmt.executeQuery(sqlStatement);
+
+            while (res.next())
+            {
+                results.add(res.getInt("productNo"));
+            }
+
+        } catch (SQLException error)
+        {
+            System.out.println("Error searchElement ProductDAO");
+        }
+        closeConnection();
+
+        return results;
     }
 
     //Recherche d'un produit en fonction de son nom et retourne les clés primaires des résultats

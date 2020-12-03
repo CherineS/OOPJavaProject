@@ -11,20 +11,20 @@ package View;
  */
 public class View
 {
-    MainPage myMainPage = new MainPage();
+    Frame frame = new Frame();
     
     public View()
     {
         
     }
     
-    public void setVisibleMainpage()
+    public void setVisibleFrame()
     {
-        myMainPage.setVisible(true);
+        frame.setVisible(true);
     }
     
-    public MainPage getMainPage()
+    public Frame getFrame()
     {
-       return myMainPage; 
+       return frame; 
     }
 }
