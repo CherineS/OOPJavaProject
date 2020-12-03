@@ -5,10 +5,6 @@
  */
 package projetinfo;
 
-/**
- *
- * @author antoi
- */
 public class Product
 {
     private int m_productNo;
@@ -18,6 +14,7 @@ public class Product
     private int m_minimumPromotion;
     private double m_valuePromotion;
     private String m_imageUrl;
+    private String m_description;
 
     public Product()
     {
@@ -28,9 +25,10 @@ public class Product
         m_minimumPromotion = 0;
         m_valuePromotion = 0;
         m_imageUrl = null;
+        m_description = null;
     }
     
-    public Product(int productNo, String name, double price, int quantity, int minimumPromotion, double valuePromotion, String imageUrl)
+    public Product(int productNo, String name, double price, int quantity, int minimumPromotion, double valuePromotion, String imageUrl, String description)
     {
         m_productNo = productNo;
         m_name = name;
@@ -39,9 +37,10 @@ public class Product
         m_minimumPromotion=minimumPromotion;
         m_valuePromotion = valuePromotion;
         m_imageUrl = imageUrl;
+        m_description = description;
     }
     
-    public Product(int productNo, String name, double price, int quantity, int minimumPromotion, double valuePromotion)
+    public Product(int productNo, String name, double price, int quantity, int minimumPromotion, double valuePromotion, String description)
     {
         m_productNo = productNo;
         m_name = name;
@@ -49,6 +48,7 @@ public class Product
         m_quantity = quantity;
         m_minimumPromotion=minimumPromotion;
         m_valuePromotion = valuePromotion;
+        m_description = description;
     }
     
     public int getProductNo()
@@ -86,6 +86,11 @@ public class Product
         return m_imageUrl;
     }
     
+    public String getDescription()
+    {
+        return m_description;
+    }
+    
     public void setProductNo(int productNo)
     {
         m_productNo=productNo;
@@ -116,9 +121,14 @@ public class Product
         m_valuePromotion = valuePromotion;
     }
     
+    public void setDescription(String description)
+    {
+        m_description = description;
+    }
+    
     public void display()
     {
         System.out.println("ProductNo:" + m_productNo + "  Name:" + m_name + "  Price:" + m_price + "  Quantity:" + m_quantity
-                            + "  MinimumPromotion:" + m_minimumPromotion + "  ValuePromotion:" + m_valuePromotion);
+                            + "  MinimumPromotion:" + m_minimumPromotion + "  ValuePromotion:" + m_valuePromotion + "  Description:" + m_description);
     }
 }
