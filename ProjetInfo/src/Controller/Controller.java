@@ -27,6 +27,7 @@ public class Controller
 {
     ArrayList<JButton> menuButton = new ArrayList<>();
     ArrayList<JButton> myButton = new ArrayList<>();
+    ArrayList<JButton> managerButton = new ArrayList<>();
     View myView = new View();
 
     public Controller()
@@ -58,21 +59,27 @@ public class Controller
         {
             if (e.getSource() == menuButton.get(0)) //Bouton search
             {
-                    ProductDAO productDAOSearched = new ProductDAO();
-                    ArrayList<Integer> listResults = new ArrayList<>();
+                ProductDAO productDAOSearched = new ProductDAO();
+                ArrayList<Integer> listResults = new ArrayList<>();
 
-                    myView.getFrame().getMainPage().emptyPanel2();
-                    
-                    listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getSearchBar());
+                listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getSearchBar());
 
-                    ProductListResults(listResults);
+                myView.getFrame().getMainPage().emptyPanel2();
+                ProductListResults(listResults,1);
             }
             else if (e.getSource() == menuButton.get(1)) //Bouton manage
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                myView.getFrame().getMainPage().hideScroll();
-                myView.getFrame().getMainPage().addInPanel2(new AddProductPage());
+                
+                myView.getFrame().getMainPage().addInPanel2(myView.getFrame().getMainPage().getManagerPage());
                 myView.getFrame().getMainPage().addPanelInFrame();
+                
+                managerButton.add(myView.getFrame().getMainPage().getManagerPage().getManagerSearchButton());
+                managerButton.add(myView.getFrame().getMainPage().getManagerPage().getAddButton());
+                
+                for (int i = 0; i < managerButton.size(); i++)
+                    managerButton.get(i).addActionListener(new ManagerButtonListener());
+                
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
             }
@@ -82,12 +89,44 @@ public class Controller
 
                 myView.getFrame().getMainPage().emptyPanel2();
 
-                ProductListResults(productDAO.returnAllElement());
+                ProductListResults(productDAO.returnAllElement(),1);
+            }
+        }
+    }
+    
+    private class ManagerButtonListener implements ActionListener
+    {
+
+        @Override
+        public void actionPerformed(ActionEvent event)
+        {
+            if(event.getSource() == managerButton.get(0)) //Search
+            {
+                myView.getFrame().getMainPage().emptyPanel2();
+                myView.getFrame().getMainPage().addInPanel2(myView.getFrame().getMainPage().getManagerPage());
+                myView.getFrame().getMainPage().addPanelInFrame();
+                
+                ProductDAO productDAOSearched = new ProductDAO();
+                ArrayList<Integer> listResults = new ArrayList<>();
+
+                listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getManagerPage().getManagerSearchBar());
+
+                ProductListResults(listResults,2);
+            }
+            else if(event.getSource() == managerButton.get(1)) //Add Product
+            {
+                myView.getFrame().getMainPage().emptyPanel2();
+                myView.getFrame().getMainPage().hideScroll();
+                myView.getFrame().getMainPage().addInPanel2(new AddProductPage());
+                myView.getFrame().getMainPage().addPanelInFrame();
+                myView.getFrame().getMainPage().revalidate();
+                myView.getFrame().getMainPage().repaint();
             }
         }
     }
 
-    public void ProductListResults(ArrayList<Integer> listResults)
+    //Méthode d'affichage d'une liste de produits
+    public void ProductListResults(ArrayList<Integer> listResults, int indice)
     {
         int yPanel=0;
         
@@ -95,24 +134,24 @@ public class Controller
         {
             for (Integer i : listResults)
             {
-                myView.getFrame().getMainPage().addInPanel2(new ProduitEnListe(i));
+                if(indice==1)
+                    myView.getFrame().getMainPage().addInPanel2(new ProduitEnListe(i));
+                else if(indice==2)
+                    myView.getFrame().getMainPage().addInPanel2(new ManagerProduitEnListe(i));
                 yPanel+=210;
             }
-
-            myView.getFrame().getMainPage().showScroll();
         }
         else{
-            myView.getFrame().getMainPage().noResult();
-            myView.getFrame().getMainPage().hideScroll();
+            myView.getFrame().getMainPage().displayText("No Result");
         }
 
         if(yPanel<700)
             myView.getFrame().getMainPage().hideScroll();
+        else myView.getFrame().getMainPage().showScroll();
 
         myView.getFrame().getMainPage().getPanel2().setPreferredSize(new Dimension(1600, yPanel));
         myView.getFrame().getMainPage().addPanelInFrame();
         myView.getFrame().getMainPage().revalidate();
         myView.getFrame().getMainPage().repaint();
     }
-    
 }

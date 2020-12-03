@@ -25,6 +25,7 @@ public class Frame extends javax.swing.JFrame
 {   
     MainPage myMainPage;
     FirstPage connexionPage;
+    ManageProductsPage manageProductsPage;
     /**
      * Creates new form testmain
      */
@@ -41,7 +42,7 @@ public class Frame extends javax.swing.JFrame
         myMainPage = new MainPage();
         myMainPage.setPreferredSize(new Dimension(1600,800));
         
-        switchToConnexionPage();
+        switchToMainPage();
     }
     
     public void switchToConnexionPage()
@@ -82,11 +83,11 @@ public class Frame extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1600, Short.MAX_VALUE)
+            .addGap(0, 1610, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 810, Short.MAX_VALUE)
         );
 
         pack();
