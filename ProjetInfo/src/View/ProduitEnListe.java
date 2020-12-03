@@ -45,6 +45,7 @@ public class ProduitEnListe extends javax.swing.JPanel
         
         name.setText(searchedProduct.getName());
         price.setText(Double.toString(searchedProduct.getPrice())+ "€");
+        description.setText(searchedProduct.getDescription());
         imageURL = searchedProduct.getURL();
         
         Image image = null;
@@ -83,6 +84,7 @@ public class ProduitEnListe extends javax.swing.JPanel
         price = new javax.swing.JLabel();
         imageDisplay = new javax.swing.JPanel();
         jButtonAddToCart = new javax.swing.JButton();
+        description = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -110,6 +112,9 @@ public class ProduitEnListe extends javax.swing.JPanel
 
         jButtonAddToCart.setText("Add to cart");
 
+        description.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        description.setText("Description");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,20 +122,21 @@ public class ProduitEnListe extends javax.swing.JPanel
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(imageDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 403, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jButtonAddToCart)
                                 .addGap(53, 53, 53))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(price)
-                                .addGap(82, 82, 82))))))
+                                .addGap(82, 82, 82))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,8 +147,13 @@ public class ProduitEnListe extends javax.swing.JPanel
                         .addComponent(name)
                         .addGap(10, 10, 10)
                         .addComponent(price)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButtonAddToCart)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jButtonAddToCart))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(imageDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,6 +163,7 @@ public class ProduitEnListe extends javax.swing.JPanel
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel description;
     private javax.swing.JPanel imageDisplay;
     private javax.swing.JButton jButtonAddToCart;
     private javax.swing.JLabel name;

@@ -38,7 +38,7 @@ public class ProductDAO extends TablesDAO
     }
 
     //Ajoute un produit dans la BDD
-    public void addElement(JTextField jName, JTextField jPrice, JTextField jQuantity, JTextField jMinPromotion, JTextField jPromotion, JTextField jImage)
+    public void addElement(JTextField jName, JTextField jPrice, JTextField jQuantity, JTextField jMinPromotion, JTextField jPromotion, JTextField jImage, JTextField jdescription)
     {
         String name = jName.getText();
         double price = Double.parseDouble(jPrice.getText());
@@ -46,6 +46,7 @@ public class ProductDAO extends TablesDAO
         double valuePromotion = Double.parseDouble(jPromotion.getText());
         int minPromotion = Integer.parseInt(jMinPromotion.getText());
         String imageURL = jImage.getText();
+        String description = jdescription.getText();
 
         getConnection();
         try
@@ -59,8 +60,8 @@ public class ProductDAO extends TablesDAO
                 productNo++;
             }
 
-            sqlStatement = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL)"
-                    + " VALUES (" + productNo + ", '" + name + "', " + price + ", " + quantity + ", " + minPromotion + ", " + valuePromotion + ", '"+ imageURL +"')";
+            sqlStatement = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)"
+                    + " VALUES (" + productNo + ", '" + name + "', " + price + ", " + quantity + ", " + minPromotion + ", " + valuePromotion + ", '"+ imageURL +"','"+ description +"' )";
             stmt.executeUpdate(sqlStatement);
         } catch (SQLException error)
         {
@@ -91,8 +92,12 @@ public class ProductDAO extends TablesDAO
                     stmt.executeUpdate("UPDATE product "+ "SET "+ element +" = "+ Integer.parseInt(modification.getText()) +" WHERE productNo = "+ productNo);
                     break;
                 case "name":
-                    String myString = "'" + modification.getText() + "'";
-                    stmt.executeUpdate("UPDATE product "+ "SET "+ element + " = " + myString +" WHERE productNo = "+ productNo);
+                    String myName = "'" + modification.getText() + "'";
+                    stmt.executeUpdate("UPDATE product "+ "SET "+ element + " = " + myName +" WHERE productNo = "+ productNo);
+                    break;
+                case "description":
+                    String myDescription = "'" + modification.getText() + "'";
+                    stmt.executeUpdate("UPDATE product "+ "SET "+ element + " = " + myDescription +" WHERE productNo = "+ productNo);
                     break;
             }
             
@@ -184,7 +189,7 @@ public class ProductDAO extends TablesDAO
                 
                 newJavaProduct = new Product(res.getInt("productNo"),res.getString("name"), res.getDouble("price"),
                                         res.getInt("quantity"),res.getInt("minimumPromotion"),res.getDouble("valuePromotion"),
-                                        res.getString("lienURL"));
+                                        res.getString("lienURL"), res.getString("description"));
             }
         } 
         catch (SQLException error)

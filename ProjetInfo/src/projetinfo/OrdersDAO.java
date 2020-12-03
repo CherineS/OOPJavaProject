@@ -54,7 +54,7 @@ public class OrdersDAO extends TablesDAO
                 {
                     int quantitySQL = res.getInt("quantity") - quantityInt;
                     myProduct = new Product(productNo, res.getString("name"), res.getDouble("price"), quantityInt,
-                            res.getInt("minimumPromotion"), res.getDouble("valuePromotion"));
+                            res.getInt("minimumPromotion"), res.getDouble("valuePromotion"), res.getString("description"));
 
                     stmt2.executeUpdate("UPDATE product " + "SET quantity = " + quantitySQL + " WHERE productNo = " + productNo);
                     result = true;
@@ -153,7 +153,6 @@ public class OrdersDAO extends TablesDAO
                     myPrice[j] = '.';
 
             price = Double.parseDouble(String.copyValueOf(myPrice));
-
             String orderProductNo = "" + myOrders.get(i).getOrderNumber() + "-" + myOrders.get(i).getProducts().getProductNo();
             java.sql.Date dateSQL = new java.sql.Date(myOrders.get(i).getDate().getTime());
 
@@ -265,7 +264,7 @@ public class OrdersDAO extends TablesDAO
                         {
                             if (productNo == result.getInt("productNo"))
                                 product = new Product(result.getInt("productNo"), result.getString("name"), result.getDouble("price"),
-                                        quantity, result.getInt("minimumPromotion"), result.getDouble("valuePromotion"));
+                                        quantity, result.getInt("minimumPromotion"), result.getDouble("valuePromotion"), result.getString("description"));
                         }
                     } catch (SQLException error)
                     {
