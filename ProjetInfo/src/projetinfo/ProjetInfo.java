@@ -22,20 +22,33 @@ public class ProjetInfo
 {
     public static void createDatabase()
     {
-        try
-        {
-            String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
-            Connection con = DriverManager.getConnection(url, "root", "");
-            Statement stmt = con.createStatement();
-            String sqlStatementProduct1 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(0,'Pomme',1,100,10,0.05,'https://fac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2FFAC.2F2019.2F09.2F20.2Ff9a0f4d7-6214-4e0c-9c55-bfc706e473a2.2Ejpeg/1200x1200/quality/80/crop-from/center/quels-sont-les-bienfaits-du-kiwi.jpeg', 'SALUTTT')";
-            String sqlStatementProduct2 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(1,'Pomme22',1.20,150,10,0.12,'https://fac.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2FFAC.2F2019.2F09.2F20.2Ff9a0f4d7-6214-4e0c-9c55-bfc706e473a2.2Ejpeg/1200x1200/quality/80/crop-from/center/quels-sont-les-bienfaits-du-kiwi.jpeg', 'XDDD')";
-            stmt.executeUpdate(sqlStatementProduct1);
-            stmt.executeUpdate(sqlStatementProduct2);
-            con.close();
-        } catch (SQLException error)
-        {
-            System.out.println("Database PRODUIT déjà à jour");
-        }
+//        try
+//        {
+//            String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+//            Connection con = DriverManager.getConnection(url, "root", "");
+//            Statement stmt = con.createStatement();
+//            String sqlStatementProduct1 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(0,'Pomme',0.40,200,10,5,'https://assets.letemps.ch/sites/default/files/media/2020/08/16/file7bvv3g0v9rdyivvq9bw.jpg', 'Pomme bio provenant de nos agriculteurs locaux')";
+//            String sqlStatementProduct2 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(1,'Banane',0.55,150,8,6,'https://www.jaimefruitsetlegumes.ca/wp-content/uploads/2019/08/iStock_000007671231Large-e1565725651658-700x700.jpg', 'Belle banane')";
+//            String sqlStatementProduct3 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(2,'Kiwi',0.45,100,5,3,'https://produits.bienmanger.com/34089-0w470h470_Kiwi_Frais_Bio.jpg', 'Mmmmhhhh le kiwi')";
+//            String sqlStatementProduct4 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(3,'Pamplemousse',0.80,70,10,4,'https://www.havea.com/media/catalog/product/cache/44f3c051f19eb24a4baafa2b36eefbbb/2/e/2e59f3297bbee087fa9eb0d603690845f7e2ae2b_pamplemousse_min.jpg', 'Quel pamplemousse')";
+//            String sqlStatementProduct5 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(4,'Orange',0.30,60,7,9,'https://lh3.googleusercontent.com/proxy/BM6O2ZJd3i6P-Twbo8FDNpXwHcqTIUeIbNrRg1SHDUs1jYuOXwENUh0MRGcFAmrDe6t_JirKGC4odHIRnSsz6nc2csrlEdixtd9_uFTtK-rRCMhOwGt7hUdtfN4bTKAf3-qs4WR9E84', 'Orange bien orange')";
+//            String sqlStatementProduct6 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(5,'Cerise',0.09,500,20,15,'https://www.academiedugout.fr/images/15839/1200-auto/cerise_000.jpg?poix=50&poiy=50', 'Cerise exceptionnelle')";
+//            String sqlStatementProduct7 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(6,'Poire',0.50,50,4,2,'https://www.academiedugout.fr/images/17155/1200-auto/poire_000.jpg?poix=50&poiy=50', 'La poire')";
+//            String sqlStatementProduct8 = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)" + " VALUES " + "(7,'Abricot',0.25,80,6,1,'https://observatoire-des-aliments.fr/wp-content/uploads/2013/02/abricot-2.jpg', 'El abricot de la muerte')";
+//            
+//            stmt.executeUpdate(sqlStatementProduct1);
+//            stmt.executeUpdate(sqlStatementProduct2);
+//            stmt.executeUpdate(sqlStatementProduct3);
+//            stmt.executeUpdate(sqlStatementProduct4);
+//            stmt.executeUpdate(sqlStatementProduct5);
+//            stmt.executeUpdate(sqlStatementProduct6);
+//            stmt.executeUpdate(sqlStatementProduct7);
+//            stmt.executeUpdate(sqlStatementProduct8);
+//            con.close();
+//        } catch (SQLException error)
+//        {
+//            System.out.println("Database PRODUIT déjà à jour");
+//        }
 
 //        try
 //        {
@@ -51,28 +64,40 @@ public class ProjetInfo
 //        {
 //            System.out.println("Database PEOPLE déjà à jour");
 //        }
-//        
-//        try
-//        {
-//            String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
-//            Connection con = DriverManager.getConnection(url, "root", "");
-//            Statement stmt = con.createStatement();
-//            String sqlStatementOrders1 = "INSERT INTO orders " + "(orderNo, productNo, quantity, date)" + " VALUES " + "(0,0,30,'2018-09-24')";
-//            String sqlStatementOrders2 = "INSERT INTO orders " + "(orderNo, productNo, quantity, date)" + " VALUES " + "(1,1,30,'2018-09-24')";
-//            stmt.executeUpdate(sqlStatementOrders1);
-//            stmt.executeUpdate(sqlStatementOrders2);
-//            con.close();
-//        } catch (SQLException error)
-//        {
-//            System.out.println("Database ORDERS déjà à jour");
-//        }
+        
+        try
+        {
+            String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+            Connection con = DriverManager.getConnection(url, "root", "");
+            Statement stmt = con.createStatement();
+            String sqlStatementOrders1 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('0-0',0,0,'gaetan.bouchy@yahoo.fr',20,17,'2020-12-04')";
+            String sqlStatementOrders2 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('0-1',0,1,'gaetan.bouchy@yahoo.fr',40,28,'2020-12-04')";
+            String sqlStatementOrders3 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('1-2',1,2,'gaetan.bouchy@yahoo.fr',60,38,'2020-12-04')";
+            String sqlStatementOrders4 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('1-3',1,3,'gaetan.bouchy@yahoo.fr',50,42,'2020-12-04')";
+            String sqlStatementOrders5 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('1-4',1,4,'gaetan.bouchy@yahoo.fr',24,18,'2020-12-04')";
+            String sqlStatementOrders6 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('2-5',2,5,'gaetan.bouchy@yahoo.fr',28,23,'2020-12-04')";
+            String sqlStatementOrders7 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('3-6',3,6,'gaetan.bouchy@yahoo.fr',14,12,'2020-12-04')";
+            
+            stmt.executeUpdate(sqlStatementOrders1);
+            stmt.executeUpdate(sqlStatementOrders2);
+            stmt.executeUpdate(sqlStatementOrders3);
+            stmt.executeUpdate(sqlStatementOrders4);
+            stmt.executeUpdate(sqlStatementOrders5);
+            stmt.executeUpdate(sqlStatementOrders6);
+            stmt.executeUpdate(sqlStatementOrders7);
+            
+            con.close();
+        } catch (SQLException error)
+        {
+            System.out.println("Database ORDERS déjà à jour");
+        }
     }
     
     public static void main(String[] args) 
     {
-//        createDatabase();
+//       createDatabase();
         
-        Controller myController = new Controller();
-        myController.addAllButtons();
+       Controller myController = new Controller();
+       myController.addAllButtons();
     }
 }

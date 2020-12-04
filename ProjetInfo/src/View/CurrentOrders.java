@@ -4,53 +4,47 @@
  * and open the template in the editor.
  */
 package View;
-import projetinfo.*;
-import projetinfo.Product;
-import java.awt.*;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
-import javax.swing.*;
-
-/*
-Sources :
-Read image from URL : https://www.codeflow.site/fr/article/java__how-to-read-an-image-from-file-or-url
-Resize image : https://www.baeldung.com/java-resize-image
-*/
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import projetinfo.Orders;
+import projetinfo.ProductDAO;
 
 /**
  *
- * @author Utilisateur
+ * @author Gaëtan
  */
-public class ProduitEnListe extends javax.swing.JPanel
+public class CurrentOrders extends javax.swing.JPanel
 {
+
     /**
-     * Creates new form FicheProduitClient
+     * Creates new form CurrentOrders
      */
-    public ProduitEnListe()
+    public CurrentOrders()
     {
         initComponents();
-        name.setText("N/A");
-        price.setText("N/A");
     }
     
-    public ProduitEnListe(int productNo)
+    public CurrentOrders(Orders myOrders)
     {
         initComponents();
         imageDisplay.setLayout(new FlowLayout());
         imageDisplay.setPreferredSize(new Dimension(146,146));
         
-        ProductDAO javaProductDAO = new ProductDAO();
-        Product searchedProduct = javaProductDAO.createJavaProduct(productNo);
-        
-        name.setText(searchedProduct.getName());
-        price.setText(Double.toString(searchedProduct.getPrice())+ "€");
-        description.setText(searchedProduct.getDescription());
+        name.setText(myOrders.getProducts().getName());
+        price.setText(Double.toString(myOrders.getProducts().getPrice())+ "€");
+        description.setText(myOrders.getProducts().getDescription());
         
         Image image = null;
         
         try {
-            URL url = new URL(searchedProduct.getURL());
+            URL url = new URL(myOrders.getProducts().getURL());
             Image imageBeforeResize = ImageIO.read(url);
             image = imageBeforeResize.getScaledInstance(138, 138, Image.SCALE_SMOOTH);
         } catch (IOException error) {
@@ -82,11 +76,8 @@ public class ProduitEnListe extends javax.swing.JPanel
         name = new javax.swing.JLabel();
         price = new javax.swing.JLabel();
         imageDisplay = new javax.swing.JPanel();
-        jButtonAddToCart = new javax.swing.JButton();
+        supprimer = new javax.swing.JButton();
         description = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         name.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         name.setText("Name");
@@ -109,12 +100,12 @@ public class ProduitEnListe extends javax.swing.JPanel
             .addGap(0, 144, Short.MAX_VALUE)
         );
 
-        jButtonAddToCart.setText("Add to cart");
-        jButtonAddToCart.addActionListener(new java.awt.event.ActionListener()
+        supprimer.setText("Supprimer");
+        supprimer.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButtonAddToCartActionPerformed(evt);
+                supprimerActionPerformed(evt);
             }
         });
 
@@ -132,8 +123,8 @@ public class ProduitEnListe extends javax.swing.JPanel
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
-                        .addComponent(jButtonAddToCart)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                        .addComponent(supprimer)
                         .addGap(53, 53, 53))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +135,7 @@ public class ProduitEnListe extends javax.swing.JPanel
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -153,7 +144,7 @@ public class ProduitEnListe extends javax.swing.JPanel
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(75, 75, 75)
-                                .addComponent(jButtonAddToCart))
+                                .addComponent(supprimer))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -164,17 +155,17 @@ public class ProduitEnListe extends javax.swing.JPanel
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAddToCartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonAddToCartActionPerformed
-    {//GEN-HEADEREND:event_jButtonAddToCartActionPerformed
+    private void supprimerActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_supprimerActionPerformed
+    {//GEN-HEADEREND:event_supprimerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAddToCartActionPerformed
+    }//GEN-LAST:event_supprimerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel description;
     private javax.swing.JPanel imageDisplay;
-    private javax.swing.JButton jButtonAddToCart;
     private javax.swing.JLabel name;
     private javax.swing.JLabel price;
+    private javax.swing.JButton supprimer;
     // End of variables declaration//GEN-END:variables
 }

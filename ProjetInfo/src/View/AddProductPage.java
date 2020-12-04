@@ -122,7 +122,7 @@ public class AddProductPage extends javax.swing.JPanel
             .addGroup(layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addComponent(JLabel1)
-                .addGap(57, 57, 57)
+                .addGap(3, 3, 3)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(73, 73, 73)
