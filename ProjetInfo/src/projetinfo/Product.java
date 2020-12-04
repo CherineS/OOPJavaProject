@@ -51,6 +51,7 @@ public class Product
         m_description = description;
     }
     
+    //getters
     public int getProductNo()
     {
         return m_productNo;
@@ -91,6 +92,7 @@ public class Product
         return m_description;
     }
     
+    //setters
     public void setProductNo(int productNo)
     {
         m_productNo=productNo;
