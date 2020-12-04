@@ -45,7 +45,7 @@ public class Frame extends javax.swing.JFrame
         myMainPage.setPreferredSize(new Dimension(1600,800));
         profilpage = new ProfilPage();
         profilpage.setPreferredSize(new Dimension(1600,800));
-        switchToProfilPage();
+        switchToMainPage();
     }
 
     public void switchToConnexionPage()

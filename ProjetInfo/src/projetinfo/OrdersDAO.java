@@ -39,7 +39,7 @@ public class OrdersDAO extends TablesDAO
             date = new SimpleDateFormat("dd/MM/yyyy").parse(inputDate);
         } catch (ParseException ex)
         {
-            System.out.println("Error AddShop OdersDAO date");
+            System.out.println("Error AddShop OrdersDAO date");
         }
 
         getConnection();
@@ -54,7 +54,7 @@ public class OrdersDAO extends TablesDAO
                 {
                     int quantitySQL = res.getInt("quantity") - quantityInt;
                     myProduct = new Product(productNo, res.getString("name"), res.getDouble("price"), quantityInt,
-                            res.getInt("minimumPromotion"), res.getDouble("valuePromotion"), res.getString("description"));
+                            res.getInt("minimumPromotion"), res.getDouble("valuePromotion"), res.getString("lienURL"), res.getString("description"));
 
                     stmt2.executeUpdate("UPDATE product " + "SET quantity = " + quantitySQL + " WHERE productNo = " + productNo);
                     result = true;

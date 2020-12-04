@@ -21,7 +21,9 @@ import java.util.logging.Logger;
  */
 public class ProductDAO extends TablesDAO
 {
-
+    private ArrayList<Integer> keyList = new ArrayList<>();
+    private ArrayList<JTextField> quantityToBuy = new ArrayList<>();
+    
     @Override
     public void deleteAllElements()
     {
@@ -199,5 +201,25 @@ public class ProductDAO extends TablesDAO
         closeConnection();
         
         return newJavaProduct;
+    }
+    
+    public void setKeyList(ArrayList<Integer> newKeyList)
+    {
+        keyList = newKeyList;
+    }
+    
+    public void addQuantityToBuy(JTextField aQuantity)
+    {
+        quantityToBuy.add(aQuantity);
+    }
+    
+    public ArrayList<Integer> getKeyList()
+    {
+        return keyList;
+    }
+    
+    public ArrayList<JTextField> getQuantityToBuy()
+    {
+        return quantityToBuy;
     }
 }

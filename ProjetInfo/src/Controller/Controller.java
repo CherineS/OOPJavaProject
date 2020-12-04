@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JTextField;
 import projetinfo.Orders;
 import projetinfo.ProductDAO;
 import projetinfo.PeopleDAO;
@@ -25,8 +26,6 @@ import projetinfo.Product;
  */
 public class Controller
 {
-
-    ArrayList<JButton> myButton = new ArrayList<>();
     ArrayList<JButton> managerButton = new ArrayList<>();
     ProductDAO productDAO = new ProductDAO();
     PeopleDAO peopleDAO = new PeopleDAO();
@@ -44,9 +43,6 @@ public class Controller
 
         for (int i = 0; i < myView.getMenuButton().size(); i++)
             myView.getMenuButton().get(i).addActionListener(new RadioButtonListener());
-
-        for (int i = 0; i < myButton.size(); i++)
-            myButton.get(i).addActionListener(new RadioButtonListener());
     }
 
     private class RadioButtonListener implements ActionListener
@@ -57,10 +53,9 @@ public class Controller
         {
             if (e.getSource() == myView.getMenuButton().get(0)) //Bouton search
             {
-                ProductDAO productDAOSearched = new ProductDAO();
                 ArrayList<Integer> listResults = new ArrayList<>();
 
-                listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getSearchBar());
+                listResults = productDAO.searchElement(myView.getFrame().getMainPage().getSearchBar());
 
                 myView.getFrame().getMainPage().emptyPanel2();
                 ProductListResults(listResults,1);
@@ -89,7 +84,7 @@ public class Controller
             } else if (e.getSource() == myView.getMenuButton().get(3)) //Bouton past orders
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                ArrayList<Orders> myOrdersSearch = ordersDAO.searchOrder("gaetan.bouchy@yahoo.fr");
+                ArrayList<Orders> myOrdersSearch = ordersDAO.searchOrder(myView.getEmail());
                 ArrayList<AllOrders> pastOrders = new ArrayList<>();
 
                 ArrayList<Integer> orderNumber = new ArrayList<>();
@@ -173,6 +168,17 @@ public class Controller
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
             }
+            
+            else{
+                for (int i = 0; i < myView.getMyButton().size(); i++)
+                {
+                    if(e.getSource() == myView.getMyButton().get(i))
+                    {
+                        System.out.println(productDAO.getQuantityToBuy().get(i).getText());
+                        ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i),myView.getEmail(),productDAO.getKeyList().get(i));
+                    }
+                }
+            }
         }
     }
     
@@ -211,13 +217,22 @@ public class Controller
     public void ProductListResults(ArrayList<Integer> listResults, int indice)
     {
         int yPanel = 0;
-
+        myView.getMyButton().clear();
+        productDAO.getQuantityToBuy().clear();
+        
         if (!listResults.isEmpty())
         {
+            productDAO.setKeyList(listResults);
+            
             for (Integer i : listResults)
             {
                 if(indice==1)
-                    myView.getFrame().getMainPage().addInPanel2(new ProduitEnListe(i));
+                {
+                    ProduitEnListe newProduitEnListe = new ProduitEnListe(i);
+                    myView.getFrame().getMainPage().addInPanel2(newProduitEnListe);
+                    myView.getMyButton().add(newProduitEnListe.getAddToCartButton());
+                    productDAO.addQuantityToBuy(newProduitEnListe.getQuantityToBuy());
+                }
                 else if(indice==2)
                     myView.getFrame().getMainPage().addInPanel2(new ManagerProduitEnListe(i));
                 yPanel+=210;
@@ -226,7 +241,10 @@ public class Controller
         else{
             myView.getFrame().getMainPage().displayText("Aucun résultat");
         }
-
+        
+        for (int i = 0; i < myView.getMyButton().size(); i++)
+            myView.getMyButton().get(i).addActionListener(new RadioButtonListener());
+        
         if (yPanel < 700)
             myView.getFrame().getMainPage().hideScroll();
         else myView.getFrame().getMainPage().showScroll();

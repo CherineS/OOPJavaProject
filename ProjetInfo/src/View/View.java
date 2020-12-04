@@ -15,11 +15,14 @@ import javax.swing.*;
 public class View
 {
     Frame frame = new Frame();
+    String email = "gaetan.bouchy@yahoo.fr";
     ArrayList<JButton> menuButton;
+    ArrayList<JButton> myButton;
     
     public View()
     {
         menuButton = new ArrayList<>();
+        myButton = new ArrayList<>();
         
         menuButton.add(frame.getMainPage().getButtonSearch());
         menuButton.add(frame.getMainPage().getButtonManageProduct());
@@ -38,8 +41,23 @@ public class View
        return frame; 
     }
     
+    public void setEmail(String newEmail)
+    {
+        email = newEmail;
+    }
+    
+    public String getEmail()
+    {
+        return email;
+    }
+    
     public ArrayList<JButton> getMenuButton()
     {
         return menuButton;
+    }
+    
+    public ArrayList<JButton> getMyButton()
+    {
+        return myButton;
     }
 }
