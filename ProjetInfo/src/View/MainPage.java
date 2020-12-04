@@ -51,9 +51,9 @@ public class MainPage extends javax.swing.JPanel
         setLayout(new FlowLayout());
         jPanel2 = new JPanel();
         jPanel2.setBackground(Color.white);
-        jPanel2.setPreferredSize(new Dimension(1600, 690));
+        jPanel2.setPreferredSize(new Dimension(1600, 670));
         scroll = new JScrollPane(jPanel2);
-        scroll.setPreferredSize(new Dimension(1600, 690));
+        scroll.setPreferredSize(new Dimension(1600, 670));
         scroll.setBorder(createEmptyBorder());
         scroll.getVerticalScrollBar().setUnitIncrement(16);
         scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);

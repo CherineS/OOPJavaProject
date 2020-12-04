@@ -28,7 +28,6 @@ public class Frame extends javax.swing.JFrame
     FirstPage connexionPage;
     NewInscription myInscription;
     ProfilPage profilpage;
-    ManageProductsPage manageProductsPage;
     /**
      * Creates new form testmain
      */
