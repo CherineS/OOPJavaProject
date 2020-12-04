@@ -91,10 +91,12 @@ public class Controller
                 
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
-            } else if (e.getSource() == menuButton.get(2)) //Bouton shop
+            }
+            else if (e.getSource() == menuButton.get(2)) //Bouton shop
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                ProductListResults(productDAO.returnAllElement());
+                ProductListResults(productDAO.returnAllElement(),1);
+                
             } else if (e.getSource() == menuButton.get(3)) //Bouton panier
             {
                 myView.getFrame().getMainPage().emptyPanel2();
@@ -139,7 +141,7 @@ public class Controller
 
                 } else
                 {
-                    myView.getFrame().getMainPage().noResult();
+                    myView.getFrame().getMainPage().displayText("No result");
                     myView.getFrame().getMainPage().hideScroll();
                 }
 
@@ -170,7 +172,7 @@ public class Controller
                     myView.getFrame().getMainPage().showScroll();
                 } else
                 {
-                    myView.getFrame().getMainPage().noResult();
+                    myView.getFrame().getMainPage().displayText("No result");
                     myView.getFrame().getMainPage().hideScroll();
                 }
 
