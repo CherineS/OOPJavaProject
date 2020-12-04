@@ -97,7 +97,7 @@ public class Controller
                 myView.getFrame().getMainPage().emptyPanel2();
                 ProductListResults(productDAO.returnAllElement(),1);
                 
-            } else if (e.getSource() == menuButton.get(3)) //Bouton panier
+            } else if (e.getSource() == menuButton.get(3)) //Bouton past orders
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 ArrayList<Orders> myOrdersSearch = ordersDAO.searchOrder("gaetan.bouchy@yahoo.fr");
@@ -141,7 +141,7 @@ public class Controller
 
                 } else
                 {
-                    myView.getFrame().getMainPage().displayText("No result");
+                    myView.getFrame().getMainPage().displayText("Aucun résultat");
                     myView.getFrame().getMainPage().hideScroll();
                 }
 
@@ -156,7 +156,7 @@ public class Controller
             } 
             
             
-            else if (e.getSource() == menuButton.get(4))
+            else if (e.getSource() == menuButton.get(4)) //Bouton panier
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 int yPanel = 0;
@@ -172,7 +172,7 @@ public class Controller
                     myView.getFrame().getMainPage().showScroll();
                 } else
                 {
-                    myView.getFrame().getMainPage().displayText("No result");
+                    myView.getFrame().getMainPage().displayText("Panier vide");
                     myView.getFrame().getMainPage().hideScroll();
                 }
 
@@ -187,7 +187,7 @@ public class Controller
         }
     }
     
-    private class ManagerButtonListener implements ActionListener
+    private class ManagerButtonListener implements ActionListener //Bouton de l'employé
     {
 
         @Override
@@ -235,7 +235,7 @@ public class Controller
             }
         }
         else{
-            myView.getFrame().getMainPage().displayText("No Result");
+            myView.getFrame().getMainPage().displayText("Aucun résultat");
         }
 
         if (yPanel < 700)

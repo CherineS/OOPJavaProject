@@ -30,12 +30,12 @@ public class CommandeEnListe extends javax.swing.JPanel
         jPanel2.setLayout(new FlowLayout());
         jPanel2.setPreferredSize(new Dimension(150,150));
         
-        nameProduct.setText("Name: " + myOrders.getProducts().getName());
-        priceProduct.setText("Prix: " + Double.toString(myOrders.getPrice())+"€");
-        descriptionProduct.setText("Description: " + myOrders.getProducts().getDescription());
-        quantity.setText("Quantité: " + Integer.toString(myOrders.getProducts().getQuantity()));
+        nameProduct.setText("Nom : " + myOrders.getProducts().getName());
+        priceProduct.setText("Prix : " + Double.toString(myOrders.getPrice())+"€");
+        descriptionProduct.setText(myOrders.getProducts().getDescription());
+        quantity.setText("Quantité : " + Integer.toString(myOrders.getProducts().getQuantity()));
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
-        date.setText("Date: " + formatter.format(myOrders.getDate()));
+        date.setText("Date : " + formatter.format(myOrders.getDate()));
         
         
         Image image = null;

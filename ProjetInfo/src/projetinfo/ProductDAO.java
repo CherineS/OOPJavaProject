@@ -159,7 +159,7 @@ public class ProductDAO extends TablesDAO
         getConnection();
         try
         {
-            String sqlStatement = "SELECT productNo FROM product WHERE name LIKE '"+ name +"'";
+            String sqlStatement = "SELECT productNo FROM product WHERE name LIKE \""+ name +"\"";
             ResultSet res = stmt.executeQuery(sqlStatement);
 
             while (res.next())

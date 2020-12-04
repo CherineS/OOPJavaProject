@@ -51,13 +51,13 @@ public class AddProductPage extends javax.swing.JPanel
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Add a product");
+        jLabel1.setText("Ajouter un produit");
 
-        JLabel1.setText("Name :");
+        JLabel1.setText("Nom :");
 
-        jLabel3.setText("Price :");
+        jLabel3.setText("Prix :");
 
-        name.setText("Name");
+        name.setText("Nom");
         name.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -66,19 +66,19 @@ public class AddProductPage extends javax.swing.JPanel
             }
         });
 
-        jLabel6.setText("for");
+        jLabel6.setText("pour");
 
-        jLabel8.setText("Image URL :");
+        jLabel8.setText("URL de l'image :");
 
-        jLabel4.setText("Quantity :");
+        jLabel4.setText("Quantité :");
 
-        jLabel7.setText("bought");
+        jLabel7.setText("achats");
 
-        quantity.setText("Quantity");
+        quantity.setText("Quantité");
 
         jLabel5.setText("Promotion :");
 
-        jButton1.setText("Add");
+        jButton1.setText("Ajouter");
         jButton1.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -87,13 +87,13 @@ public class AddProductPage extends javax.swing.JPanel
             }
         });
 
-        price.setText("Price");
+        price.setText("Prix");
 
-        valuePromotion.setText("Percent");
+        valuePromotion.setText("%");
 
         minPromotion.setText("Minimum");
 
-        imageURL.setText("ImageURL");
+        imageURL.setText("URL");
         imageURL.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -144,19 +144,19 @@ public class AddProductPage extends javax.swing.JPanel
                             .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(355, 355, 355)
-                        .addComponent(jButton1)))
-                .addContainerGap(231, Short.MAX_VALUE))
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(308, 308, 308)
+                        .addComponent(jLabel1)))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLabel1)
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

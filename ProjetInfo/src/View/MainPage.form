@@ -87,10 +87,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="salesButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pastOrdersButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="pastOrdersButton" min="-2" pref="195" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="parametersButton" min="-2" pref="170" max="-2" attributes="0"/>
-                      <EmptySpace pref="672" max="32767" attributes="0"/>
+                      <EmptySpace pref="617" max="32767" attributes="0"/>
                       <Component id="jButtonManageProduct" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -117,7 +117,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Shop"/>
+                <Property name="text" type="java.lang.String" value="La boutique"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="trendButton">
@@ -128,7 +128,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="On trend"/>
+                <Property name="text" type="java.lang.String" value="Tendances"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[140, 41]"/>
                 </Property>
@@ -142,7 +142,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Sales"/>
+                <Property name="text" type="java.lang.String" value="Promotions"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[140, 41]"/>
                 </Property>
@@ -156,7 +156,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Past orders"/>
+                <Property name="text" type="java.lang.String" value="Historique des commandes"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[140, 41]"/>
@@ -171,7 +171,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Account parameters"/>
+                <Property name="text" type="java.lang.String" value="Param&#xe8;tres du compte"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[140, 41]"/>
                 </Property>
@@ -185,7 +185,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Manage products"/>
+                <Property name="text" type="java.lang.String" value="G&#xe9;rer les produits"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[170, 25]"/>
                 </Property>

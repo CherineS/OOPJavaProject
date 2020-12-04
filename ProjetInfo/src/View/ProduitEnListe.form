@@ -31,23 +31,23 @@
               <Component id="imageDisplay" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="name" min="-2" pref="182" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="411" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="description" min="-2" pref="350" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jButtonAddToCart" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="price" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="name" min="-2" pref="182" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="411" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -62,9 +62,9 @@
                       <Component id="name" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                               <Component id="price" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="jButtonAddToCart" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -125,7 +125,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButtonAddToCart">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add to cart"/>
+        <Property name="text" type="java.lang.String" value="Ajouter au panier"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddToCartActionPerformed"/>

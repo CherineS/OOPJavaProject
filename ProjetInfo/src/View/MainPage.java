@@ -51,9 +51,9 @@ public class MainPage extends javax.swing.JPanel
         setLayout(new FlowLayout());
         jPanel2 = new JPanel();
         jPanel2.setBackground(Color.white);
-        jPanel2.setPreferredSize(new Dimension(1600, 700));
+        jPanel2.setPreferredSize(new Dimension(1600, 690));
         scroll = new JScrollPane(jPanel2);
-        scroll.setPreferredSize(new Dimension(1600, 700));
+        scroll.setPreferredSize(new Dimension(1600, 690));
         scroll.setBorder(createEmptyBorder());
         scroll.getVerticalScrollBar().setUnitIncrement(16);
         scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
@@ -369,32 +369,32 @@ public class MainPage extends javax.swing.JPanel
 
         shopButton.setBackground(new java.awt.Color(255, 102, 51));
         shopButton.setForeground(new java.awt.Color(255, 255, 255));
-        shopButton.setText("Shop");
+        shopButton.setText("La boutique");
 
         trendButton.setBackground(new java.awt.Color(255, 102, 51));
         trendButton.setForeground(new java.awt.Color(255, 255, 255));
-        trendButton.setText("On trend");
+        trendButton.setText("Tendances");
         trendButton.setPreferredSize(new java.awt.Dimension(140, 41));
 
         salesButton.setBackground(new java.awt.Color(255, 102, 51));
         salesButton.setForeground(new java.awt.Color(255, 255, 255));
-        salesButton.setText("Sales");
+        salesButton.setText("Promotions");
         salesButton.setPreferredSize(new java.awt.Dimension(140, 41));
 
         pastOrdersButton.setBackground(new java.awt.Color(255, 102, 51));
         pastOrdersButton.setForeground(new java.awt.Color(255, 255, 255));
-        pastOrdersButton.setText("Past orders");
+        pastOrdersButton.setText("Historique des commandes");
         pastOrdersButton.setToolTipText("");
         pastOrdersButton.setPreferredSize(new java.awt.Dimension(140, 41));
 
         parametersButton.setBackground(new java.awt.Color(255, 102, 51));
         parametersButton.setForeground(new java.awt.Color(255, 255, 255));
-        parametersButton.setText("Account parameters");
+        parametersButton.setText("Paramètres du compte");
         parametersButton.setPreferredSize(new java.awt.Dimension(140, 41));
 
         jButtonManageProduct.setBackground(new java.awt.Color(255, 102, 51));
         jButtonManageProduct.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonManageProduct.setText("Manage products");
+        jButtonManageProduct.setText("Gérer les produits");
         jButtonManageProduct.setPreferredSize(new java.awt.Dimension(170, 25));
         jButtonManageProduct.addActionListener(new java.awt.event.ActionListener()
         {
@@ -415,10 +415,10 @@ public class MainPage extends javax.swing.JPanel
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pastOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pastOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(parametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 672, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 617, Short.MAX_VALUE)
                 .addComponent(jButtonManageProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(

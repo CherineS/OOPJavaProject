@@ -53,9 +53,9 @@ public class ManageProductsPage extends javax.swing.JPanel
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Products manager");
+        jLabel1.setText("Gestion des produits");
 
-        managerSearchBar.setText("Enter a product name..");
+        managerSearchBar.setText("Entrer le nom d'un produit...");
         managerSearchBar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -64,9 +64,9 @@ public class ManageProductsPage extends javax.swing.JPanel
             }
         });
 
-        managerSearchButton.setText("Search");
+        managerSearchButton.setText("Rechercher");
 
-        addProductButton.setText("Add a new product");
+        addProductButton.setText("Ajouter un nouveau produit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -81,8 +81,8 @@ public class ManageProductsPage extends javax.swing.JPanel
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(492, 492, 492)
-                .addComponent(addProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(475, 475, 475)
+                .addComponent(addProductButton)
                 .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
