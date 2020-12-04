@@ -11,13 +11,8 @@ import View.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import projetinfo.Orders;
 import projetinfo.ProductDAO;
 import projetinfo.PeopleDAO;
@@ -31,7 +26,6 @@ import projetinfo.Product;
 public class Controller
 {
 
-    ArrayList<JButton> menuButton = new ArrayList<>();
     ArrayList<JButton> myButton = new ArrayList<>();
     ArrayList<JButton> managerButton = new ArrayList<>();
     ProductDAO productDAO = new ProductDAO();
@@ -47,14 +41,9 @@ public class Controller
     public void addAllButtons()
     {
         myView.setVisibleFrame();
-        menuButton.add(myView.getFrame().getMainPage().getButtonSearch());
-        menuButton.add(myView.getFrame().getMainPage().getButtonManageProduct());
-        menuButton.add(myView.getFrame().getMainPage().getButtonShop());
-        menuButton.add(myView.getFrame().getMainPage().getPastOrderButton());
-        menuButton.add(myView.getFrame().getMainPage().getButtonCart());
 
-        for (int i = 0; i < menuButton.size(); i++)
-            menuButton.get(i).addActionListener(new RadioButtonListener());
+        for (int i = 0; i < myView.getMenuButton().size(); i++)
+            myView.getMenuButton().get(i).addActionListener(new RadioButtonListener());
 
         for (int i = 0; i < myButton.size(); i++)
             myButton.get(i).addActionListener(new RadioButtonListener());
@@ -66,7 +55,7 @@ public class Controller
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            if (e.getSource() == menuButton.get(0)) //Bouton search
+            if (e.getSource() == myView.getMenuButton().get(0)) //Bouton search
             {
                 ProductDAO productDAOSearched = new ProductDAO();
                 ArrayList<Integer> listResults = new ArrayList<>();
@@ -76,7 +65,7 @@ public class Controller
                 myView.getFrame().getMainPage().emptyPanel2();
                 ProductListResults(listResults,1);
             }
-            else if (e.getSource() == menuButton.get(1)) //Bouton manage
+            else if (e.getSource() == myView.getMenuButton().get(1)) //Bouton manage
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 
@@ -92,12 +81,12 @@ public class Controller
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
             }
-            else if (e.getSource() == menuButton.get(2)) //Bouton shop
+            else if (e.getSource() == myView.getMenuButton().get(2)) //Bouton shop
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 ProductListResults(productDAO.returnAllElement(),1);
                 
-            } else if (e.getSource() == menuButton.get(3)) //Bouton past orders
+            } else if (e.getSource() == myView.getMenuButton().get(3)) //Bouton past orders
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 ArrayList<Orders> myOrdersSearch = ordersDAO.searchOrder("gaetan.bouchy@yahoo.fr");
@@ -156,7 +145,7 @@ public class Controller
             } 
             
             
-            else if (e.getSource() == menuButton.get(4)) //Bouton panier
+            else if (e.getSource() == myView.getMenuButton().get(4)) //Bouton panier
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 int yPanel = 0;
