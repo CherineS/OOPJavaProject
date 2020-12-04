@@ -54,7 +54,7 @@ public class OrdersDAO extends TablesDAO
                 {
                     int quantitySQL = res.getInt("quantity") - quantityInt;
                     myProduct = new Product(productNo, res.getString("name"), res.getDouble("price"), quantityInt,
-                            res.getInt("minimumPromotion"), res.getDouble("valuePromotion"));
+                            res.getInt("minimumPromotion"), res.getDouble("valuePromotion"), res.getString("description"));
 
                     stmt2.executeUpdate("UPDATE product " + "SET quantity = " + quantitySQL + " WHERE productNo = " + productNo);
                     result = true;
@@ -87,7 +87,7 @@ public class OrdersDAO extends TablesDAO
 
             if (result == true)
             {
-                for (int i = 0; i < myOrders.size(); i++) /// Si déjà un produit, augmenté quantité simplement, n'en créer pas un autre
+                for (int i = 0; i < myOrders.size(); i++) // Si déjà un produit, augmente quantité simplement, n'en créer pas un autre
                     if (Order.getProducts().getProductNo() == myOrders.get(i).getProducts().getProductNo())
                     {
                         myOrders.get(i).getProducts().setQuantity((quantityInt + myOrders.get(i).getProducts().getQuantity()));
@@ -133,6 +133,38 @@ public class OrdersDAO extends TablesDAO
         closeConnection();
     }
 
+    public ArrayList<Orders> getOrders()
+    {
+        return myOrders;
+    }
+    
+    public ArrayList<Orders> getPastOrders(int number)
+    {
+        ArrayList<Orders> pastOrders = new ArrayList<>();
+        getConnection();
+        
+        try
+        {
+            String sqlStatement = "SELECT* FROM orders WHERE orderNo ='"+ number +"' ";
+            ResultSet res = stmt.executeQuery(sqlStatement);
+
+            while (res.next())
+            {
+                Product myProduct = new Product(res.getInt("productNo"),"N/A", 0,0,0,0,null,null);
+                Orders myOrd = new Orders(res.getInt("orderNo"),res.getDate("date"), myProduct, res.getDouble("price"),res.getString("email"));
+                pastOrders.add(myOrd);
+            }
+
+        } catch (SQLException error)
+        {
+            System.out.println("Error searchElement ProductDAO");
+        }
+        
+        closeConnection();
+        return pastOrders;
+        
+    }
+
     public void addOrders()
     {
         getConnection();
@@ -153,7 +185,6 @@ public class OrdersDAO extends TablesDAO
                     myPrice[j] = '.';
 
             price = Double.parseDouble(String.copyValueOf(myPrice));
-
             String orderProductNo = "" + myOrders.get(i).getOrderNumber() + "-" + myOrders.get(i).getProducts().getProductNo();
             java.sql.Date dateSQL = new java.sql.Date(myOrders.get(i).getDate().getTime());
 
@@ -253,7 +284,7 @@ public class OrdersDAO extends TablesDAO
                     int quantity = res.getInt("quantity");
                     int orderNo = res.getInt("orderNo");
                     double price = res.getDouble("price");
-                    
+
                     Product product = null;
 
                     try
@@ -265,7 +296,7 @@ public class OrdersDAO extends TablesDAO
                         {
                             if (productNo == result.getInt("productNo"))
                                 product = new Product(result.getInt("productNo"), result.getString("name"), result.getDouble("price"),
-                                        quantity, result.getInt("minimumPromotion"), result.getDouble("valuePromotion"));
+                                        quantity, result.getInt("minimumPromotion"), result.getDouble("valuePromotion"), result.getString("lienURL"), result.getString("description"));
                         }
                     } catch (SQLException error)
                     {

@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.util.ArrayList;
+import javax.swing.*;
+
 /**
  *
  * @author Utilisateur
@@ -12,10 +15,17 @@ package View;
 public class View
 {
     Frame frame = new Frame();
+    ArrayList<JButton> menuButton;
     
     public View()
     {
+        menuButton = new ArrayList<>();
         
+        menuButton.add(frame.getMainPage().getButtonSearch());
+        menuButton.add(frame.getMainPage().getButtonManageProduct());
+        menuButton.add(frame.getMainPage().getButtonShop());
+        menuButton.add(frame.getMainPage().getPastOrderButton());
+        menuButton.add(frame.getMainPage().getButtonCart());
     }
     
     public void setVisibleFrame()
@@ -26,5 +36,10 @@ public class View
     public Frame getFrame()
     {
        return frame; 
+    }
+    
+    public ArrayList<JButton> getMenuButton()
+    {
+        return menuButton;
     }
 }
