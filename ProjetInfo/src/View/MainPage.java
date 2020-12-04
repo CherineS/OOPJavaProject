@@ -47,6 +47,7 @@ public class MainPage extends javax.swing.JPanel
         scroll.setPreferredSize(new Dimension(1600,700));
         scroll.setBorder(createEmptyBorder());
         scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.getVerticalScrollBar().setUnitIncrement(20);
     }
 
     public void addPanelInFrame()

@@ -5,6 +5,9 @@
  */
 package View;
 
+import javax.swing.JOptionPane;
+import projetinfo.PeopleDAO;
+
 /**
  *
  * @author antoi
@@ -36,12 +39,14 @@ public class NewInscription extends javax.swing.JPanel
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        name = new javax.swing.JTextField();
+        Firstname = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
+        status = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        password = new javax.swing.JPasswordField();
+        password2 = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setForeground(new java.awt.Color(0, 153, 153));
@@ -67,24 +72,44 @@ public class NewInscription extends javax.swing.JPanel
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Status");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        name.setBackground(new java.awt.Color(255, 255, 255));
+        name.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        Firstname.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
+        email.setBackground(new java.awt.Color(255, 255, 255));
+        email.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField4.setForeground(new java.awt.Color(0, 0, 0));
-
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Customer" }));
+        status.setBackground(new java.awt.Color(255, 255, 255));
+        status.setForeground(new java.awt.Color(0, 0, 0));
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Customer" }));
+        status.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                statusActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Enter");
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        password.setBackground(new java.awt.Color(255, 255, 255));
+        password.setForeground(new java.awt.Color(0, 0, 0));
+
+        password2.setBackground(new java.awt.Color(255, 255, 255));
+        password2.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Confirm Password");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -96,22 +121,24 @@ public class NewInscription extends javax.swing.JPanel
                         .addGap(240, 240, 240)
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
+                        .addGap(156, 156, 156)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
+                            .addComponent(jLabel7)
                             .addComponent(jLabel6))
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(193, Short.MAX_VALUE))
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                            .addComponent(Firstname)
+                            .addComponent(name)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(password)
+                            .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(password2))))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,26 +147,30 @@ public class NewInscription extends javax.swing.JPanel
                 .addGap(91, 91, 91)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Firstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(password2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 72, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -165,21 +196,61 @@ public class NewInscription extends javax.swing.JPanel
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void statusActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_statusActionPerformed
+    {//GEN-HEADEREND:event_statusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
+    {//GEN-HEADEREND:event_jButton1ActionPerformed
+        PeopleDAO myP = new PeopleDAO();
+        if(myP.newinscription(email,password,password,name,Firstname,status)==0)
+        {
+          JOptionPane.showMessageDialog(null, "New Inscription done");  
+        }
+        if(myP.newinscription(email,password,password,name,Firstname,status)==1)
+        {
+           JOptionPane.showMessageDialog(null, "The Email entered already exist"); 
+        }
+        if(myP.newinscription(email,password,password,name,Firstname,status)==2)
+        {
+           JOptionPane.showMessageDialog(null, "The Email entered is not available");  
+        }
+        if(myP.newinscription(email,password,password,name,Firstname,status)==3)
+        {
+           JOptionPane.showMessageDialog(null, "You put nothing on the name"); 
+        }
+        if(myP.newinscription(email,password,password,name,Firstname,status)==4)
+        {
+           JOptionPane.showMessageDialog(null, "You put nothing on the firstname");  
+        }
+        if(myP.newinscription(email,password,password,name,Firstname,status)==5)
+        {
+           JOptionPane.showMessageDialog(null, "Your two passwords do not match"); 
+        }
+        if(myP.newinscription(email,password,password,name,Firstname,status)==6)
+        {
+            JOptionPane.showMessageDialog(null, "Your password is too short");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Firstname;
+    private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField name;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JPasswordField password2;
+    private javax.swing.JComboBox<String> status;
     // End of variables declaration//GEN-END:variables
 }
