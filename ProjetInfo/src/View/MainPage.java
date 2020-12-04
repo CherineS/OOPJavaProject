@@ -38,6 +38,8 @@ public class MainPage extends javax.swing.JPanel
 
     public void manualInitComponents()
     {
+        manageProductsPage = new ManageProductsPage();
+        
         //Suppression des bords des boutons
         shopButton.setBorderPainted(false);
         trendButton.setBorderPainted(false);
@@ -96,6 +98,16 @@ public class MainPage extends javax.swing.JPanel
         buttonImage.setOpaque(false);
         buttonImage.setContentAreaFilled(false);
         buttonImage.setBorderPainted(false);
+    }
+    
+    public void displayText(String message) //Display a message
+    {
+        JLabel noResults = new JLabel(message);
+        noResults.setPreferredSize(new Dimension(300, 280));
+        noResults.setFont(new Font("Arial",Font.PLAIN,20));
+        noResults.setHorizontalAlignment(JLabel.CENTER);
+        noResults.setVerticalAlignment(JLabel.CENTER);
+        jPanel2.add(noResults);
     }
 
     public void logoMainPage()
@@ -260,6 +272,17 @@ public class MainPage extends javax.swing.JPanel
         jPanel2.add(newProductPage);
     }
     
+    public void addInPanel2(ManageProductsPage newManageProductsPage)
+    {   
+        jPanel2.add(newManageProductsPage);
+    }
+    
+    public void addInPanel2(ManagerProduitEnListe newProduct)
+    {   
+        jPanel2.add(newProduct);
+    }
+    
+    
     public void addInPanel2(AllOrders newOrder)
     {
         jPanel2.add(newOrder);
@@ -279,17 +302,7 @@ public class MainPage extends javax.swing.JPanel
     {
         return searchBar;
     }
-
-    public void noResult() //Display "No Result" message
-    {
-        JLabel noResults = new JLabel("No Result");
-        noResults.setPreferredSize(new Dimension(300, 280));
-        noResults.setFont(new Font("Arial", Font.PLAIN, 20));
-        noResults.setHorizontalAlignment(JLabel.CENTER);
-        noResults.setVerticalAlignment(JLabel.CENTER);
-        jPanel2.add(noResults);
-    }
-
+    
     //Buttons
     public JButton getButtonSearch()
     {
@@ -314,6 +327,12 @@ public class MainPage extends javax.swing.JPanel
     public JButton getButtonProfile()
     {
         return jButtonProfile;
+    }
+
+    //Concerne le manageProductsPage
+    public ManageProductsPage getManagerPage()
+    {
+        return manageProductsPage;
     }
     
     public JButton getPastOrderButton()
@@ -399,18 +418,20 @@ public class MainPage extends javax.swing.JPanel
                 .addComponent(pastOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(parametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 676, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 672, Short.MAX_VALUE)
                 .addComponent(jButtonManageProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(shopButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(trendButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(salesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pastOrdersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(parametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButtonManageProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(shopButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(parametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonManageProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(trendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pastOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(9, 9, 9))
         );
 
         jPanelLogo.setBackground(new java.awt.Color(255, 255, 255));
@@ -470,9 +491,8 @@ public class MainPage extends javax.swing.JPanel
                     .addComponent(jPanelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelPeople, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -516,4 +536,5 @@ public class MainPage extends javax.swing.JPanel
     private JButton jButtonSearch;
     private JButton jButtonCart;
     private JButton jButtonProfile;
+    private ManageProductsPage manageProductsPage;
 }
