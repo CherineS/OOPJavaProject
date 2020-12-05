@@ -199,7 +199,7 @@ public class Controller
             } else if (e.getSource() == myView.getValider())
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                JOptionPane.showMessageDialog(null, "Votre commande a bien été passé");
+                JOptionPane.showMessageDialog(null, "Votre commande a été validée !");
                 ordersDAO.addOrders();
                 myView.getMenuButton().get(2).doClick();
             }
@@ -237,22 +237,34 @@ public class Controller
                                 productDAO.changeElement("name", myView.getUpdateButton().getTheName(), myView.getUpdateButton().getProductNo());
                                 productDAO.changeElement("price", myView.getUpdateButton().getPrice(), myView.getUpdateButton().getProductNo());
                                 productDAO.changeElement("quantity", myView.getUpdateButton().getQuantity(), myView.getUpdateButton().getProductNo());
-                                productDAO.changeElement("minimumPromotion", myView.getUpdateButton().getMinPromotion(), myView.getUpdateButton().getProductNo());
-                                productDAO.changeElement("valuePromotion", myView.getUpdateButton().getValuePromotion(), myView.getUpdateButton().getProductNo());
                                 productDAO.changeElement("lienURL", myView.getUpdateButton().getImageURL(), myView.getUpdateButton().getProductNo());
                                 productDAO.changeElement("description", myView.getUpdateButton().getDescription(), myView.getUpdateButton().getProductNo());
+                                
+                                if(Double.parseDouble(myView.getUpdateButton().getValuePromotion().getText())==0 || Double.parseDouble(myView.getUpdateButton().getMinPromotion().getText())==0)
+                                {
+                                    myView.getUpdateButton().deleteMinPromotion();
+                                    myView.getUpdateButton().deleteValuePromotion();
+                                }
+                                else
+                                {
+                                    productDAO.changeElement("minimumPromotion", myView.getUpdateButton().getMinPromotion(), myView.getUpdateButton().getProductNo());
+                                    productDAO.changeElement("valuePromotion", myView.getUpdateButton().getValuePromotion(), myView.getUpdateButton().getProductNo());
+                                }
 
                                 JOptionPane.showMessageDialog(null, "Produit mis à jour");
                             }
                             else if(e.getSource() == myView.getMyButton().get(1))
                             {
-                                myView.getUpdateButton().delete();
-                                productDAO.changeElement("quantity", myView.getUpdateButton().getQuantity(), myView.getUpdateButton().getProductNo());
+                                myView.getUpdateButton().deleteQuantity();
+                                productDAO.deleteElement(myView.getUpdateButton().getProductNo());
 
                                 JOptionPane.showMessageDialog(null, "Produit supprimé");
                             }
                         }
-                        else ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i),myView.getEmail(),productDAO.getKeyList().get(i));
+                        else{
+                            ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i),myView.getEmail(),productDAO.getKeyList().get(i));
+                            JOptionPane.showMessageDialog(null, "Produit ajouté !");
+                        }
                     }
                 }
                 for (int i = 0; i < myView.getSuppButton().size(); i++)

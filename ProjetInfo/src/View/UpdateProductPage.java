@@ -76,9 +76,19 @@ public class UpdateProductPage extends javax.swing.JPanel
         repaint();
     }
     
-    public void delete()
+    public void deleteQuantity()
     {
         quantity.setText("0");
+    }
+    
+    public void deleteValuePromotion()
+    {
+        valuePromotion.setText("0");
+    }
+    
+    public void deleteMinPromotion()
+    {
+        minPromotion.setText("0");
     }
     
     public int getProductNo()
@@ -295,7 +305,7 @@ public class UpdateProductPage extends javax.swing.JPanel
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel6)
                                 .addGap(12, 12, 12)
-                                .addComponent(minPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(minPromotion, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel7)))
                         .addGap(18, 18, 18)
