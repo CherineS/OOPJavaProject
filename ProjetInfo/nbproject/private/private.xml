@@ -10,10 +10,10 @@
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/ManagerProduitEnListe.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/projetinfo/ProductDAO.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/projetinfo/OrdersDAO.java</file>
+            <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/OrdersPaymentAndPrice.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/AddProductPage.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/ProfilPage.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/projetinfo/People.java</file>
-            <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/OrdersPayementAndPrice.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/UpdateProductPage.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/projetinfo/PeopleDAO.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/Frame.java</file>
@@ -26,6 +26,7 @@
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/ProduitEnListe.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/projetinfo/Product.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/ProductPage.java</file>
+            <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/PaymentPage.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/Controller/Controller.java</file>
             <file>file:/C:/Users/Gaëtan/Documents/Projet/OOPJavaProject/ProjetInfo/src/View/ManageProductsPage.java</file>
         </group>

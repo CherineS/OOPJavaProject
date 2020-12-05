@@ -64,13 +64,13 @@ public class MainPage extends javax.swing.JPanel
         searchBar.setBackground(new Color(242, 242, 242));
         Font font = new Font("Courier", Font.BOLD, 18);
         searchBar.setFont(font);
+        searchBar.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 
         buttonText = new JButton();
         buttonText.setBounds(590, 21, 300, 40);
         buttonText.setOpaque(false);
         buttonText.setContentAreaFilled(false);
         buttonText.setBorderPainted(false);
-        searchBar.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         buttonText.add(searchBar); // Bouton ajoute barre de recherche
         jPanel1.add(buttonText);
 
@@ -102,7 +102,7 @@ public class MainPage extends javax.swing.JPanel
         jButtonDisconnect.setBorderPainted(false);
         jPanel1.add(jButtonDisconnect);
 
-        buttonImage = new JButton(); // Bouton imega barre de recherche du milieu
+        buttonImage = new JButton(); // Bouton image barre de recherche du milieu
         buttonImage.setBounds(555, 6, 450, 70);
         buttonImage.setOpaque(false);
         buttonImage.setContentAreaFilled(false);
@@ -293,6 +293,11 @@ public class MainPage extends javax.swing.JPanel
     {
         scroll.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
     }
+    
+    public void resetScroll()
+    {
+        scroll.getViewport().setViewPosition(new Point(0,0));
+    }
 
     public void emptyPanel2()
     {
@@ -340,9 +345,14 @@ public class MainPage extends javax.swing.JPanel
         jPanel2.add(newOrders);
     }
     
-    public void addInPanel2(OrdersPayementAndPrice OPAP)
+    public void addInPanel2(OrdersPaymentAndPrice OPAP)
     {
        jPanel2.add(OPAP); 
+    }
+    
+    public void addInPanel2(PaymentPage pp)
+    {
+        jPanel2.add(pp);
     }
 
     public JTextField getSearchBar()

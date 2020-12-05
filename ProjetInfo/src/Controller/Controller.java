@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import projetinfo.Orders;
 import projetinfo.ProductDAO;
@@ -43,6 +44,7 @@ public class Controller
 
         for (int i = 0; i < myView.getMenuButton().size(); i++)
             myView.getMenuButton().get(i).addActionListener(new RadioButtonListener());
+
     }
 
     private class RadioButtonListener implements ActionListener
@@ -104,6 +106,8 @@ public class Controller
                         {
                             Product myProd;
                             myProd = productDAO.createJavaProduct(myOrdersTest.get(j).getProducts().getProductNo());
+                            String orderProdNo = "" + myOrdersTest.get(j).getOrderNumber() + "-" + myOrdersTest.get(j).getProducts().getProductNo();
+                            myProd.setQuantity(ordersDAO.findQuantity(orderProdNo));
                             myOrdersTest.get(j).setProducts(myProd);
                             order.addPanel(new CommandeEnListe(myOrdersTest.get(j)));
                         }
@@ -139,7 +143,7 @@ public class Controller
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 myView.getSuppButton().clear();
-                
+
                 int yPanel = 0;
 
                 if (!ordersDAO.getOrders().isEmpty())
@@ -149,11 +153,16 @@ public class Controller
                         CurrentOrders currOrders = new CurrentOrders(ordersDAO.getOrders().get(i));
                         myView.getFrame().getMainPage().addInPanel2(currOrders);
                         myView.getSuppButton().add(currOrders.getSupprimer());
-                        
+
                         yPanel += 210;
                     }
+
+                    OrdersPaymentAndPrice myOrders = new OrdersPaymentAndPrice(ordersDAO.getOrders());
+                    myView.setCommander(myOrders.getCommander());
+                    myView.getCommander().addActionListener(new RadioButtonListener());
                     
-                    myView.getFrame().getMainPage().addInPanel2(new OrdersPayementAndPrice());
+                    myView.getFrame().getMainPage().addInPanel2(myOrders);
+
                     yPanel += 100;
                     myView.getFrame().getMainPage().showScroll();
                 } else
@@ -168,29 +177,46 @@ public class Controller
                 if (yPanel < 700)
                     myView.getFrame().getMainPage().hideScroll();
 
-                
                 myView.getFrame().getMainPage().getPanel2().setPreferredSize(new Dimension(1600, yPanel));
                 myView.getFrame().getMainPage().addPanelInFrame();
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
-            } else
+            } else if (e.getSource() == myView.getCommander())
+            {
+                myView.getFrame().getMainPage().emptyPanel2();
+                PaymentPage myPaymentPage = new PaymentPage();
+                myView.getFrame().getMainPage().addInPanel2(myPaymentPage); 
+                myView.getFrame().getMainPage().showScroll();
+                myView.getFrame().getMainPage().hideScroll();
+                myView.getFrame().getMainPage().resetScroll();
+                myView.setValider(myPaymentPage.getValidate());
+                myView.getValider().addActionListener(new RadioButtonListener());  
+            }
+            else if (e.getSource()== myView.getValider())
+            {
+                myView.getFrame().getMainPage().emptyPanel2();
+                JOptionPane.showMessageDialog(null,"Votre commande a bien été passé");
+                ordersDAO.addOrders();
+                myView.getMenuButton().get(2).doClick();
+            }
             {
                 for (int i = 0; i < myView.getMyButton().size(); i++)
                     if (e.getSource() == myView.getMyButton().get(i))
                         ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i), myView.getEmail(), productDAO.getKeyList().get(i));
 
-                for (int i = 0; i < myView.getSuppButton().size(); i++) 
+                for (int i = 0; i < myView.getSuppButton().size(); i++)
                     if (e.getSource() == myView.getSuppButton().get(i))
                     {
                         ordersDAO.deleteShop(ordersDAO.getOrders().get(i).getProducts().getProductNo());
                         myView.getMenuButton().get(4).doClick();
-                    }            
+                    }
             }
         }
     }
 
     private class ManagerButtonListener implements ActionListener //Bouton de l'employé
     {
+
         @Override
         public void actionPerformed(ActionEvent event)
         {
@@ -248,12 +274,16 @@ public class Controller
             myView.getMyButton().get(i).addActionListener(new RadioButtonListener());
 
         if (yPanel < 700)
+        {
+            myView.getFrame().getMainPage().showScroll();
             myView.getFrame().getMainPage().hideScroll();
+        }
         else
             myView.getFrame().getMainPage().showScroll();
+           
 
         myView.getFrame().getMainPage().getPanel2().setPreferredSize(new Dimension(1600, yPanel));
-        myView.getFrame().getMainPage().addPanelInFrame();
+        myView.getFrame().getMainPage().addPanelInFrame();              
         myView.getFrame().getMainPage().revalidate();
         myView.getFrame().getMainPage().repaint();
     }

@@ -9,7 +9,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.net.URL;
+import java.text.DecimalFormat;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,42 +33,55 @@ public class CurrentOrders extends javax.swing.JPanel
     {
         initComponents();
     }
-    
+
     public CurrentOrders(Orders myOrders)
     {
         initComponents();
         imageDisplay.setLayout(new FlowLayout());
-        imageDisplay.setPreferredSize(new Dimension(146,146));
-        
+        imageDisplay.setPreferredSize(new Dimension(146, 146));
+
         name.setText(myOrders.getProducts().getName());
-        price.setText(Double.toString(myOrders.getPrice())+ "€");
+        
+
+        double thePrice = myOrders.getPrice();
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        String stringPrice = df.format(thePrice);
+        char[] myPrice = stringPrice.toCharArray();
+        for (int j = 0; j < myPrice.length; j++)
+            if (myPrice[j] == ',')
+                myPrice[j] = '.';
+
+        thePrice = Double.parseDouble(String.copyValueOf(myPrice));
+        price.setText(Double.toString(thePrice) + "€");
         description.setText(myOrders.getProducts().getDescription());
         jLabel1.setText(Integer.toString(myOrders.getProducts().getQuantity()));
-        
+
         Image image = null;
-        
-        try {
+
+        try
+        {
             URL url = new URL(myOrders.getProducts().getURL());
             Image imageBeforeResize = ImageIO.read(url);
             image = imageBeforeResize.getScaledInstance(138, 138, Image.SCALE_SMOOTH);
-        } catch (IOException error) {
+        } catch (IOException error)
+        {
             System.out.println("Erreur image");
         }
-        
+
         JLabel label;
-        if(image!=null)
-        {
+        if (image != null)
             label = new JLabel(new ImageIcon(image));
-        }
-        else 
-            label= new JLabel();
-        
+        else
+            label = new JLabel();
+
         imageDisplay.add(label);
         add(imageDisplay);
         revalidate();
         repaint();
     }
-    
+
     public JButton getSupprimer()
     {
         return supprimer;
@@ -129,24 +144,20 @@ public class CurrentOrders extends javax.swing.JPanel
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(imageDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                        .addComponent(supprimer)
+                        .addGap(53, 53, 53))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
-                                .addComponent(supprimer)
-                                .addGap(53, 53, 53))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(price)
-                                .addGap(82, 82, 82))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(price)
+                        .addGap(82, 82, 82))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,15 +167,14 @@ public class CurrentOrders extends javax.swing.JPanel
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(name)
-                            .addComponent(price))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(price)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(75, 75, 75)
                                 .addComponent(supprimer))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()

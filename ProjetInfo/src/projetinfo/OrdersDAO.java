@@ -50,8 +50,11 @@ public class OrdersDAO extends TablesDAO
 
             while (res.next())
             {
-                if ((productNo == res.getInt("productNo")) && (quantityInt <= res.getInt("quantity")))
+                if (productNo == res.getInt("productNo"))
                 {
+                    if (quantityInt > res.getInt("quantity"))
+                        quantityInt = res.getInt("quantity");
+
                     int quantitySQL = res.getInt("quantity") - quantityInt;
                     myProduct = new Product(productNo, res.getString("name"), res.getDouble("price"), quantityInt,
                             res.getInt("minimumPromotion"), res.getDouble("valuePromotion"), res.getString("lienURL"), res.getString("description"));
@@ -83,7 +86,7 @@ public class OrdersDAO extends TablesDAO
 
         if (myProduct != null)
         {
-          double price = (myProduct.getQuantity() / myProduct.getminimumPromotion())
+            double price = (myProduct.getQuantity() / myProduct.getminimumPromotion())
                     * (myProduct.getPrice() * (1 - (myProduct.getValuePromotion() * 0.01))) * myProduct.getminimumPromotion()
                     + (myProduct.getQuantity() % myProduct.getminimumPromotion()) * (myProduct.getPrice());
 
@@ -105,7 +108,7 @@ public class OrdersDAO extends TablesDAO
                     if (Order.getProducts().getProductNo() == myOrders.get(i).getProducts().getProductNo())
                     {
                         myOrders.get(i).getProducts().setQuantity((quantityInt + myOrders.get(i).getProducts().getQuantity()));
-                        myOrders.get(i).setPrice(myOrders.get(i).getPrice()+price);
+                        myOrders.get(i).setPrice(myOrders.get(i).getPrice() + price);
                         condition++;
                     }
 
@@ -146,27 +149,27 @@ public class OrdersDAO extends TablesDAO
             }
 
         closeConnection();
-    }  
+    }
 
     public ArrayList<Orders> getOrders()
     {
         return myOrders;
     }
-    
+
     public ArrayList<Orders> getPastOrders(int number)
     {
         ArrayList<Orders> pastOrders = new ArrayList<>();
         getConnection();
-        
+
         try
         {
-            String sqlStatement = "SELECT* FROM orders WHERE orderNo ='"+ number +"' ";
+            String sqlStatement = "SELECT* FROM orders WHERE orderNo ='" + number + "' ";
             ResultSet res = stmt.executeQuery(sqlStatement);
 
             while (res.next())
             {
-                Product myProduct = new Product(res.getInt("productNo"),"N/A", 0,0,0,0,null,null);
-                Orders myOrd = new Orders(res.getInt("orderNo"),res.getDate("date"), myProduct, res.getDouble("price"),res.getString("email"));
+                Product myProduct = new Product(res.getInt("productNo"), "N/A", 0, 0, 0, 0, null, null);
+                Orders myOrd = new Orders(res.getInt("orderNo"), res.getDate("date"), myProduct, res.getDouble("price"), res.getString("email"));
                 pastOrders.add(myOrd);
             }
 
@@ -174,10 +177,10 @@ public class OrdersDAO extends TablesDAO
         {
             System.out.println("Error searchElement ProductDAO");
         }
-        
+
         closeConnection();
         return pastOrders;
-        
+
     }
 
     public void addOrders()
@@ -185,8 +188,8 @@ public class OrdersDAO extends TablesDAO
         getConnection();
 
         for (int i = 0; i < myOrders.size(); i++)
-        {          
-            
+        {
+
             String orderProductNo = "" + myOrders.get(i).getOrderNumber() + "-" + myOrders.get(i).getProducts().getProductNo();
             java.sql.Date dateSQL = new java.sql.Date(myOrders.get(i).getDate().getTime());
 
@@ -221,6 +224,28 @@ public class OrdersDAO extends TablesDAO
             System.out.println("Error deleteAllElements OrdersDAO");
         }
         closeConnection();
+    }
+
+    public int findQuantity(String orderProdNo)
+    {
+        int quantity = 0;
+        getConnection();
+        try
+        {
+            String sqlStatement = "SELECT quantity FROM orders WHERE orderProductNo ='" + orderProdNo + "' ";
+            ResultSet res = stmt.executeQuery(sqlStatement);
+
+            while (res.next())
+            {
+                quantity = res.getInt("quantity");
+            }
+
+        } catch (SQLException error)
+        {
+            System.out.println("Error searchElement ProductDAO");
+        }
+        closeConnection();
+        return quantity;
     }
 
     public void deleteElement()
