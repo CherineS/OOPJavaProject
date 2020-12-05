@@ -37,18 +37,20 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="description" min="-2" pref="380" max="-2" attributes="0"/>
                           <Component id="imageURL" min="-2" pref="378" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="valuePromotion" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="name" min="-2" pref="378" max="-2" attributes="0"/>
+                          <Component id="price" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="quantity" min="-2" max="-2" attributes="0"/>
+                                  <Component id="valuePromotion" min="-2" pref="47" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="minPromotion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="name" min="-2" pref="378" max="-2" attributes="0"/>
-                          <Component id="quantity" min="-2" max="-2" attributes="0"/>
-                          <Component id="price" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">

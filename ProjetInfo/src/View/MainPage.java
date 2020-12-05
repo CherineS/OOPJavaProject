@@ -297,6 +297,11 @@ public class MainPage extends javax.swing.JPanel
     {
         jPanel2.add(newOrders);
     }
+    
+    public void addInPanel2(UpdateProductPage newUpdateProductPage)
+    {
+        jPanel2.add(newUpdateProductPage);
+    }
 
     public JTextField getSearchBar()
     {

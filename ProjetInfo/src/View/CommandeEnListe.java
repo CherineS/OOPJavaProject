@@ -89,7 +89,7 @@ public class CommandeEnListe extends javax.swing.JPanel
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
 
         nameProduct.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -100,6 +100,7 @@ public class CommandeEnListe extends javax.swing.JPanel
 
         descriptionProduct.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         descriptionProduct.setText("jLabel1");
+        descriptionProduct.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         quantity.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         quantity.setText("Quantity");
@@ -135,13 +136,13 @@ public class CommandeEnListe extends javax.swing.JPanel
                         .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(priceProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(descriptionProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descriptionProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
