@@ -148,8 +148,9 @@ public class ProductDAO extends TablesDAO
     }
 
     //Recherche d'un produit en fonction de son nom et retourne les clés primaires des résultats
-    public ArrayList<Integer> searchElement(JTextField myName)
+    public ArrayList<Integer> searchElement(JTextField myName, boolean manager)
     {
+        String sqlStatement;
         ArrayList<Integer> results = new ArrayList<>();
         String name = myName.getText();
         name = "%" + name + "%";
@@ -157,7 +158,10 @@ public class ProductDAO extends TablesDAO
         getConnection();
         try
         {
-            String sqlStatement = "SELECT productNo FROM product WHERE name LIKE \""+ name +"\"";
+            if(!manager)
+                sqlStatement = "SELECT productNo FROM product WHERE name LIKE \""+ name +"\" AND quantity != 0";
+            else sqlStatement = "SELECT productNo FROM product WHERE name LIKE \""+ name +"\"";
+            
             ResultSet res = stmt.executeQuery(sqlStatement);
 
             while (res.next())

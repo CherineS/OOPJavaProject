@@ -56,7 +56,7 @@ public class Controller
             {
                 ArrayList<Integer> listResults = new ArrayList<>();
 
-                listResults = productDAO.searchElement(myView.getFrame().getMainPage().getSearchBar());
+                listResults = productDAO.searchElement(myView.getFrame().getMainPage().getSearchBar(),false);
 
                 myView.getFrame().getMainPage().emptyPanel2();
                 ProductListResults(listResults,1);
@@ -245,11 +245,8 @@ public class Controller
                                     myView.getUpdateButton().deleteMinPromotion();
                                     myView.getUpdateButton().deleteValuePromotion();
                                 }
-                                else
-                                {
-                                    productDAO.changeElement("minimumPromotion", myView.getUpdateButton().getMinPromotion(), myView.getUpdateButton().getProductNo());
-                                    productDAO.changeElement("valuePromotion", myView.getUpdateButton().getValuePromotion(), myView.getUpdateButton().getProductNo());
-                                }
+                                productDAO.changeElement("minimumPromotion", myView.getUpdateButton().getMinPromotion(), myView.getUpdateButton().getProductNo());
+                                productDAO.changeElement("valuePromotion", myView.getUpdateButton().getValuePromotion(), myView.getUpdateButton().getProductNo());
 
                                 JOptionPane.showMessageDialog(null, "Produit mis à jour");
                             }
@@ -292,7 +289,7 @@ public class Controller
                 ProductDAO productDAOSearched = new ProductDAO();
                 ArrayList<Integer> listResults = new ArrayList<>();
 
-                listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getManagerPage().getManagerSearchBar());
+                listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getManagerPage().getManagerSearchBar(),true);
 
                 ProductListResults(listResults,2);
             }
