@@ -34,6 +34,8 @@ public class MainPage extends javax.swing.JPanel
         searchBarMainPage();
         cartMainPage();
         profileMainPage();
+        decoBarMainPage();
+//        paymentMainPage();
     }
 
     public void manualInitComponents()
@@ -62,13 +64,13 @@ public class MainPage extends javax.swing.JPanel
         searchBar.setBackground(new Color(242, 242, 242));
         Font font = new Font("Courier", Font.BOLD, 18);
         searchBar.setFont(font);
+        searchBar.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 
         buttonText = new JButton();
         buttonText.setBounds(590, 21, 300, 40);
         buttonText.setOpaque(false);
         buttonText.setContentAreaFilled(false);
         buttonText.setBorderPainted(false);
-        searchBar.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         buttonText.add(searchBar); // Bouton ajoute barre de recherche
         jPanel1.add(buttonText);
 
@@ -80,24 +82,32 @@ public class MainPage extends javax.swing.JPanel
         jPanel1.add(jButtonSearch);
         
         jButtonCart = new JButton();   // Bouton panier
-        jButtonCart.setBounds(1320, 11, 70, 70);
+        jButtonCart.setBounds(1330, 11, 65, 65);
         jButtonCart.setOpaque(false);
         jButtonCart.setContentAreaFilled(false);
         jButtonCart.setBorderPainted(false);
         jPanel1.add(jButtonCart);
         
         jButtonProfile = new JButton(); // Bouton profil
-        jButtonProfile.setBounds(1442, 9, 75, 75);
+        jButtonProfile.setBounds(1420, 11, 65, 65);
         jButtonProfile.setOpaque(false);
         jButtonProfile.setContentAreaFilled(false);
         jButtonProfile.setBorderPainted(false);
         jPanel1.add(jButtonProfile);
+        
+        jButtonDisconnect = new JButton(); // Bouton déconnecter
+        jButtonDisconnect.setBounds(1500, 11, 65, 65);
+        jButtonDisconnect.setOpaque(false);
+        jButtonDisconnect.setContentAreaFilled(false);
+        jButtonDisconnect.setBorderPainted(false);
+        jPanel1.add(jButtonDisconnect);
 
-        buttonImage = new JButton(); // Bouton imega barre de recherche du milieu
+        buttonImage = new JButton(); // Bouton image barre de recherche du milieu
         buttonImage.setBounds(555, 6, 450, 70);
         buttonImage.setOpaque(false);
         buttonImage.setContentAreaFilled(false);
         buttonImage.setBorderPainted(false);
+    
     }
     
     public void displayText(String message) //Display a message
@@ -141,6 +151,38 @@ public class MainPage extends javax.swing.JPanel
         revalidate();
         repaint();
     }
+    
+    public void decoBarMainPage()
+    {
+        jPanelDeconnection.setLayout(new FlowLayout());
+        jPanelDeconnection.setPreferredSize(new Dimension(65, 65));
+
+        String imageURL = "https://i.goopics.net/XWqrX.jpg";
+
+        Image image = null;
+
+        try
+        {
+            URL url = new URL(imageURL);
+            Image imageBeforeResize = ImageIO.read(url);
+            image = imageBeforeResize.getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+        } catch (IOException error)
+        {
+            System.out.println("Erreur cartMainPage");
+        }
+
+        JLabel label;
+        if (image != null)
+            label = new JLabel(new ImageIcon(image));
+        else
+            label = new JLabel();
+
+        jPanelDeconnection.setBackground(Color.white);
+        jPanelDeconnection.add(label);
+        jPanel1.add(jPanelDeconnection);
+        revalidate();
+        repaint();
+    }
 
     public void searchBarMainPage()
     {
@@ -172,7 +214,7 @@ public class MainPage extends javax.swing.JPanel
     public void cartMainPage()
     {
         jPanelCart.setLayout(new FlowLayout());
-        jPanelCart.setPreferredSize(new Dimension(80, 80));
+        jPanelCart.setPreferredSize(new Dimension(65, 65));
 
         String imageURL = "https://i.goopics.net/bWen0.jpg";
         // https://i.goopics.net/bWen0.jpg avec écriture panier
@@ -184,7 +226,7 @@ public class MainPage extends javax.swing.JPanel
         {
             URL url = new URL(imageURL);
             Image imageBeforeResize = ImageIO.read(url);
-            image = imageBeforeResize.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+            image = imageBeforeResize.getScaledInstance(64, 64, Image.SCALE_SMOOTH);
         } catch (IOException error)
         {
             System.out.println("Erreur cartMainPage");
@@ -206,7 +248,7 @@ public class MainPage extends javax.swing.JPanel
     public void profileMainPage()
     {
         jPanelPeople.setLayout(new FlowLayout());
-        jPanelPeople.setPreferredSize(new Dimension(80, 80));
+        jPanelPeople.setPreferredSize(new Dimension(65, 65));
 
         String imageURL = "https://i.goopics.net/w2ARR.jpg"; 
         // https://i.goopics.net/w2ARR.jpg  avec écriture profil
@@ -218,7 +260,7 @@ public class MainPage extends javax.swing.JPanel
         {
             URL url = new URL(imageURL);
             Image imageBeforeResize = ImageIO.read(url);
-            image = imageBeforeResize.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+            image = imageBeforeResize.getScaledInstance(64, 64, Image.SCALE_SMOOTH);
         } catch (IOException error)
         {
             System.out.println("Erreur profileMainPage");
@@ -250,6 +292,11 @@ public class MainPage extends javax.swing.JPanel
     public void showScroll()
     {
         scroll.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
+    }
+    
+    public void resetScroll()
+    {
+        scroll.getViewport().setViewPosition(new Point(0,0));
     }
 
     public void emptyPanel2()
@@ -298,6 +345,16 @@ public class MainPage extends javax.swing.JPanel
         jPanel2.add(newOrders);
     }
     
+    public void addInPanel2(OrdersPaymentAndPrice OPAP)
+    {
+       jPanel2.add(OPAP); 
+    }
+    
+    public void addInPanel2(PaymentPage pp)
+    {
+        jPanel2.add(pp);
+    }
+    
     public void addInPanel2(UpdateProductPage newUpdateProductPage)
     {
         jPanel2.add(newUpdateProductPage);
@@ -333,6 +390,11 @@ public class MainPage extends javax.swing.JPanel
     {
         return jButtonProfile;
     }
+    
+    public JButton getButtonDisoconnect()
+    {
+        return jButtonDisconnect;
+    }
 
     //Concerne le manageProductsPage
     public ManageProductsPage getManagerPage()
@@ -366,6 +428,7 @@ public class MainPage extends javax.swing.JPanel
         jPanelLogo = new javax.swing.JPanel();
         jPanelCart = new javax.swing.JPanel();
         jPanelPeople = new javax.swing.JPanel();
+        jPanelDeconnection = new javax.swing.JPanel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1600, 125));
@@ -430,7 +493,7 @@ public class MainPage extends javax.swing.JPanel
                 .addComponent(pastOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(parametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 505, Short.MAX_VALUE)
                 .addComponent(jButtonManageProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -457,40 +520,58 @@ public class MainPage extends javax.swing.JPanel
             .addGap(0, 78, Short.MAX_VALUE)
         );
 
+        jPanelCart.setPreferredSize(new java.awt.Dimension(65, 65));
+
         javax.swing.GroupLayout jPanelCartLayout = new javax.swing.GroupLayout(jPanelCart);
         jPanelCart.setLayout(jPanelCartLayout);
         jPanelCartLayout.setHorizontalGroup(
             jPanelCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 65, Short.MAX_VALUE)
         );
         jPanelCartLayout.setVerticalGroup(
             jPanelCartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 65, Short.MAX_VALUE)
         );
+
+        jPanelPeople.setPreferredSize(new java.awt.Dimension(65, 65));
 
         javax.swing.GroupLayout jPanelPeopleLayout = new javax.swing.GroupLayout(jPanelPeople);
         jPanelPeople.setLayout(jPanelPeopleLayout);
         jPanelPeopleLayout.setHorizontalGroup(
             jPanelPeopleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 65, Short.MAX_VALUE)
         );
         jPanelPeopleLayout.setVerticalGroup(
             jPanelPeopleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 65, Short.MAX_VALUE)
+        );
+
+        jPanelDeconnection.setPreferredSize(new java.awt.Dimension(65, 65));
+
+        javax.swing.GroupLayout jPanelDeconnectionLayout = new javax.swing.GroupLayout(jPanelDeconnection);
+        jPanelDeconnection.setLayout(jPanelDeconnectionLayout);
+        jPanelDeconnectionLayout.setHorizontalGroup(
+            jPanelDeconnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 65, Short.MAX_VALUE)
+        );
+        jPanelDeconnectionLayout.setVerticalGroup(
+            jPanelDeconnectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 65, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jPanelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1194, Short.MAX_VALUE)
+                .addGap(1219, 1219, 1219)
                 .addComponent(jPanelCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(15, 15, 15)
                 .addComponent(jPanelPeople, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addGap(15, 15, 15)
+                .addComponent(jPanelDeconnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -498,11 +579,14 @@ public class MainPage extends javax.swing.JPanel
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelPeople, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanelCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanelPeople, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanelDeconnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(11, 11, 11)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.getAccessibleContext().setAccessibleName("");
@@ -517,7 +601,7 @@ public class MainPage extends javax.swing.JPanel
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 687, Short.MAX_VALUE))
+                .addGap(0, 660, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -532,6 +616,7 @@ public class MainPage extends javax.swing.JPanel
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelCart;
+    private javax.swing.JPanel jPanelDeconnection;
     private javax.swing.JPanel jPanelLogo;
     private javax.swing.JPanel jPanelPeople;
     private javax.swing.JButton parametersButton;
@@ -548,5 +633,6 @@ public class MainPage extends javax.swing.JPanel
     private JButton jButtonSearch;
     private JButton jButtonCart;
     private JButton jButtonProfile;
-    private ManageProductsPage manageProductsPage;
+    private JButton jButtonDisconnect;
+    private ManageProductsPage manageProductsPage;   
 }

@@ -14,9 +14,6 @@ import javax.swing.*;
 public class ManageProductsPage extends javax.swing.JPanel
 {
 
-    /**
-     * Creates new form ManageProductsPage
-     */
     public ManageProductsPage()
     {
         initComponents();

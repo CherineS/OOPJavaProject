@@ -50,8 +50,11 @@ public class OrdersDAO extends TablesDAO
 
             while (res.next())
             {
-                if ((productNo == res.getInt("productNo")) && (quantityInt <= res.getInt("quantity")))
+                if (productNo == res.getInt("productNo"))
                 {
+                    if (quantityInt > res.getInt("quantity"))
+                        quantityInt = res.getInt("quantity");
+
                     int quantitySQL = res.getInt("quantity") - quantityInt;
                     myProduct = new Product(productNo, res.getString("name"), res.getDouble("price"), quantityInt,
                             res.getInt("minimumPromotion"), res.getDouble("valuePromotion"), res.getString("lienURL"), res.getString("description"));
@@ -83,7 +86,21 @@ public class OrdersDAO extends TablesDAO
 
         if (myProduct != null)
         {
-            Orders Order = new Orders(OrderNo, date, myProduct, ((double) myProduct.getQuantity() * myProduct.getPrice()), email);
+            double price = (myProduct.getQuantity() / myProduct.getminimumPromotion())
+                    * (myProduct.getPrice() * (1 - (myProduct.getValuePromotion() * 0.01))) * myProduct.getminimumPromotion()
+                    + (myProduct.getQuantity() % myProduct.getminimumPromotion()) * (myProduct.getPrice());
+
+            DecimalFormat df = new DecimalFormat("#.##");
+            df.setRoundingMode(RoundingMode.HALF_UP);
+            String stringPrice = df.format(price);
+
+            char[] myPrice = stringPrice.toCharArray();
+            for (int j = 0; j < myPrice.length; j++)
+                if (myPrice[j] == ',')
+                    myPrice[j] = '.';
+
+            price = Double.parseDouble(String.copyValueOf(myPrice));
+            Orders Order = new Orders(OrderNo, date, myProduct, price, email);
 
             if (result == true)
             {
@@ -91,6 +108,7 @@ public class OrdersDAO extends TablesDAO
                     if (Order.getProducts().getProductNo() == myOrders.get(i).getProducts().getProductNo())
                     {
                         myOrders.get(i).getProducts().setQuantity((quantityInt + myOrders.get(i).getProducts().getQuantity()));
+                        myOrders.get(i).setPrice(myOrders.get(i).getPrice() + price);
                         condition++;
                     }
 
@@ -137,21 +155,21 @@ public class OrdersDAO extends TablesDAO
     {
         return myOrders;
     }
-    
+
     public ArrayList<Orders> getPastOrders(int number)
     {
         ArrayList<Orders> pastOrders = new ArrayList<>();
         getConnection();
-        
+
         try
         {
-            String sqlStatement = "SELECT* FROM orders WHERE orderNo ='"+ number +"' ";
+            String sqlStatement = "SELECT* FROM orders WHERE orderNo ='" + number + "' ";
             ResultSet res = stmt.executeQuery(sqlStatement);
 
             while (res.next())
             {
-                Product myProduct = new Product(res.getInt("productNo"),"N/A", 0,0,0,0,null,null);
-                Orders myOrd = new Orders(res.getInt("orderNo"),res.getDate("date"), myProduct, res.getDouble("price"),res.getString("email"));
+                Product myProduct = new Product(res.getInt("productNo"), "N/A", 0, 0, 0, 0, null, null);
+                Orders myOrd = new Orders(res.getInt("orderNo"), res.getDate("date"), myProduct, res.getDouble("price"), res.getString("email"));
                 pastOrders.add(myOrd);
             }
 
@@ -159,10 +177,10 @@ public class OrdersDAO extends TablesDAO
         {
             System.out.println("Error searchElement ProductDAO");
         }
-        
+
         closeConnection();
         return pastOrders;
-        
+
     }
 
     public void addOrders()
@@ -171,20 +189,7 @@ public class OrdersDAO extends TablesDAO
 
         for (int i = 0; i < myOrders.size(); i++)
         {
-            double price = (myOrders.get(i).getProducts().getQuantity() / myOrders.get(i).getProducts().getminimumPromotion())
-                    * (myOrders.get(i).getProducts().getPrice() * (1 - (myOrders.get(i).getProducts().getValuePromotion() * 0.01))) * myOrders.get(i).getProducts().getminimumPromotion()
-                    + (myOrders.get(i).getProducts().getQuantity() % myOrders.get(i).getProducts().getminimumPromotion()) * (myOrders.get(i).getProducts().getPrice());
 
-            DecimalFormat df = new DecimalFormat("#.##");
-            df.setRoundingMode(RoundingMode.HALF_UP);
-            String stringPrice = df.format(price);
-
-            char[] myPrice = stringPrice.toCharArray();
-            for (int j = 0; j < myPrice.length; j++)
-                if (myPrice[j] == ',')
-                    myPrice[j] = '.';
-
-            price = Double.parseDouble(String.copyValueOf(myPrice));
             String orderProductNo = "" + myOrders.get(i).getOrderNumber() + "-" + myOrders.get(i).getProducts().getProductNo();
             java.sql.Date dateSQL = new java.sql.Date(myOrders.get(i).getDate().getTime());
 
@@ -194,7 +199,7 @@ public class OrdersDAO extends TablesDAO
                         + " VALUES "
                         + "('" + orderProductNo + "','" + myOrders.get(i).getOrderNumber() + "','" + myOrders.get(i).getProducts().getProductNo()
                         + "','" + myOrders.get(i).getEmail() + "','" + myOrders.get(i).getProducts().getQuantity() + "', '"
-                        + price + "','" + dateSQL + "')");
+                        + myOrders.get(i).getPrice() + "','" + dateSQL + "')");
             } catch (SQLException error)
             {
                 System.out.println("Error addOrders OrdersDAO");
@@ -219,6 +224,28 @@ public class OrdersDAO extends TablesDAO
             System.out.println("Error deleteAllElements OrdersDAO");
         }
         closeConnection();
+    }
+
+    public int findQuantity(String orderProdNo)
+    {
+        int quantity = 0;
+        getConnection();
+        try
+        {
+            String sqlStatement = "SELECT quantity FROM orders WHERE orderProductNo ='" + orderProdNo + "' ";
+            ResultSet res = stmt.executeQuery(sqlStatement);
+
+            while (res.next())
+            {
+                quantity = res.getInt("quantity");
+            }
+
+        } catch (SQLException error)
+        {
+            System.out.println("Error searchElement ProductDAO");
+        }
+        closeConnection();
+        return quantity;
     }
 
     public void deleteElement()

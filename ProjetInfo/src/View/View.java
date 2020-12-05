@@ -18,6 +18,9 @@ public class View
     String email = "gaetan.bouchy@yahoo.fr";
     ArrayList<JButton> menuButton;
     ArrayList<JButton> myButton;
+    ArrayList<JButton> suppButton;
+    JButton commander;
+    JButton valider;
     ArrayList<JButton> managerButton;
     UpdateProductPage updateProductPage;
     
@@ -25,6 +28,8 @@ public class View
     {
         menuButton = new ArrayList<>();
         myButton = new ArrayList<>();
+        suppButton= new ArrayList<>();
+        commander = new JButton();
         managerButton = new ArrayList<>();
         updateProductPage = new UpdateProductPage();
         
@@ -34,7 +39,8 @@ public class View
         menuButton.add(frame.getMainPage().getPastOrderButton());
         menuButton.add(frame.getMainPage().getButtonCart());
     }
-    
+            
+            
     public void setVisibleFrame()
     {
         frame.setVisible(true);
@@ -48,6 +54,26 @@ public class View
     public void setEmail(String newEmail)
     {
         email = newEmail;
+    }
+    
+    public void setCommander(JButton e)
+    {
+        commander = e;
+    }
+    
+    public JButton getCommander()
+    {
+       return commander; 
+    }
+    
+    public void setValider(JButton e)
+    {
+        valider = e;
+    }
+       
+    public JButton getValider()
+    {
+       return valider; 
     }
     
     public String getEmail()
@@ -64,6 +90,12 @@ public class View
     {
         return myButton;
     }
+    
+    public ArrayList<JButton> getSuppButton()
+    {
+        return suppButton;
+    }
+
     
     public ArrayList<JButton> getManagerButton()
     {
