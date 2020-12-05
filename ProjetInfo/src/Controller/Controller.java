@@ -13,10 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
-<<<<<<< HEAD
 import javax.swing.JFormattedTextField;
-=======
->>>>>>> Gaëtan
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import projetinfo.Orders;
@@ -47,7 +44,6 @@ public class Controller
 
         for (int i = 0; i < myView.getMenuButton().size(); i++)
             myView.getMenuButton().get(i).addActionListener(new RadioButtonListener());
-
     }
 
     private class RadioButtonListener implements ActionListener
@@ -63,11 +59,11 @@ public class Controller
                 listResults = productDAO.searchElement(myView.getFrame().getMainPage().getSearchBar());
 
                 myView.getFrame().getMainPage().emptyPanel2();
-                ProductListResults(listResults, 1);
-            } else if (e.getSource() == myView.getMenuButton().get(1)) //Bouton manage
+                ProductListResults(listResults,1);
+            }
+            else if (e.getSource() == myView.getMenuButton().get(1)) //Bouton manage
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-<<<<<<< HEAD
                 myView.getManagerButton().clear();
                 
                 myView.getFrame().getMainPage().addInPanel2(myView.getFrame().getMainPage().getManagerPage());
@@ -79,25 +75,14 @@ public class Controller
                 for (int i = 0; i < myView.getManagerButton().size(); i++)
                     myView.getManagerButton().get(i).addActionListener(new ManagerButtonListener());
                 
-=======
-
-                myView.getFrame().getMainPage().addInPanel2(myView.getFrame().getMainPage().getManagerPage());
-                myView.getFrame().getMainPage().addPanelInFrame();
-
-                managerButton.add(myView.getFrame().getMainPage().getManagerPage().getManagerSearchButton());
-                managerButton.add(myView.getFrame().getMainPage().getManagerPage().getAddButton());
-
-                for (int i = 0; i < managerButton.size(); i++)
-                    managerButton.get(i).addActionListener(new ManagerButtonListener());
-
->>>>>>> Gaëtan
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
-            } else if (e.getSource() == myView.getMenuButton().get(2)) //Bouton shop
+            }
+            else if (e.getSource() == myView.getMenuButton().get(2)) //Bouton shop
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                ProductListResults(productDAO.returnAllElement(), 1);
-
+                ProductListResults(productDAO.returnAllElement(),1);
+                
             } else if (e.getSource() == myView.getMenuButton().get(3)) //Bouton past orders
             {
                 myView.getFrame().getMainPage().emptyPanel2();
@@ -156,7 +141,10 @@ public class Controller
                 myView.getFrame().getMainPage().addPanelInFrame();
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
-            } else if (e.getSource() == myView.getMenuButton().get(4)) //Bouton panier
+            } 
+            
+            
+            else if (e.getSource() == myView.getMenuButton().get(4)) //Bouton panier
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 myView.getSuppButton().clear();
@@ -177,7 +165,7 @@ public class Controller
                     OrdersPaymentAndPrice myOrders = new OrdersPaymentAndPrice(ordersDAO.getOrders());
                     myView.setCommander(myOrders.getCommander());
                     myView.getCommander().addActionListener(new RadioButtonListener());
-                    
+
                     myView.getFrame().getMainPage().addInPanel2(myOrders);
 
                     yPanel += 100;
@@ -202,29 +190,25 @@ public class Controller
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 PaymentPage myPaymentPage = new PaymentPage();
-                myView.getFrame().getMainPage().addInPanel2(myPaymentPage); 
+                myView.getFrame().getMainPage().addInPanel2(myPaymentPage);
                 myView.getFrame().getMainPage().showScroll();
                 myView.getFrame().getMainPage().hideScroll();
                 myView.getFrame().getMainPage().resetScroll();
                 myView.setValider(myPaymentPage.getValidate());
-                myView.getValider().addActionListener(new RadioButtonListener());  
-            }
-            else if (e.getSource()== myView.getValider())
+                myView.getValider().addActionListener(new RadioButtonListener());
+            } else if (e.getSource() == myView.getValider())
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                JOptionPane.showMessageDialog(null,"Votre commande a bien été passé");
+                JOptionPane.showMessageDialog(null, "Votre commande a bien été passé");
                 ordersDAO.addOrders();
                 myView.getMenuButton().get(2).doClick();
             }
-            {
+            
+            else{
                 for (int i = 0; i < myView.getMyButton().size(); i++)
-                    if (e.getSource() == myView.getMyButton().get(i))
-                        ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i), myView.getEmail(), productDAO.getKeyList().get(i));
-
-                for (int i = 0; i < myView.getSuppButton().size(); i++)
-                    if (e.getSource() == myView.getSuppButton().get(i))
+                {
+                    if(e.getSource() == myView.getMyButton().get(i))
                     {
-<<<<<<< HEAD
                         if(Integer.parseInt(productDAO.getQuantityToBuy().get(0).getText()) == -2)
                         {
                             myView.setUpdateButton(productDAO.getKeyList().get(i));
@@ -271,46 +255,36 @@ public class Controller
                         else ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i),myView.getEmail(),productDAO.getKeyList().get(i));
                     }
                 }
-                
-                
-=======
+                for (int i = 0; i < myView.getSuppButton().size(); i++)
+                    if (e.getSource() == myView.getSuppButton().get(i))
+                    {
                         ordersDAO.deleteShop(ordersDAO.getOrders().get(i).getProducts().getProductNo());
                         myView.getMenuButton().get(4).doClick();
                     }
->>>>>>> Gaëtan
             }
         }
     }
-
+    
     private class ManagerButtonListener implements ActionListener //Bouton de l'employé
     {
 
         @Override
         public void actionPerformed(ActionEvent event)
         {
-<<<<<<< HEAD
             if(event.getSource() == myView.getManagerButton().get(0)) //Search
-=======
-            if (event.getSource() == managerButton.get(0)) //Search
->>>>>>> Gaëtan
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 myView.getFrame().getMainPage().addInPanel2(myView.getFrame().getMainPage().getManagerPage());
                 myView.getFrame().getMainPage().addPanelInFrame();
-
+                
                 ProductDAO productDAOSearched = new ProductDAO();
                 ArrayList<Integer> listResults = new ArrayList<>();
 
                 listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getManagerPage().getManagerSearchBar());
 
-<<<<<<< HEAD
                 ProductListResults(listResults,2);
             }
             else if(event.getSource() == myView.getManagerButton().get(1)) //Add Product
-=======
-                ProductListResults(listResults, 2);
-            } else if (event.getSource() == managerButton.get(1)) //Add Product
->>>>>>> Gaëtan
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 myView.getFrame().getMainPage().hideScroll();
@@ -328,20 +302,19 @@ public class Controller
         int yPanel = 0;
         myView.getMyButton().clear();
         productDAO.getQuantityToBuy().clear();
-
+        
         if (!listResults.isEmpty())
         {
             productDAO.setKeyList(listResults);
-
+            
             for (Integer i : listResults)
             {
-                if (indice == 1)
+                if(indice==1)
                 {
                     ProduitEnListe newProduitEnListe = new ProduitEnListe(i);
                     myView.getFrame().getMainPage().addInPanel2(newProduitEnListe);
                     myView.getMyButton().add(newProduitEnListe.getAddToCartButton());
                     productDAO.addQuantityToBuy(newProduitEnListe.getQuantityToBuy());
-<<<<<<< HEAD
                 }
                 else if(indice==2)
                 {
@@ -352,29 +325,21 @@ public class Controller
                     myView.getMyButton().add(newManagerProduitEnListe.getUpdateButton());
                 }
                 yPanel+=210;
-=======
-                } else if (indice == 2)
-                    myView.getFrame().getMainPage().addInPanel2(new ManagerProduitEnListe(i));
-                yPanel += 210;
->>>>>>> Gaëtan
             }
-        } else
+        }
+        else{
             myView.getFrame().getMainPage().displayText("Aucun résultat");
-
+        }
+        
         for (int i = 0; i < myView.getMyButton().size(); i++)
             myView.getMyButton().get(i).addActionListener(new RadioButtonListener());
-
+        
         if (yPanel < 700)
-        {
-            myView.getFrame().getMainPage().showScroll();
             myView.getFrame().getMainPage().hideScroll();
-        }
-        else
-            myView.getFrame().getMainPage().showScroll();
-           
+        else myView.getFrame().getMainPage().showScroll();
 
         myView.getFrame().getMainPage().getPanel2().setPreferredSize(new Dimension(1600, yPanel));
-        myView.getFrame().getMainPage().addPanelInFrame();              
+        myView.getFrame().getMainPage().addPanelInFrame();
         myView.getFrame().getMainPage().revalidate();
         myView.getFrame().getMainPage().repaint();
     }

@@ -28,7 +28,7 @@ public class CommandeEnListe extends javax.swing.JPanel
     {
         initComponents();
         jPanel2.setLayout(new FlowLayout());
-        jPanel2.setPreferredSize(new Dimension(150,150));
+        jPanel2.setPreferredSize(new Dimension(152,152));
         
         nameProduct.setText("Nom : " + myOrders.getProducts().getName());
         priceProduct.setText("Prix : " + Double.toString(myOrders.getPrice())+"€");
@@ -43,7 +43,7 @@ public class CommandeEnListe extends javax.swing.JPanel
         try {
             URL url = new URL(myOrders.getProducts().getURL());
             Image imageBeforeResize = ImageIO.read(url);
-            image = imageBeforeResize.getScaledInstance(146, 146, Image.SCALE_SMOOTH);
+            image = imageBeforeResize.getScaledInstance(142, 142, Image.SCALE_SMOOTH);
         } catch (IOException error) {
             System.out.println("Erreur image");
         }
