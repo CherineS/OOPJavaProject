@@ -26,9 +26,7 @@ import projetinfo.Product;
  */
 public class Controller
 {
-
     ArrayList<JButton> managerButton = new ArrayList<>();
-    ArrayList<Integer> toDelete = new ArrayList<>();
     ProductDAO productDAO = new ProductDAO();
     PeopleDAO peopleDAO = new PeopleDAO();
     OrdersDAO ordersDAO = new OrdersDAO();
@@ -154,7 +152,9 @@ public class Controller
                         
                         yPanel += 210;
                     }
-
+                    
+                    myView.getFrame().getMainPage().addInPanel2(new OrdersPayementAndPrice());
+                    yPanel += 100;
                     myView.getFrame().getMainPage().showScroll();
                 } else
                 {
@@ -168,6 +168,7 @@ public class Controller
                 if (yPanel < 700)
                     myView.getFrame().getMainPage().hideScroll();
 
+                
                 myView.getFrame().getMainPage().getPanel2().setPreferredSize(new Dimension(1600, yPanel));
                 myView.getFrame().getMainPage().addPanelInFrame();
                 myView.getFrame().getMainPage().revalidate();
@@ -190,7 +191,6 @@ public class Controller
 
     private class ManagerButtonListener implements ActionListener //Bouton de l'employé
     {
-
         @Override
         public void actionPerformed(ActionEvent event)
         {

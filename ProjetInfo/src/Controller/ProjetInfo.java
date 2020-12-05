@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetinfo;
+package Controller;
 import View.*;
 import java.awt.*;
 import Controller.*;
@@ -65,32 +65,32 @@ public class ProjetInfo
 //            System.out.println("Database PEOPLE déjà à jour");
 //        }
         
-        try
-        {
-            String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
-            Connection con = DriverManager.getConnection(url, "root", "");
-            Statement stmt = con.createStatement();
-            String sqlStatementOrders1 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('0-0',0,0,'gaetan.bouchy@yahoo.fr',20,17,'2020-12-04')";
-            String sqlStatementOrders2 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('0-1',0,1,'gaetan.bouchy@yahoo.fr',40,28,'2020-12-04')";
-            String sqlStatementOrders3 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('1-2',1,2,'gaetan.bouchy@yahoo.fr',60,38,'2020-12-04')";
-            String sqlStatementOrders4 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('1-3',1,3,'gaetan.bouchy@yahoo.fr',50,42,'2020-12-04')";
-            String sqlStatementOrders5 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('1-4',1,4,'gaetan.bouchy@yahoo.fr',24,18,'2020-12-04')";
-            String sqlStatementOrders6 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('2-5',2,5,'gaetan.bouchy@yahoo.fr',28,23,'2020-12-04')";
-            String sqlStatementOrders7 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('3-6',3,6,'gaetan.bouchy@yahoo.fr',14,12,'2020-12-04')";
-            
-            stmt.executeUpdate(sqlStatementOrders1);
-            stmt.executeUpdate(sqlStatementOrders2);
-            stmt.executeUpdate(sqlStatementOrders3);
-            stmt.executeUpdate(sqlStatementOrders4);
-            stmt.executeUpdate(sqlStatementOrders5);
-            stmt.executeUpdate(sqlStatementOrders6);
-            stmt.executeUpdate(sqlStatementOrders7);
-            
-            con.close();
-        } catch (SQLException error)
-        {
-            System.out.println("Database ORDERS déjà à jour");
-        }
+//        try
+//        {
+//            String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+//            Connection con = DriverManager.getConnection(url, "root", "");
+//            Statement stmt = con.createStatement();
+//            String sqlStatementOrders1 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('0-0',0,0,'gaetan.bouchy@yahoo.fr',20,17,'2020-12-04')";
+//            String sqlStatementOrders2 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('0-1',0,1,'gaetan.bouchy@yahoo.fr',40,28,'2020-12-04')";
+//            String sqlStatementOrders3 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('1-2',1,2,'gaetan.bouchy@yahoo.fr',60,38,'2020-12-04')";
+//            String sqlStatementOrders4 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('1-3',1,3,'gaetan.bouchy@yahoo.fr',50,42,'2020-12-04')";
+//            String sqlStatementOrders5 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('1-4',1,4,'gaetan.bouchy@yahoo.fr',24,18,'2020-12-04')";
+//            String sqlStatementOrders6 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('2-5',2,5,'gaetan.bouchy@yahoo.fr',28,23,'2020-12-04')";
+//            String sqlStatementOrders7 = "INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)" + " VALUES " + "('3-6',3,6,'gaetan.bouchy@yahoo.fr',14,12,'2020-12-04')";
+//            
+//            stmt.executeUpdate(sqlStatementOrders1);
+//            stmt.executeUpdate(sqlStatementOrders2);
+//            stmt.executeUpdate(sqlStatementOrders3);
+//            stmt.executeUpdate(sqlStatementOrders4);
+//            stmt.executeUpdate(sqlStatementOrders5);
+//            stmt.executeUpdate(sqlStatementOrders6);
+//            stmt.executeUpdate(sqlStatementOrders7);
+//            
+//            con.close();
+//        } catch (SQLException error)
+//        {
+//            System.out.println("Database ORDERS déjà à jour");
+//        }
     }
     
     public static void main(String[] args) 
