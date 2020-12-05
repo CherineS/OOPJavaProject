@@ -83,7 +83,21 @@ public class OrdersDAO extends TablesDAO
 
         if (myProduct != null)
         {
-            Orders Order = new Orders(OrderNo, date, myProduct, ((double) myProduct.getQuantity() * myProduct.getPrice()), email);
+          double price = (myProduct.getQuantity() / myProduct.getminimumPromotion())
+                    * (myProduct.getPrice() * (1 - (myProduct.getValuePromotion() * 0.01))) * myProduct.getminimumPromotion()
+                    + (myProduct.getQuantity() % myProduct.getminimumPromotion()) * (myProduct.getPrice());
+
+            DecimalFormat df = new DecimalFormat("#.##");
+            df.setRoundingMode(RoundingMode.HALF_UP);
+            String stringPrice = df.format(price);
+
+            char[] myPrice = stringPrice.toCharArray();
+            for (int j = 0; j < myPrice.length; j++)
+                if (myPrice[j] == ',')
+                    myPrice[j] = '.';
+
+            price = Double.parseDouble(String.copyValueOf(myPrice));
+            Orders Order = new Orders(OrderNo, date, myProduct, price, email);
 
             if (result == true)
             {
@@ -91,6 +105,7 @@ public class OrdersDAO extends TablesDAO
                     if (Order.getProducts().getProductNo() == myOrders.get(i).getProducts().getProductNo())
                     {
                         myOrders.get(i).getProducts().setQuantity((quantityInt + myOrders.get(i).getProducts().getQuantity()));
+                        myOrders.get(i).setPrice(myOrders.get(i).getPrice()+price);
                         condition++;
                     }
 
@@ -131,7 +146,7 @@ public class OrdersDAO extends TablesDAO
             }
 
         closeConnection();
-    }
+    }  
 
     public ArrayList<Orders> getOrders()
     {
@@ -170,21 +185,8 @@ public class OrdersDAO extends TablesDAO
         getConnection();
 
         for (int i = 0; i < myOrders.size(); i++)
-        {
-            double price = (myOrders.get(i).getProducts().getQuantity() / myOrders.get(i).getProducts().getminimumPromotion())
-                    * (myOrders.get(i).getProducts().getPrice() * (1 - (myOrders.get(i).getProducts().getValuePromotion() * 0.01))) * myOrders.get(i).getProducts().getminimumPromotion()
-                    + (myOrders.get(i).getProducts().getQuantity() % myOrders.get(i).getProducts().getminimumPromotion()) * (myOrders.get(i).getProducts().getPrice());
-
-            DecimalFormat df = new DecimalFormat("#.##");
-            df.setRoundingMode(RoundingMode.HALF_UP);
-            String stringPrice = df.format(price);
-
-            char[] myPrice = stringPrice.toCharArray();
-            for (int j = 0; j < myPrice.length; j++)
-                if (myPrice[j] == ',')
-                    myPrice[j] = '.';
-
-            price = Double.parseDouble(String.copyValueOf(myPrice));
+        {          
+            
             String orderProductNo = "" + myOrders.get(i).getOrderNumber() + "-" + myOrders.get(i).getProducts().getProductNo();
             java.sql.Date dateSQL = new java.sql.Date(myOrders.get(i).getDate().getTime());
 
@@ -194,7 +196,7 @@ public class OrdersDAO extends TablesDAO
                         + " VALUES "
                         + "('" + orderProductNo + "','" + myOrders.get(i).getOrderNumber() + "','" + myOrders.get(i).getProducts().getProductNo()
                         + "','" + myOrders.get(i).getEmail() + "','" + myOrders.get(i).getProducts().getQuantity() + "', '"
-                        + price + "','" + dateSQL + "')");
+                        + myOrders.get(i).getPrice() + "','" + dateSQL + "')");
             } catch (SQLException error)
             {
                 System.out.println("Error addOrders OrdersDAO");

@@ -18,11 +18,13 @@ public class View
     String email = "gaetan.bouchy@yahoo.fr";
     ArrayList<JButton> menuButton;
     ArrayList<JButton> myButton;
+    ArrayList<JButton> suppButton;
     
     public View()
     {
         menuButton = new ArrayList<>();
         myButton = new ArrayList<>();
+        suppButton= new ArrayList<>();
         
         menuButton.add(frame.getMainPage().getButtonSearch());
         menuButton.add(frame.getMainPage().getButtonManageProduct());
@@ -60,4 +62,10 @@ public class View
     {
         return myButton;
     }
+    
+    public ArrayList<JButton> getSuppButton()
+    {
+        return suppButton;
+    }
+
 }

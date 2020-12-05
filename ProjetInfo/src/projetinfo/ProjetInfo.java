@@ -96,7 +96,7 @@ public class ProjetInfo
     public static void main(String[] args) 
     {
 //       createDatabase();
-        
+//        
        Controller myController = new Controller();
        myController.addAllButtons();
     }
