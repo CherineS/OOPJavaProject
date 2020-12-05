@@ -93,13 +93,9 @@ public class ProductDAO extends TablesDAO
                 case "minimumPromotion":
                     stmt.executeUpdate("UPDATE product "+ "SET "+ element +" = "+ Integer.parseInt(modification.getText()) +" WHERE productNo = "+ productNo);
                     break;
-                case "name":
-                    String myName = "'" + modification.getText() + "'";
-                    stmt.executeUpdate("UPDATE product "+ "SET "+ element + " = " + myName +" WHERE productNo = "+ productNo);
-                    break;
-                case "description":
-                    String myDescription = "'" + modification.getText() + "'";
-                    stmt.executeUpdate("UPDATE product "+ "SET "+ element + " = " + myDescription +" WHERE productNo = "+ productNo);
+                default :
+                    String modificationText = "\"" + modification.getText() + "\"";
+                    stmt.executeUpdate("UPDATE product "+ "SET "+ element + " = " + modificationText +" WHERE productNo = "+ productNo);
                     break;
             }
             
