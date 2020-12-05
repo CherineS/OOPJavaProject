@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import projetinfo.Orders;
@@ -186,29 +187,43 @@ public class Controller
                             productDAO.getQuantityToBuy().clear();
                             myView.getMyButton().clear();
                             
-                            productDAO.getQuantityToBuy().add(new JTextField("-3"));
+                            productDAO.getQuantityToBuy().add(new JTextField("-21"));
                             myView.getMyButton().add(myView.getUpdateButton().getValidateButton());
+                            myView.getMyButton().add(myView.getUpdateButton().getDeleteButton());
                             myView.getMyButton().get(0).addActionListener(new RadioButtonListener());
+                            myView.getMyButton().get(1).addActionListener(new RadioButtonListener());
                             
                             myView.getFrame().getMainPage().addPanelInFrame();
                             myView.getFrame().getMainPage().revalidate();
                             myView.getFrame().getMainPage().repaint();
                         }
-                        else if(Integer.parseInt(productDAO.getQuantityToBuy().get(0).getText()) == -3)
+                        else if(Integer.parseInt(productDAO.getQuantityToBuy().get(0).getText()) == -21)
                         {
-                            productDAO.changeElement("name", myView.getUpdateButton().getTheName(), productDAO.getKeyList().get(i));
-                            productDAO.changeElement("price", myView.getUpdateButton().getPrice(), productDAO.getKeyList().get(i));
-                            productDAO.changeElement("quantity", myView.getUpdateButton().getQuantity(), productDAO.getKeyList().get(i));
-                            productDAO.changeElement("minimumPromotion", myView.getUpdateButton().getMinPromotion(), productDAO.getKeyList().get(i));
-                            productDAO.changeElement("valuePromotion", myView.getUpdateButton().getValuePromotion(), productDAO.getKeyList().get(i));
-                            productDAO.changeElement("lienURL", myView.getUpdateButton().getImageURL(), productDAO.getKeyList().get(i));
-                            productDAO.changeElement("description", myView.getUpdateButton().getDescription(), productDAO.getKeyList().get(i));
-                            
-                            JOptionPane.showMessageDialog(null, "Produit mis à jour");
+                            if(e.getSource() == myView.getMyButton().get(0))
+                            {
+                                productDAO.changeElement("name", myView.getUpdateButton().getTheName(), myView.getUpdateButton().getProductNo());
+                                productDAO.changeElement("price", myView.getUpdateButton().getPrice(), myView.getUpdateButton().getProductNo());
+                                productDAO.changeElement("quantity", myView.getUpdateButton().getQuantity(), myView.getUpdateButton().getProductNo());
+                                productDAO.changeElement("minimumPromotion", myView.getUpdateButton().getMinPromotion(), myView.getUpdateButton().getProductNo());
+                                productDAO.changeElement("valuePromotion", myView.getUpdateButton().getValuePromotion(), myView.getUpdateButton().getProductNo());
+                                productDAO.changeElement("lienURL", myView.getUpdateButton().getImageURL(), myView.getUpdateButton().getProductNo());
+                                productDAO.changeElement("description", myView.getUpdateButton().getDescription(), myView.getUpdateButton().getProductNo());
+
+                                JOptionPane.showMessageDialog(null, "Produit mis à jour");
+                            }
+                            else if(e.getSource() == myView.getMyButton().get(1))
+                            {
+                                myView.getUpdateButton().delete();
+                                productDAO.changeElement("quantity", myView.getUpdateButton().getQuantity(), myView.getUpdateButton().getProductNo());
+
+                                JOptionPane.showMessageDialog(null, "Produit supprimé");
+                            }
                         }
                         else ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i),myView.getEmail(),productDAO.getKeyList().get(i));
                     }
                 }
+                
+                
             }
         }
     }

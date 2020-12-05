@@ -22,7 +22,8 @@ import projetinfo.ProductDAO;
  */
 public class UpdateProductPage extends javax.swing.JPanel
 {
-
+    int currentKey;
+    
     /**
      * Creates new form ProductPage
      */
@@ -36,6 +37,7 @@ public class UpdateProductPage extends javax.swing.JPanel
         initComponents();
         imageDisplay.setLayout(new FlowLayout());
         imageDisplay.setPreferredSize(new Dimension(146,146));
+        currentKey=primaryKey;
         
         ProductDAO javaProductDAO = new ProductDAO();
         Product searchedProduct = javaProductDAO.createJavaProduct(primaryKey);
@@ -74,9 +76,24 @@ public class UpdateProductPage extends javax.swing.JPanel
         repaint();
     }
     
+    public void delete()
+    {
+        quantity.setText("0");
+    }
+    
+    public int getProductNo()
+    {
+        return currentKey;
+    }
+    
     public JButton getValidateButton()
     {
         return updateButton;
+    }
+    
+    public JButton getDeleteButton()
+    {
+        return deleteButton;
     }
 
     public JTextField getTheName()
