@@ -47,7 +47,6 @@ public class MainPage extends javax.swing.JPanel
         trendButton.setBorderPainted(false);
         salesButton.setBorderPainted(false);
         pastOrdersButton.setBorderPainted(false);
-        parametersButton.setBorderPainted(false);
         jButtonManageProduct.setBorderPainted(false);
 
         setLayout(new FlowLayout());
@@ -432,7 +431,6 @@ public class MainPage extends javax.swing.JPanel
         trendButton = new javax.swing.JButton();
         salesButton = new javax.swing.JButton();
         pastOrdersButton = new javax.swing.JButton();
-        parametersButton = new javax.swing.JButton();
         jButtonManageProduct = new javax.swing.JButton();
         jPanelLogo = new javax.swing.JPanel();
         jPanelCart = new javax.swing.JPanel();
@@ -469,12 +467,6 @@ public class MainPage extends javax.swing.JPanel
         pastOrdersButton.setToolTipText("");
         pastOrdersButton.setPreferredSize(new java.awt.Dimension(140, 41));
 
-        parametersButton.setBackground(new java.awt.Color(255, 102, 51));
-        parametersButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        parametersButton.setForeground(new java.awt.Color(255, 255, 255));
-        parametersButton.setText("Paramètres du compte");
-        parametersButton.setPreferredSize(new java.awt.Dimension(140, 41));
-
         jButtonManageProduct.setBackground(new java.awt.Color(255, 102, 51));
         jButtonManageProduct.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButtonManageProduct.setForeground(new java.awt.Color(255, 255, 255));
@@ -500,18 +492,15 @@ public class MainPage extends javax.swing.JPanel
                 .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pastOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(parametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 505, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 724, Short.MAX_VALUE)
                 .addComponent(jButtonManageProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(shopButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(shopButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
             .addComponent(trendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(salesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(pastOrdersButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(parametersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jButtonManageProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -594,8 +583,8 @@ public class MainPage extends javax.swing.JPanel
                             .addComponent(jPanelCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanelPeople, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanelDeconnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(11, 11, 11)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
         );
 
         jPanel3.getAccessibleContext().setAccessibleName("");
@@ -628,7 +617,6 @@ public class MainPage extends javax.swing.JPanel
     private javax.swing.JPanel jPanelDeconnection;
     private javax.swing.JPanel jPanelLogo;
     private javax.swing.JPanel jPanelPeople;
-    private javax.swing.JButton parametersButton;
     private javax.swing.JButton pastOrdersButton;
     private javax.swing.JButton salesButton;
     private javax.swing.JButton shopButton;

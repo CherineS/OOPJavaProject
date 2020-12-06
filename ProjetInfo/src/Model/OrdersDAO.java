@@ -72,9 +72,15 @@ public class OrdersDAO extends TablesDAO
 
         if (myProduct != null)
         {
-            double price = (myProduct.getQuantity() / myProduct.getminimumPromotion())
+            double price;
+            if(myProduct.getminimumPromotion()!=0)
+            {
+                price = (myProduct.getQuantity() / myProduct.getminimumPromotion())
                     * (myProduct.getPrice() * (1 - (myProduct.getValuePromotion() * 0.01))) * myProduct.getminimumPromotion()
                     + (myProduct.getQuantity() % myProduct.getminimumPromotion()) * (myProduct.getPrice());
+            }
+            else 
+                price = (myProduct.getQuantity()*myProduct.getPrice());
 
             DecimalFormat df = new DecimalFormat("#.##");
             df.setRoundingMode(RoundingMode.HALF_UP);

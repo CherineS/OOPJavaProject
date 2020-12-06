@@ -279,7 +279,6 @@ public class AddProductPage extends javax.swing.JPanel
                 problem=true;
             }
             
-            
             if(Double.parseDouble(valuePromotion.getText())==0)
                 minPromotion.setText("0");
             
