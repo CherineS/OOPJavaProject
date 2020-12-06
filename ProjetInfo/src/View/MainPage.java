@@ -395,6 +395,11 @@ public class MainPage extends javax.swing.JPanel
     {
         return jButtonDisconnect;
     }
+    
+    public JButton getButtonSales()
+    {
+        return salesButton;
+    }
 
     //Concerne le manageProductsPage
     public ManageProductsPage getManagerPage()

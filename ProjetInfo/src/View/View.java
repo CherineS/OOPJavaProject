@@ -38,6 +38,8 @@ public class View
         menuButton.add(frame.getMainPage().getButtonShop());
         menuButton.add(frame.getMainPage().getPastOrderButton());
         menuButton.add(frame.getMainPage().getButtonCart());
+        menuButton.add(new JButton());
+        menuButton.add(frame.getMainPage().getButtonSales());
     }
             
             

@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.ArrayList;
 
         
-public class ProjetInfo
+public class Model
 {
     public static void createDatabase()
     {

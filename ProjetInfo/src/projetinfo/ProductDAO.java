@@ -53,17 +53,16 @@ public class ProductDAO extends TablesDAO
         getConnection();
         try
         {
-            String sqlStatement = "SELECT productNo FROM product";
+            String sqlStatement = "SELECT productNo FROM product ORDER BY productNo";
             ResultSet res = stmt.executeQuery(sqlStatement);
             int productNo = 0;
 
-            while (res.next())
-            {
-                productNo++;
-            }
-
+            while(res.next())
+                productNo = res.getInt("productNo");
+            productNo++;
+            
             sqlStatement = "INSERT INTO product " + "(productNo, name, price, quantity, minimumPromotion, valuePromotion, lienURL, description)"
-                    + " VALUES (" + productNo + ", '" + name + "', " + price + ", " + quantity + ", " + minPromotion + ", " + valuePromotion + ", '"+ imageURL +"','"+ description +"' )";
+                    + " VALUES (" + productNo + ", \"" + name + "\", " + price + ", " + quantity + ", " + minPromotion + ", " + valuePromotion + ", \""+ imageURL +"\", \""+ description +"\" )";
             stmt.executeUpdate(sqlStatement);
         } catch (SQLException error)
         {
@@ -82,14 +81,10 @@ public class ProductDAO extends TablesDAO
             switch (element)
             {
                 case "price":
-                    stmt.executeUpdate("UPDATE product "+ "SET "+ element + " = " + Double.parseDouble(modification.getText()) +" WHERE productNo = "+ productNo);
-                    break;
                 case "valuePromotion":
                     stmt.executeUpdate("UPDATE product "+ "SET "+ element + " = " + Double.parseDouble(modification.getText()) +" WHERE productNo = "+ productNo);
                     break;
                 case "quantity":
-                    stmt.executeUpdate("UPDATE product "+ "SET "+ element +" = "+ Integer.parseInt(modification.getText()) +" WHERE productNo = "+ productNo);
-                    break;
                 case "minimumPromotion":
                     stmt.executeUpdate("UPDATE product "+ "SET "+ element +" = "+ Integer.parseInt(modification.getText()) +" WHERE productNo = "+ productNo);
                     break;
@@ -161,6 +156,57 @@ public class ProductDAO extends TablesDAO
             if(!manager)
                 sqlStatement = "SELECT productNo FROM product WHERE name LIKE \""+ name +"\" AND quantity != 0";
             else sqlStatement = "SELECT productNo FROM product WHERE name LIKE \""+ name +"\"";
+            
+            ResultSet res = stmt.executeQuery(sqlStatement);
+
+            while (res.next())
+            {
+                results.add(res.getInt("productNo"));
+            }
+
+        } catch (SQLException error)
+        {
+            System.out.println("Error searchElement ProductDAO");
+        }
+        
+        try
+        {
+            if(manager)
+            {
+                try
+                {
+                    int noForManager = Integer.parseInt(myName.getText());
+                    sqlStatement = "SELECT productNo FROM product WHERE productNo ="+ noForManager;
+            
+                    ResultSet res2 = stmt.executeQuery(sqlStatement);
+
+                    while (res2.next())
+                    {
+                        results.add(res2.getInt("productNo"));
+                    }
+                } catch (NumberFormatException e)
+                {
+                }
+            }
+
+        } catch (SQLException error)
+        {
+            System.out.println("Error searchElement ProductDAO");
+        }
+        closeConnection();
+
+        return results;
+    }
+    
+    public ArrayList<Integer> searchPromotion()
+    {
+        String sqlStatement;
+        ArrayList<Integer> results = new ArrayList<>();
+        
+        getConnection();
+        try
+        {
+            sqlStatement = "SELECT productNo FROM product WHERE valuePromotion>0 AND quantity != 0";
             
             ResultSet res = stmt.executeQuery(sqlStatement);
 
