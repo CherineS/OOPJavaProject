@@ -5,7 +5,7 @@
  */
 package Controller;
         
-public class Model
+public class Main
 {
     public static void createDatabase()
     {
