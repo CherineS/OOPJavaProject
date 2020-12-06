@@ -5,11 +5,10 @@
  */
 package View;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import Model.PeopleDAO;
 
 /**
  *
@@ -17,10 +16,6 @@ import Model.PeopleDAO;
  */
 public class NewInscription extends javax.swing.JPanel
 {
-
-    /**
-     * Creates new form NewJPanel
-     */
     public NewInscription()
     {
         initComponents();
@@ -208,49 +203,44 @@ public class NewInscription extends javax.swing.JPanel
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        PeopleDAO myP = new PeopleDAO();
-        boolean test = false;
-        try
-        {
-            if ("Employee".equals((String) status.getSelectedItem()))
-            {
-                String code = JOptionPane.showInputDialog(null, "Enter the Employee password");
-                if (!"1234".equals(code))
-                {
-                    JOptionPane.showMessageDialog(null, "Wrong password");
-                    test = true;
-                }
-            }
-            if (test == false)
-            {
-                if (myP.newinscription(email, password, password2, name, Firstname, status) == 0)
-                    JOptionPane.showMessageDialog(null, "New Inscription done");
-                else{
-                if (myP.newinscription(email, password, password2, name, Firstname, status) == 1)
-                    JOptionPane.showMessageDialog(null, "The Email entered already exist");
-
-                if (myP.newinscription(email, password, password2, name, Firstname, status) == 2)
-                    JOptionPane.showMessageDialog(null, "The Email entered is not available");
-                if (myP.newinscription(email, password, password2, name, Firstname, status) == 3)
-                    JOptionPane.showMessageDialog(null, "You put nothing on the name");
-                if (myP.newinscription(email, password, password2, name, Firstname, status) == 4)
-                    JOptionPane.showMessageDialog(null, "You put nothing on the firstname");
-                if (myP.newinscription(email, password, password2, name, Firstname, status) == 6)
-                    JOptionPane.showMessageDialog(null, "Your two passwords do not match");
-                if (myP.newinscription(email, password, password2, name, Firstname, status) == 5)
-                    JOptionPane.showMessageDialog(null, "Your password is too short");
-                if (myP.newinscription(email, password, password2, name, Firstname, status) == 50)
-                    JOptionPane.showMessageDialog(null, "Error");
-                    }   
-            }
-        } catch (Exception e)
-        {
-        }
-
-
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public JButton getInscription()
+    {
+        return jButton1;
+    }
 
+    public JTextField getFirstname()
+    {
+        return Firstname;
+    }
+
+    public JTextField getEmail()
+    {
+        return email;
+    }
+
+    public JTextField getTheName()
+    {
+        return name;
+    }
+
+    public JPasswordField getPassword()
+    {
+        return password;
+    }
+
+    public JPasswordField getPassword2()
+    {
+        return password2;
+    }
+
+    public JComboBox<String> getStatus()
+    {
+        return status;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Firstname;
     private javax.swing.JTextField email;
