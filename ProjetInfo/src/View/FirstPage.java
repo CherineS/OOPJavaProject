@@ -40,10 +40,10 @@ public class FirstPage extends javax.swing.JPanel
         NewInscription = new javax.swing.JButton();
         Connexion = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 153, 153));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Gigi", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("CARROUF");
 
         EmailLabel.setText("Email :");
@@ -131,6 +131,17 @@ public class FirstPage extends javax.swing.JPanel
             {
                 JOptionPane.showMessageDialog(null, "Mauvais Password");
             }
+            if(myP.Connection(InputEmail, InputPassword) && myP.testEmail(InputEmail.getText()))
+                    {
+                       if(myP.getstatus(InputEmail).equals("Employee"))
+                       {
+                          JOptionPane.showMessageDialog(null, "Shop Employee"); 
+                       }
+                       if(myP.getstatus(InputEmail).equals("Customer"))
+                       {
+                          JOptionPane.showMessageDialog(null, "Shop Customer"); 
+                       }
+                    }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_ConnexionActionPerformed
