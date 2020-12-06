@@ -14,11 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import Model.Orders;
-import Model.ProductDAO;
-import Model.PeopleDAO;
-import Model.OrdersDAO;
-import Model.Product;
+import Model.*;
 import com.mysql.cj.conf.ConnectionUrlParser.Pair;
 
 /**

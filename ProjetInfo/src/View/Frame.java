@@ -20,7 +20,6 @@ public class Frame extends javax.swing.JFrame
     FirstPage connexionPage;
     NewInscription myInscription;
     ProfilPage profilpage;
-    FirstPage myfirstpage;
     /**
      * Creates new form testmain
      */
@@ -36,9 +35,7 @@ public class Frame extends javax.swing.JFrame
         connexionPage.setPreferredSize(new Dimension(1600, 800));
         myMainPage = new MainPage();
         myMainPage.setPreferredSize(new Dimension(1600,800));
-        myInscription = new NewInscription();
-        myInscription.setPreferredSize(new Dimension(1600,800));
-        switchToNewInscription();
+        switchToMainPage();
     }
 
     public void switchToConnexionPage()
@@ -61,11 +58,6 @@ public class Frame extends javax.swing.JFrame
     {
         getContentPane().removeAll();
         add(profilpage);
-    }
-    public void switchToFirstPage()
-    {
-        getContentPane().removeAll();
-        add(myfirstpage);
     }
     
     public void setVisibleMainpage()
