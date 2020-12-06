@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import static javax.swing.BorderFactory.createEmptyBorder;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 /*
 Sources :
@@ -46,7 +49,14 @@ public class ProduitEnListe extends javax.swing.JPanel
         
         name.setText(searchedProduct.getName());
         price.setText(Double.toString(searchedProduct.getPrice())+ "€");
+        
+        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER); 
+        jScrollPane1.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER); 
+        jScrollPane1.setBorder(createEmptyBorder());
         description.setText(searchedProduct.getDescription());
+        description.setBorder(createEmptyBorder());
+        description.setLineWrap(true);
+        description.setWrapStyleWord(true);
         quantityLeft.setText(quantityLeft.getText()+Integer.toString(searchedProduct.getQuantity())+")");
         
         if(searchedProduct.getValuePromotion()>0)
@@ -139,12 +149,13 @@ public class ProduitEnListe extends javax.swing.JPanel
         price = new javax.swing.JLabel();
         imageDisplay = new javax.swing.JPanel();
         jButtonAddToCart = new javax.swing.JButton();
-        description = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         quantityToBuy = new javax.swing.JTextField();
         quantityLeft = new javax.swing.JLabel();
         promotionText = new javax.swing.JLabel();
         imageButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        description = new javax.swing.JTextArea();
 
         description1.setText("Description");
         description1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -184,9 +195,6 @@ public class ProduitEnListe extends javax.swing.JPanel
             }
         });
 
-        description.setText("Description");
-        description.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Quantité :");
 
@@ -203,6 +211,11 @@ public class ProduitEnListe extends javax.swing.JPanel
 
         imageButton.setPreferredSize(new java.awt.Dimension(73, 73));
 
+        description.setEditable(false);
+        description.setColumns(20);
+        description.setRows(5);
+        jScrollPane1.setViewportView(description);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,12 +223,16 @@ public class ProduitEnListe extends javax.swing.JPanel
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(imageDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(286, 286, 286)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(imageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(promotionText, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
@@ -245,13 +262,12 @@ public class ProduitEnListe extends javax.swing.JPanel
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(name))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addComponent(name)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(imageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(promotionText))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
@@ -277,12 +293,13 @@ public class ProduitEnListe extends javax.swing.JPanel
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel description;
+    private javax.swing.JTextArea description;
     private javax.swing.JLabel description1;
     private javax.swing.JButton imageButton;
     private javax.swing.JPanel imageDisplay;
     private javax.swing.JButton jButtonAddToCart;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
     private javax.swing.JLabel price;
     private javax.swing.JLabel promotionText;
