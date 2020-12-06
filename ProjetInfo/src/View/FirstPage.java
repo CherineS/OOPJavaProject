@@ -7,7 +7,7 @@ package View;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import projetinfo.PeopleDAO;
+import Model.PeopleDAO;
 
 /**
  *

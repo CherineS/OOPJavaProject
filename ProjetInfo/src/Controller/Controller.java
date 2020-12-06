@@ -15,11 +15,11 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import projetinfo.Orders;
-import projetinfo.ProductDAO;
-import projetinfo.PeopleDAO;
-import projetinfo.OrdersDAO;
-import projetinfo.Product;
+import Model.Orders;
+import Model.ProductDAO;
+import Model.PeopleDAO;
+import Model.OrdersDAO;
+import Model.Product;
 
 /**
  *

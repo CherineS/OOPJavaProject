@@ -5,7 +5,7 @@
  */
 package View;
 import javax.swing.JOptionPane;
-import projetinfo.ProductDAO;
+import Model.ProductDAO;
 
 /**
  *

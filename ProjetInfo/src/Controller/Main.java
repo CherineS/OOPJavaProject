@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetinfo;
+package Controller;
 import View.*;
 import java.awt.*;
 import Controller.*;
@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.ArrayList;
 
         
-public class ProjetInfo
+public class Main
 {
     public static void createDatabase()
     {

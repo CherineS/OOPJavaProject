@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package View;
-import projetinfo.*;
-import projetinfo.Product;
+import Model.ProductDAO;
+import Model.Product;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;

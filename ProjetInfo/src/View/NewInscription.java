@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import projetinfo.PeopleDAO;
+import Model.PeopleDAO;
 
 /**
  *

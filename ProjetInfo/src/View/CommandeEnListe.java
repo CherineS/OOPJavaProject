@@ -13,7 +13,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import projetinfo.Orders;
+import Model.Orders;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Formatter;
