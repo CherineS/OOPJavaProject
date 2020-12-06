@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import Model.Orders;
 import java.text.SimpleDateFormat;
-import javax.swing.BorderFactory;
 import static javax.swing.BorderFactory.createEmptyBorder;
 import javax.swing.JTextArea;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;

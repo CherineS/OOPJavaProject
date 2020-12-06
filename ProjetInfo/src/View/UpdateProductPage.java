@@ -15,8 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import Model.Product;
 import Model.ProductDAO;
-import static javax.swing.BorderFactory.createEmptyBorder;
-import javax.swing.JTextArea;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
