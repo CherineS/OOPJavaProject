@@ -105,7 +105,17 @@ public class MainPage extends javax.swing.JPanel
         buttonImage.setOpaque(false);
         buttonImage.setContentAreaFilled(false);
         buttonImage.setBorderPainted(false);
+
+        
     
+    }
+    
+    public void manageButton(boolean visible)
+    {
+        if(visible==false)
+            jButtonManageProduct.setVisible(false);
+        else 
+            jButtonManageProduct.setVisible(true);
     }
     
     public void displayText(String message) //Display a message
@@ -310,6 +320,11 @@ public class MainPage extends javax.swing.JPanel
     public void addInPanel2(ProduitEnListe newProduct)
     {
         jPanel2.add(newProduct);
+    }
+    
+    public void addInPanel2(ProfilPage pp)
+    {
+        jPanel2.add(pp);
     }
 
     public void addInPanel2(AddProductPage newProductPage)

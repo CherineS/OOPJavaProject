@@ -7,7 +7,6 @@ package Model;
 
 import java.util.ArrayList;
 import java.sql.*;
-import javax.sql.*;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -62,7 +61,6 @@ public class PeopleDAO extends TablesDAO
     public ArrayList<String> getinformation(String email)
     {
         ArrayList<String> myinfo = new ArrayList<>();
-        String Email, firstname, name, password;
         getConnection();
         try
         {
@@ -99,6 +97,27 @@ public class PeopleDAO extends TablesDAO
             System.out.println("Error deleteElements PeopleDAO");
         }
         closeConnection();
+    }
+
+    public String statusPeople(String email)
+    {
+        String status = null;
+        getConnection();
+        try
+        {
+            String sqlStatement = "SELECT status FROM people where email = \"" + email + "\"";
+            ResultSet res = stmt.executeQuery(sqlStatement);
+            while (res.next())
+            {
+                status = res.getString("status");
+            }
+
+        } catch (SQLException error)
+        {
+            System.out.println("Error Connection");
+        }
+        closeConnection();
+        return status;
     }
 
     public boolean Connection(JTextField myemail, JPasswordField mypassword)

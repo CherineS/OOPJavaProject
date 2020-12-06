@@ -131,15 +131,17 @@ public class CommandeEnListe extends javax.swing.JPanel
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jScrollPane1.setBackground(new java.awt.Color(238, 238, 238));
+
         descriptionProduct.setEditable(false);
-        descriptionProduct.setBackground(new java.awt.Color(240, 240, 240));
+        descriptionProduct.setBackground(new java.awt.Color(238, 238, 238));
         descriptionProduct.setColumns(20);
         descriptionProduct.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         descriptionProduct.setRows(5);
         descriptionProduct.setBorder(null);
-        descriptionProduct.setCaretColor(new java.awt.Color(240, 240, 240));
-        descriptionProduct.setDisabledTextColor(new java.awt.Color(240, 240, 240));
-        descriptionProduct.setSelectionColor(new java.awt.Color(240, 240, 240));
+        descriptionProduct.setCaretColor(new java.awt.Color(238, 238, 238));
+        descriptionProduct.setDisabledTextColor(new java.awt.Color(238, 238, 238));
+        descriptionProduct.setSelectionColor(new java.awt.Color(238, 238, 238));
         jScrollPane1.setViewportView(descriptionProduct);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

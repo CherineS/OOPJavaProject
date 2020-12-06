@@ -6,9 +6,10 @@
 package View;
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Model.PeopleDAO;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -17,13 +18,10 @@ import Model.PeopleDAO;
 public class ProfilPage extends javax.swing.JPanel
 {
 
-    /**
-     * Creates new form ProfilPage
-     */
-    public ProfilPage()
+    public ProfilPage(String currentEmail)
     {
         initComponents();
-        initcomponent2();
+        initcomponent2(currentEmail);
     }
 
     /**
@@ -120,10 +118,7 @@ public class ProfilPage extends javax.swing.JPanel
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        PeopleDAO myp = new PeopleDAO();
-        myp.changeElement(name, password, firstname, email);
-        JOptionPane.showMessageDialog(null, "Modifié");
-        
+     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_nameActionPerformed
@@ -131,15 +126,41 @@ public class ProfilPage extends javax.swing.JPanel
         // TODO add your handling code here:
     }//GEN-LAST:event_nameActionPerformed
 
-    private void initcomponent2()
+    public void initcomponent2(String currentEmail)
     {
         PeopleDAO myp = new PeopleDAO();
-        ArrayList<String> info = myp.getinformation("gaetan.bouchy@yahoo.fr");
+        ArrayList<String> info = myp.getinformation(currentEmail);
         email.setText(info.get(0));
         name.setText(info.get(1));
         firstname.setText(info.get(2));
         password.setText(info.get(3));
     }
+    
+    public JButton getProfileModif()
+    {
+        return  jButton1;
+    }
+
+    public JTextField getTheName()
+    {
+        return name;
+    }
+
+    public JLabel getEmail()
+    {
+        return email;
+    }
+
+    public JTextField getFirstname()
+    {
+        return firstname;
+    }
+
+    public JTextField getPassword()
+    {
+        return password;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel email;
     private javax.swing.JTextField firstname;

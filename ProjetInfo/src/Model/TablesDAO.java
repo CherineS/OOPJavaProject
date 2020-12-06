@@ -6,8 +6,6 @@
 package Model;
 
 import java.sql.*;
-import javax.sql.*;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
 

@@ -5,9 +5,9 @@
  */
 package View;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import Model.PeopleDAO;
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -121,29 +121,7 @@ public class FirstPage extends javax.swing.JPanel
 
     private void ConnexionActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ConnexionActionPerformed
     {//GEN-HEADEREND:event_ConnexionActionPerformed
-            PeopleDAO myP = new PeopleDAO();
-            if(!myP.testEmail(InputEmail.getText()))
-            {
-                JOptionPane.showMessageDialog(null, "Mauvaise Email");
-            }
-            
-            if(!myP.Connection(InputEmail, InputPassword) && myP.testEmail(InputEmail.getText()))
-            {
-                JOptionPane.showMessageDialog(null, "Mauvais Password");
-            }
-            if(myP.Connection(InputEmail, InputPassword) && myP.testEmail(InputEmail.getText()))
-                    {
-                       if(myP.getstatus(InputEmail).equals("Employee"))
-                       {
-                          JOptionPane.showMessageDialog(null, "Shop Employee"); 
-                       }
-                       if(myP.getstatus(InputEmail).equals("Customer"))
-                       {
-                          JOptionPane.showMessageDialog(null, "Shop Customer"); 
-                       }
-                    }
 
-        // TODO add your handling code here:
     }//GEN-LAST:event_ConnexionActionPerformed
 
     private void NewInscriptionActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_NewInscriptionActionPerformed
@@ -151,6 +129,25 @@ public class FirstPage extends javax.swing.JPanel
         // TODO add your handling code here:
     }//GEN-LAST:event_NewInscriptionActionPerformed
 
+    public JButton getConnexion()
+    {
+        return Connexion;
+    }
+    
+    public JButton getTransitionInscription()
+    {
+        return NewInscription;
+    }
+    
+     public JTextField getEmail()
+     {
+         return InputEmail;
+     }
+     
+     public JPasswordField getPassword()
+     {
+         return InputPassword;
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Connexion;
