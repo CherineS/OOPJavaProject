@@ -7,7 +7,7 @@ package View;
 
 import java.util.ArrayList;
 import javax.swing.JTextField;
-import projetinfo.PeopleDAO;
+import Model.PeopleDAO;
 
 /**
  *

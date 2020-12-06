@@ -329,7 +329,6 @@ public class MainPage extends javax.swing.JPanel
         jPanel2.add(newProduct);
     }
     
-    
     public void addInPanel2(AllOrders newOrder)
     {
         jPanel2.add(newOrder);
@@ -394,6 +393,11 @@ public class MainPage extends javax.swing.JPanel
     public JButton getButtonDisoconnect()
     {
         return jButtonDisconnect;
+    }
+    
+    public JButton getTrendButton()
+    {
+        return trendButton;
     }
 
     //Concerne le manageProductsPage

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetinfo;
+package Model;
 
 import java.util.ArrayList;
 import java.sql.*;
@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Collections;
 
 /**
  *
@@ -151,9 +152,85 @@ public class OrdersDAO extends TablesDAO
         closeConnection();
     }
 
+    public void addOrders()
+    {
+        int numberOrder = OrderNoMax();
+        getConnection();
+
+        for (int i = 0; i < myOrders.size(); i++)
+        {
+
+            String orderProductNo = "" + numberOrder + "-" + myOrders.get(i).getProducts().getProductNo();
+            java.sql.Date dateSQL = new java.sql.Date(myOrders.get(i).getDate().getTime());
+
+            try
+            {
+                stmt.execute("INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)"
+                        + " VALUES "
+                        + "('" + orderProductNo + "','" + numberOrder + "','" + myOrders.get(i).getProducts().getProductNo()
+                        + "','" + myOrders.get(i).getEmail() + "','" + myOrders.get(i).getProducts().getQuantity() + "', '"
+                        + myOrders.get(i).getPrice() + "','" + dateSQL + "')");
+            } catch (SQLException error)
+            {
+                System.out.println("Error addOrders OrdersDAO");
+            }
+        }
+        closeConnection();
+        myOrders.clear();
+        myProductSearch.clear();
+    }
+
+    public int OrderNoMax()
+    {
+        getConnection();
+        ArrayList<Integer> myOrders = new ArrayList<>();
+        int result = 0;
+        try
+        {
+            ResultSet res = stmt.executeQuery("SELECT* FROM orders");
+            while (res.next())
+            {
+                myOrders.add(res.getInt("orderNo"));
+            }
+        } catch (SQLException error)
+        {
+            System.out.println("Error AddShop OrdersDAO (orders)");
+        }
+
+        if (!myOrders.isEmpty())
+            result = Collections.max(myOrders) + 1;
+
+        closeConnection();
+        return result;
+    }
+
     public ArrayList<Orders> getOrders()
     {
         return myOrders;
+    }
+
+    public ArrayList<Integer> getOnTrend(ArrayList<Integer> products)
+    {
+        getConnection();
+
+        try
+        {
+            String sqlStatement = "SELECT* FROM orders";
+            ResultSet res = stmt.executeQuery(sqlStatement);
+
+            while (res.next())
+            {
+                products.set(Integer.parseInt(res.getString("productNo")), Integer.parseInt(res.getString("quantity")) + products.get(Integer.parseInt(res.getString("productNo"))));
+            }
+
+        } catch (SQLException error)
+        {
+            System.out.println("Error searchElement ProductDAO");
+        }
+
+        closeConnection();
+
+        return products;
     }
 
     public ArrayList<Orders> getPastOrders(int number)
@@ -180,34 +257,6 @@ public class OrdersDAO extends TablesDAO
 
         closeConnection();
         return pastOrders;
-
-    }
-
-    public void addOrders()
-    {
-        getConnection();
-
-        for (int i = 0; i < myOrders.size(); i++)
-        {
-
-            String orderProductNo = "" + myOrders.get(i).getOrderNumber() + "-" + myOrders.get(i).getProducts().getProductNo();
-            java.sql.Date dateSQL = new java.sql.Date(myOrders.get(i).getDate().getTime());
-
-            try
-            {
-                stmt.execute("INSERT INTO orders " + "(orderProductNo, orderNo, productNo, email, quantity, price, date)"
-                        + " VALUES "
-                        + "('" + orderProductNo + "','" + myOrders.get(i).getOrderNumber() + "','" + myOrders.get(i).getProducts().getProductNo()
-                        + "','" + myOrders.get(i).getEmail() + "','" + myOrders.get(i).getProducts().getQuantity() + "', '"
-                        + myOrders.get(i).getPrice() + "','" + dateSQL + "')");
-            } catch (SQLException error)
-            {
-                System.out.println("Error addOrders OrdersDAO");
-            }
-        }
-        closeConnection();
-        myOrders.clear();
-        myProductSearch.clear();
     }
 
     @Override
