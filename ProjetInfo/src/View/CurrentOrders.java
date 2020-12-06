@@ -16,8 +16,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import projetinfo.Orders;
-import projetinfo.ProductDAO;
+import Model.Orders;
+import Model.ProductDAO;
 
 /**
  *

@@ -23,7 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import projetinfo.Orders;
+import Model.Orders;
 
 /**
  *

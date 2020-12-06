@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetinfo;
+package Model;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -126,6 +126,30 @@ public class ProductDAO extends TablesDAO
         try
         {
             String sqlStatement = "SELECT productNo FROM product WHERE quantity != 0";
+            ResultSet res = stmt.executeQuery(sqlStatement);
+
+            while (res.next())
+            {
+                results.add(res.getInt("productNo"));
+            }
+
+        } catch (SQLException error)
+        {
+            System.out.println("Error searchElement ProductDAO");
+        }
+        closeConnection();
+
+        return results;
+    }
+    
+    public ArrayList<Integer> returnElements()
+    {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        getConnection();
+        try
+        {
+            String sqlStatement = "SELECT productNo FROM product";
             ResultSet res = stmt.executeQuery(sqlStatement);
 
             while (res.next())

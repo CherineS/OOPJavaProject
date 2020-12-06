@@ -10,7 +10,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import projetinfo.ProductDAO;
+import Model.ProductDAO;
 
 /**
  *
