@@ -70,21 +70,6 @@ public class OrdersDAO extends TablesDAO
         }
         closeConnection();
 
-        getConnection();
-        try
-        {
-            ResultSet res = stmt.executeQuery("SELECT* FROM orders");
-
-            while (res.next())
-            {
-                OrderNo = res.getInt("orderNo") + 1;
-            }
-        } catch (SQLException error)
-        {
-            System.out.println("Error AddShop OrdersDAO (orders)");
-        }
-        closeConnection();
-
         if (myProduct != null)
         {
             double price = (myProduct.getQuantity() / myProduct.getminimumPromotion())
