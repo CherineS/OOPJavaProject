@@ -35,7 +35,6 @@ public class MainPage extends javax.swing.JPanel
         cartMainPage();
         profileMainPage();
         decoBarMainPage();
-//        paymentMainPage();
     }
 
     public void manualInitComponents()

@@ -22,9 +22,8 @@ import java.util.Collections;
  */
 public class OrdersDAO extends TablesDAO
 {
-
-    private ArrayList<Orders> myOrders = new ArrayList<>();
-    private ArrayList<Product> myProductSearch = new ArrayList<>();
+    private final ArrayList<Orders> myOrders = new ArrayList<>();
+    private final ArrayList<Product> myProductSearch = new ArrayList<>();
 
     public boolean AddShop(JTextField quantity, String email, int productNo)
     {
@@ -174,22 +173,22 @@ public class OrdersDAO extends TablesDAO
     public int OrderNoMax()
     {
         getConnection();
-        ArrayList<Integer> myOrders = new ArrayList<>();
+        ArrayList<Integer> myOrdersTest = new ArrayList<>();
         int result = 0;
         try
         {
             ResultSet res = stmt.executeQuery("SELECT* FROM orders");
             while (res.next())
             {
-                myOrders.add(res.getInt("orderNo"));
+                myOrdersTest.add(res.getInt("orderNo"));
             }
         } catch (SQLException error)
         {
             System.out.println("Error AddShop OrdersDAO (orders)");
         }
 
-        if (!myOrders.isEmpty())
-            result = Collections.max(myOrders) + 1;
+        if (!myOrdersTest.isEmpty())
+            result = Collections.max(myOrdersTest) + 1;
 
         closeConnection();
         return result;

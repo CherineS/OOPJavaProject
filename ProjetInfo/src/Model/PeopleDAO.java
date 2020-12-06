@@ -7,7 +7,6 @@ package Model;
 
 import java.util.ArrayList;
 import java.sql.*;
-import javax.sql.*;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -60,7 +59,6 @@ public class PeopleDAO extends TablesDAO
     public ArrayList<String> getinformation(String email)
     {
         ArrayList<String> myinfo = new ArrayList<>();
-        String Email,firstname,name,password;
         getConnection();
         try
         {
@@ -171,8 +169,6 @@ public class PeopleDAO extends TablesDAO
           }
       return 50;
     }
-    
-    
 
     public boolean testEmail(String email)
     {

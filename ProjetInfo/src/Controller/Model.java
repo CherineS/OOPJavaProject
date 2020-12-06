@@ -4,19 +4,6 @@
  * and open the template in the editor.
  */
 package Controller;
-import View.*;
-import java.awt.*;
-import Controller.*;
-
-import java.math.RoundingMode;
-import javax.swing.*;
-import java.sql.*;
-import javax.sql.*;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;  
-import java.util.Date; 
-import java.util.ArrayList;
-
         
 public class Model
 {

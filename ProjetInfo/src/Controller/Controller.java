@@ -6,14 +6,12 @@
 package Controller;
 
 import java.util.ArrayList;
-import javax.swing.JButton;
 import View.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Model.Orders;
@@ -22,9 +20,6 @@ import Model.PeopleDAO;
 import Model.OrdersDAO;
 import Model.Product;
 import com.mysql.cj.conf.ConnectionUrlParser.Pair;
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  *
@@ -55,14 +50,12 @@ public class Controller
     {
 
         @Override
+        @SuppressWarnings("empty-statement")
         public void actionPerformed(ActionEvent e)
         {
             if (e.getSource() == myView.getMenuButton().get(0)) //Bouton search
             {
-                ArrayList<Integer> listResults = new ArrayList<>();
-
-                listResults = productDAO.searchElement(myView.getFrame().getMainPage().getSearchBar(),false);
-
+                ArrayList<Integer> listResults = productDAO.searchElement(myView.getFrame().getMainPage().getSearchBar(),false);
                 myView.getFrame().getMainPage().emptyPanel2();
                 ProductListResults(listResults,1);
             }
@@ -110,8 +103,7 @@ public class Controller
                 {
                     for (int i = 0; i < orderNumber.size(); i++)
                     {
-                        ArrayList<Orders> myOrdersTest = new ArrayList<>();
-                        myOrdersTest = ordersDAO.getPastOrders(orderNumber.get(i));
+                        ArrayList<Orders> myOrdersTest = ordersDAO.getPastOrders(orderNumber.get(i));
                         for (int j = 0; j < myOrdersTest.size(); j++)
                         {
                             Product myProd;
@@ -141,7 +133,8 @@ public class Controller
                     myView.getFrame().getMainPage().hideScroll();
                 }
 
-                int yPanel = 210 * myOrdersSearch.size() + 80 * pastOrders.size();;
+                int yPanel = 210 * myOrdersSearch.size() + 80 * pastOrders.size();
+                
                 if (yPanel < 700)
                     myView.getFrame().getMainPage().hideScroll();
 
@@ -213,7 +206,7 @@ public class Controller
                 ArrayList<Integer> result = new ArrayList<>();
                 ArrayList<Pair<Integer, Integer>> pairList = new ArrayList<>();
 
-                for (int i = 0; i < productDAO.returnElements().size(); i++)
+                for (Integer returnElement : productDAO.returnElements())
                     allProducts.add(0);
 
                 allProducts = ordersDAO.getOnTrend(allProducts);
@@ -224,7 +217,7 @@ public class Controller
                     pairList.add(pairElement);
                 }
 
-                for(int i = 0; i < pairList.size(); i++)
+                for (Pair<Integer, Integer> pairList1 : pairList)
                     for(int j = 0; j < pairList.size() - 1; j++)
                         if (pairList.get(j).right < pairList.get(j + 1).right)
                         {
@@ -248,10 +241,7 @@ public class Controller
 
             } else if (e.getSource() == myView.getMenuButton().get(6)) //Bouton promotion
             {
-                ArrayList<Integer> listResults = new ArrayList<>();
-
-                listResults = productDAO.searchPromotion();
-
+                ArrayList<Integer> listResults = productDAO.searchPromotion();
                 myView.getFrame().getMainPage().emptyPanel2();
                 ProductListResults(listResults,1);
             }
@@ -261,58 +251,54 @@ public class Controller
                 {
                     if(e.getSource() == myView.getMyButton().get(i))
                     {
-                        if(Integer.parseInt(productDAO.getQuantityToBuy().get(0).getText()) == -2)
+                        switch (Integer.parseInt(productDAO.getQuantityToBuy().get(0).getText()))
                         {
-                            myView.setUpdateButton(productDAO.getKeyList().get(i));
-                            
-                            myView.getFrame().getMainPage().emptyPanel2();
-                            myView.getFrame().getMainPage().hideScroll();
-                            
-                            myView.getFrame().getMainPage().addInPanel2(myView.getUpdateButton());
-                            productDAO.getQuantityToBuy().clear();
-                            myView.getMyButton().clear();
-                            
-                            productDAO.getQuantityToBuy().add(new JTextField("-21"));
-                            myView.getMyButton().add(myView.getUpdateButton().getValidateButton());
-                            myView.getMyButton().add(myView.getUpdateButton().getDeleteButton());
-                            myView.getMyButton().get(0).addActionListener(new RadioButtonListener());
-                            myView.getMyButton().get(1).addActionListener(new RadioButtonListener());
-                            
-                            myView.getFrame().getMainPage().addPanelInFrame();
-                            myView.getFrame().getMainPage().revalidate();
-                            myView.getFrame().getMainPage().repaint();
-                        }
-                        else if(Integer.parseInt(productDAO.getQuantityToBuy().get(0).getText()) == -21)
-                        {
-                            if(e.getSource() == myView.getMyButton().get(0))
-                            {
-                                productDAO.changeElement("name", myView.getUpdateButton().getTheName(), myView.getUpdateButton().getProductNo());
-                                productDAO.changeElement("price", myView.getUpdateButton().getPrice(), myView.getUpdateButton().getProductNo());
-                                productDAO.changeElement("quantity", myView.getUpdateButton().getQuantity(), myView.getUpdateButton().getProductNo());
-                                productDAO.changeElement("lienURL", myView.getUpdateButton().getImageURL(), myView.getUpdateButton().getProductNo());
-                                productDAO.changeElement("description", myView.getUpdateButton().getDescription(), myView.getUpdateButton().getProductNo());
-                                
-                                if(Double.parseDouble(myView.getUpdateButton().getValuePromotion().getText())==0 || Integer.parseInt(myView.getUpdateButton().getMinPromotion().getText())==0)
+                            case -2:
+                                myView.setUpdateButton(productDAO.getKeyList().get(i));
+                                myView.getFrame().getMainPage().emptyPanel2();
+                                myView.getFrame().getMainPage().hideScroll();
+                                myView.getFrame().getMainPage().addInPanel2(myView.getUpdateButton());
+                                productDAO.getQuantityToBuy().clear();
+                                myView.getMyButton().clear();
+                                productDAO.getQuantityToBuy().add(new JTextField("-21"));
+                                myView.getMyButton().add(myView.getUpdateButton().getValidateButton());
+                                myView.getMyButton().add(myView.getUpdateButton().getDeleteButton());
+                                myView.getMyButton().get(0).addActionListener(new RadioButtonListener());
+                                myView.getMyButton().get(1).addActionListener(new RadioButtonListener());
+                                myView.getFrame().getMainPage().addPanelInFrame();
+                                myView.getFrame().getMainPage().revalidate();
+                                myView.getFrame().getMainPage().repaint();
+                                break;
+                            case -21:
+                                if(e.getSource() == myView.getMyButton().get(0))
                                 {
-                                    myView.getUpdateButton().deleteMinPromotion();
-                                    myView.getUpdateButton().deleteValuePromotion();
+                                    productDAO.changeElement("name", myView.getUpdateButton().getTheName(), myView.getUpdateButton().getProductNo());
+                                    productDAO.changeElement("price", myView.getUpdateButton().getPrice(), myView.getUpdateButton().getProductNo());
+                                    productDAO.changeElement("quantity", myView.getUpdateButton().getQuantity(), myView.getUpdateButton().getProductNo());
+                                    productDAO.changeElement("lienURL", myView.getUpdateButton().getImageURL(), myView.getUpdateButton().getProductNo());
+                                    productDAO.changeElement("description", myView.getUpdateButton().getDescription(), myView.getUpdateButton().getProductNo());
+                                    
+                                    if(Double.parseDouble(myView.getUpdateButton().getValuePromotion().getText())==0 || Integer.parseInt(myView.getUpdateButton().getMinPromotion().getText())==0)
+                                    {
+                                        myView.getUpdateButton().deleteMinPromotion();
+                                        myView.getUpdateButton().deleteValuePromotion();
+                                    }
+                                    productDAO.changeElement("minimumPromotion", myView.getUpdateButton().getMinPromotion(), myView.getUpdateButton().getProductNo());
+                                    productDAO.changeElement("valuePromotion", myView.getUpdateButton().getValuePromotion(), myView.getUpdateButton().getProductNo());
+                                    
+                                    JOptionPane.showMessageDialog(null, "Produit mis à jour");
                                 }
-                                productDAO.changeElement("minimumPromotion", myView.getUpdateButton().getMinPromotion(), myView.getUpdateButton().getProductNo());
-                                productDAO.changeElement("valuePromotion", myView.getUpdateButton().getValuePromotion(), myView.getUpdateButton().getProductNo());
-
-                                JOptionPane.showMessageDialog(null, "Produit mis à jour");
-                            }
-                            else if(e.getSource() == myView.getMyButton().get(1))
-                            {
-                                myView.getUpdateButton().deleteQuantity();
-                                productDAO.deleteElement(myView.getUpdateButton().getProductNo());
-
-                                JOptionPane.showMessageDialog(null, "Produit supprimé");
-                            }
-                        }
-                        else{
-                            ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i),myView.getEmail(),productDAO.getKeyList().get(i));
-                            JOptionPane.showMessageDialog(null, "Produit ajouté !");
+                                else if(e.getSource() == myView.getMyButton().get(1))
+                                {
+                                    myView.getUpdateButton().deleteQuantity();
+                                    productDAO.deleteElement(myView.getUpdateButton().getProductNo());
+                                    
+                                    JOptionPane.showMessageDialog(null, "Produit supprimé");
+                                }   break;
+                            default:
+                                ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i),myView.getEmail(),productDAO.getKeyList().get(i));
+                                JOptionPane.showMessageDialog(null, "Produit ajouté !");
+                                break;
                         }
                     }
                 }
@@ -339,9 +325,7 @@ public class Controller
                 myView.getFrame().getMainPage().addPanelInFrame();
 
                 ProductDAO productDAOSearched = new ProductDAO();
-                ArrayList<Integer> listResults = new ArrayList<>();
-
-                listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getManagerPage().getManagerSearchBar(), true);
+                ArrayList<Integer> listResults = productDAOSearched.searchElement(myView.getFrame().getMainPage().getManagerPage().getManagerSearchBar(), true);
 
                 ProductListResults(listResults, 2);
             } else if (event.getSource() == myView.getManagerButton().get(1)) //Add Product

@@ -6,16 +6,8 @@
 package View;
 
 import java.awt.*;
-import java.util.ArrayList;
 import javax.swing.*;
-import Model.ProductDAO;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import javax.swing.*;
-import static javax.swing.BorderFactory.createEmptyBorder;
-import static javax.swing.ScrollPaneConstants.*;
 
 /**
  *

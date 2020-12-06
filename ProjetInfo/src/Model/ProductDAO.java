@@ -5,15 +5,9 @@
  */
 package Model;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.sql.*;
-import javax.sql.*;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,7 +16,7 @@ import java.util.logging.Logger;
 public class ProductDAO extends TablesDAO
 {
     private ArrayList<Integer> keyList = new ArrayList<>();
-    private ArrayList<JTextField> quantityToBuy = new ArrayList<>();
+    private final ArrayList<JTextField> quantityToBuy = new ArrayList<>();
     
     @Override
     public void deleteAllElements()
