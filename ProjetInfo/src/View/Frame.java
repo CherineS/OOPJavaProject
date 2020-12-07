@@ -19,7 +19,9 @@ public class Frame extends javax.swing.JFrame
     MainPage myMainPage;
     FirstPage connexionPage;
     ProfilPage profilpage;
-    NewInscription myInscription; 
+    AddProductPage myAddPage;
+    NewInscription myInscription;
+    UpdateProductPage updateProductPage;
     /**
      * Creates new form testmain
      */
@@ -37,6 +39,7 @@ public class Frame extends javax.swing.JFrame
         myMainPage.setPreferredSize(new Dimension(1600,800));
         myInscription = new NewInscription();
         myInscription.setPreferredSize(new Dimension(1600,800));
+        updateProductPage = new UpdateProductPage();
         switchToConnexionPage();
 
     }
@@ -96,6 +99,33 @@ public class Frame extends javax.swing.JFrame
     public ProfilPage getProfilPage()
     {
         return profilpage;
+    }
+    
+    public void discardAddPage()
+    {
+        myAddPage.setVisible(false);
+        myAddPage.removeAll();
+    }
+    
+    public void setAddPage(AddProductPage newPage)
+    {
+        myAddPage = new AddProductPage();
+        myAddPage = newPage;
+    }
+    
+    public AddProductPage getAddPage()
+    {
+        return myAddPage;
+    }
+    
+    public void setUpdateButton(int productNo)
+    {
+        updateProductPage = new UpdateProductPage(productNo);
+    }
+
+    public UpdateProductPage getUpdateButton()
+    {
+        return updateProductPage;
     }
 
     /**

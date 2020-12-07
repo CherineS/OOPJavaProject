@@ -10,6 +10,8 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import Model.ProductDAO;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
@@ -242,79 +244,7 @@ public class AddProductPage extends javax.swing.JPanel
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        boolean problem=false;
-        
-        try
-        {
-            if(Integer.parseInt(quantity.getText())<0)
-            {
-                JOptionPane.showMessageDialog(null, "Entrée erronée : Quantité négative");
-                problem=true;
-            }
-        } catch (NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(null, "Entrée erronée : Quantité n'est pas un entier");
-            problem=true;
-        }
-        
-        try
-        {
-            if(Double.parseDouble(price.getText())<0)
-            {
-                JOptionPane.showMessageDialog(null, "Entrée erronée : Prix est négatif");
-                problem=true;
-            }
-        } catch (NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(null, "Entrée erronée : Prix n'est pas un réel");
-            problem=true;
-        }
-        
-        try
-        {
-            if(Double.parseDouble(valuePromotion.getText())<0 || Double.parseDouble(valuePromotion.getText())>100)
-            {
-                JOptionPane.showMessageDialog(null, "Entrée erronée : Valeur de promotion n'est pas entre 0 et 100");
-                problem=true;
-            }
-            
-            if(Double.parseDouble(valuePromotion.getText())==0)
-                minPromotion.setText("0");
-            
-        } catch (NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(null, "Entrée erronée : Valeur de promotion n'est pas un réel");
-            problem=true;
-        }
-        
-        try
-        {
-            if(Integer.parseInt(minPromotion.getText())<0)
-            {
-                JOptionPane.showMessageDialog(null, "Entrée erronée : Minimum Promotion négatif");
-                problem=true;
-            }
-            
-        } catch (NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(null, "Entrée erronée : Minimum Promotion n'est pas un entier");
-            problem=true;
-        }
-        
-        try {
-            URL url = new URL(imageURL.getText());
-            Image image = ImageIO.read(url);
-        } catch (IOException error) {
-            JOptionPane.showMessageDialog(null, "Lien d'image invalide");
-            problem=true;
-        }
-        
-        if(problem==false)
-        {
-            ProductDAO newProduct = new ProductDAO();
-            newProduct.addElement(name, price, quantity, minPromotion, valuePromotion, imageURL, description);
-            JOptionPane.showMessageDialog(null, "Produit ajouté !");
-        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void descriptionActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_descriptionActionPerformed
@@ -322,6 +252,46 @@ public class AddProductPage extends javax.swing.JPanel
         // TODO add your handling code here:
     }//GEN-LAST:event_descriptionActionPerformed
 
+    public JTextField getTheName()
+    {
+        return name;
+    }
+
+    public JTextField getPrice()
+    {
+        return price;
+    }
+
+    public JTextField getQuantity()
+    {
+        return quantity;
+    }
+
+    public JTextField getValuePromotion()
+    {
+        return valuePromotion;
+    }
+
+    public JTextField getMinPromotion()
+    {
+        return minPromotion;
+    }
+
+    public JTextField getDescription()
+    {
+        return description;
+    }
+
+    public JTextField getImageURL()
+    {
+        return imageURL;
+    }
+
+    public JButton getAddValidate()
+    {
+        return jButton1;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabel1;

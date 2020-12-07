@@ -37,51 +37,7 @@ public class UpdateProductPage extends javax.swing.JPanel
     public UpdateProductPage(int primaryKey)
     {
         initComponents();
-        imageDisplay.setLayout(new FlowLayout());
-        imageDisplay.setPreferredSize(new Dimension(146,146));
-        currentKey=primaryKey;
-        
-        ProductDAO javaProductDAO = new ProductDAO();
-        Product searchedProduct = javaProductDAO.createJavaProduct(primaryKey);
-        
-        productNo.setText(Integer.toString(primaryKey));
-        imageURL.setText(searchedProduct.getURL());
-        name.setText(searchedProduct.getName());
-        name.setText(searchedProduct.getName());
-        quantity.setText(Integer.toString(searchedProduct.getQuantity()));
-        price.setText(Double.toString(searchedProduct.getPrice()));
-        
-        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER); 
-        jScrollPane1.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER); 
-        description.setText(searchedProduct.getDescription());
-        description.setLineWrap(true);
-        description.setWrapStyleWord(true);
-        
-        valuePromotion.setText(Double.toString(searchedProduct.getValuePromotion()));
-        minPromotion.setText(Integer.toString(searchedProduct.getminimumPromotion()));
-        
-        Image image = null;
-        
-        try {
-            URL url = new URL(searchedProduct.getURL());
-            Image imageBeforeResize = ImageIO.read(url);
-            image = imageBeforeResize.getScaledInstance(138, 138, Image.SCALE_SMOOTH);
-        } catch (IOException error) {
-            System.out.println("Erreur image");
-        }
-        
-        JLabel label;
-        if(image!=null)
-        {
-            label = new JLabel(new ImageIcon(image));
-        }
-        else 
-            label= new JLabel();
-        
-        imageDisplay.add(label);
-        add(imageDisplay);
-        revalidate();
-        repaint();
+        ManualInitcomponent(primaryKey);
     }
     
     public void deleteQuantity()
@@ -281,11 +237,13 @@ public class UpdateProductPage extends javax.swing.JPanel
                                     .addComponent(jLabel3))
                                 .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(189, 189, 189)
-                                .addComponent(jLabelName1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(189, 189, 189)
+                                        .addComponent(jLabelName1))
+                                    .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(23, 23, 23)
@@ -347,11 +305,15 @@ public class UpdateProductPage extends javax.swing.JPanel
                             .addComponent(jLabelName1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelName)
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(29, 29, 29)
-                                .addComponent(jLabel4)
-                                .addGap(35, 35, 35)
-                                .addComponent(jLabel3)
-                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(valuePromotion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,18 +325,62 @@ public class UpdateProductPage extends javax.swing.JPanel
                                             .addComponent(jLabel6)
                                             .addComponent(jLabel7)))))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(updateButton)
                 .addGap(28, 28, 28))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void ManualInitcomponent(int primaryKey)
+    {
+        imageDisplay.setLayout(new FlowLayout());
+        imageDisplay.setPreferredSize(new Dimension(146,146));
+        currentKey=primaryKey;
+        
+        ProductDAO javaProductDAO = new ProductDAO();
+        Product searchedProduct = javaProductDAO.createJavaProduct(primaryKey);
+        
+        productNo.setText(Integer.toString(primaryKey));
+        imageURL.setText(searchedProduct.getURL());
+        name.setText(searchedProduct.getName());
+        name.setText(searchedProduct.getName());
+        quantity.setText(Integer.toString(searchedProduct.getQuantity()));
+        price.setText(Double.toString(searchedProduct.getPrice()));
+        
+        jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER); 
+        jScrollPane1.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER); 
+        description.setText(searchedProduct.getDescription());
+        description.setLineWrap(true);
+        description.setWrapStyleWord(true);
+        
+        valuePromotion.setText(Double.toString(searchedProduct.getValuePromotion()));
+        minPromotion.setText(Integer.toString(searchedProduct.getminimumPromotion()));
+        
+        Image image = null;
+        
+        try {
+            URL url = new URL(searchedProduct.getURL());
+            Image imageBeforeResize = ImageIO.read(url);
+            image = imageBeforeResize.getScaledInstance(138, 138, Image.SCALE_SMOOTH);
+        } catch (IOException error) {
+            System.out.println("Erreur image");
+        }
+        
+        JLabel label;
+        if(image!=null)
+        {
+            label = new JLabel(new ImageIcon(image));
+        }
+        else 
+            label= new JLabel();
+        
+        imageDisplay.add(label);
+        add(imageDisplay);
+        revalidate();
+        repaint();
+    }
+    
     private void nameActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_nameActionPerformed
     {//GEN-HEADEREND:event_nameActionPerformed
 
