@@ -47,7 +47,6 @@ public class PeopleDAO extends TablesDAO
         getConnection();
         try
         {
-            System.out.println("Check");
             stmt.executeUpdate("UPDATE people SET password  = '" + mypassword + "' WHERE email = \"" + myemail + "\"");
             stmt.executeUpdate("UPDATE people SET firstName = '" + myfirstname + "'WHERE  email = \"" + myemail + "\"");
             stmt.executeUpdate("UPDATE people SET lastName  = '" + myname + "' WHERE email = \"" + myemail + "\"");

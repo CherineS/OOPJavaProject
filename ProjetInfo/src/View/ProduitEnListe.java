@@ -213,6 +213,7 @@ public class ProduitEnListe extends javax.swing.JPanel
 
         description.setEditable(false);
         description.setColumns(20);
+        description.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         description.setRows(5);
         jScrollPane1.setViewportView(description);
 

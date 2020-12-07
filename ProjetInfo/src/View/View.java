@@ -24,6 +24,7 @@ public class View
     JButton commander;
     JButton valider;
     JButton modifierProfil;
+    
     ArrayList<JButton> managerButton;
     ArrayList<JButton> peopleButton;
 
@@ -33,6 +34,8 @@ public class View
         myButton = new ArrayList<>();
         suppButton = new ArrayList<>();
         commander = new JButton();
+        modifierProfil = new JButton();
+        valider = new JButton();
         managerButton = new ArrayList<>();
         peopleButton = new ArrayList<>();
 
@@ -49,6 +52,7 @@ public class View
         peopleButton.add(frame.getFirstPage().getConnexion());
         peopleButton.add(frame.getFirstPage().getTransitionInscription());
         peopleButton.add(frame.getNewInscription().getInscription());
+        
     }
     
 

@@ -16,6 +16,7 @@ import javax.swing.JTextField;
  */
 public class NewInscription extends javax.swing.JPanel
 {
+
     public NewInscription()
     {
         initComponents();
@@ -179,7 +180,7 @@ public class NewInscription extends javax.swing.JPanel
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-      
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public JButton getInscription()
@@ -216,7 +217,33 @@ public class NewInscription extends javax.swing.JPanel
     {
         return status;
     }
-    
+
+    public void setFirstname()
+    {
+        Firstname.setText("");
+    }
+
+    public void setEmail()
+    {
+        email.setText("");
+    }
+
+    public void setName()
+    {
+        name.setText("");
+    }
+
+    public void setPassword()
+    {
+        password.setText("");
+    }
+
+    public void setPassword2()
+    {
+        password2.setText("");
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Firstname;
     private javax.swing.JTextField email;

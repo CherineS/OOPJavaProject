@@ -35,6 +35,8 @@ public class Controller
 
     public Controller()
     {
+        ordersDAO.deleteElement();
+        
         for (int i = 0; i < myView.getPeopleButton().size(); i++)
             myView.getPeopleButton().get(i).addActionListener(new PeopleButtonListener());
     }
@@ -93,6 +95,13 @@ public class Controller
                         if (peopleDAO.newinscription(myView.getFrame().getNewInscription().getEmail(), myView.getFrame().getNewInscription().getPassword(), myView.getFrame().getNewInscription().getPassword2(), myView.getFrame().getNewInscription().getTheName(), myView.getFrame().getNewInscription().getFirstname(), myView.getFrame().getNewInscription().getStatus()) == 0)
                         {
                             JOptionPane.showMessageDialog(null, "Nouvelle inscription effectuée");
+                            myView.getFrame().getNewInscription().setEmail();
+                            myView.getFrame().getNewInscription().setFirstname();
+                            myView.getFrame().getNewInscription().setName();
+                            myView.getFrame().getNewInscription().setPassword();
+                            myView.getFrame().getNewInscription().setPassword2();
+                            myView.getFrame().getNewInscription().revalidate();
+                            myView.getFrame().getNewInscription().repaint();
                             myView.getFrame().switchToConnexionPage();
                         } else
                         {
@@ -135,7 +144,7 @@ public class Controller
             } else if (e.getSource() == myView.getMenuButton().get(1)) //Bouton manage
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                myView.getFrame().getMainPage().resetScroll();
+                myView.getFrame().getMainPage().getPanel2().setPreferredSize(new Dimension(1600, 660));
                 myView.getFrame().getMainPage().hideScroll();
                 myView.getManagerButton().clear();
 
@@ -320,11 +329,12 @@ public class Controller
             } else if (e.getSource() == myView.getMenuButton().get(7)) //Bouton profil
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                ProfilPage myProfilPage = new ProfilPage(myView.getEmail());
-                myView.getFrame().getMainPage().addInPanel2(myProfilPage);
+                myView.getFrame().setProfilPage(new ProfilPage(myView.getEmail()));
+                myView.getFrame().getMainPage().addInPanel2(myView.getFrame().getProfilPage());
+                myView.getFrame().getMainPage().hideScroll();
                 myView.getFrame().getMainPage().resetScroll();
-                myView.setModifierProfil(myProfilPage.getProfileModif());
-                myView.getModifierProfil().addActionListener(new RadioButtonListener());  
+                myView.setModifierProfil(myView.getFrame().getProfilPage().getProfileModif());
+                myView.getModifierProfil().addActionListener(new RadioButtonListener());
                 myView.getFrame().getMainPage().addPanelInFrame();
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
@@ -335,6 +345,11 @@ public class Controller
                 myView.getFrame().getMainPage().resetScroll();
                 myView.getFrame().getMainPage().hideScroll();
                 myView.getFrame().switchToConnexionPage();
+                ordersDAO.getOrders().clear();
+                myView.getFrame().getFirstPage().setInputEmail();
+                myView.getFrame().getFirstPage().setInputPassword();
+                myView.getFrame().getFirstPage().revalidate();
+                myView.getFrame().getFirstPage().repaint();
             } 
             else if (e.getSource() == myView.getModifierProfil())
             {         
@@ -463,6 +478,7 @@ public class Controller
                     JOptionPane.showMessageDialog(null, "Produit ajouté !");
                     
                     myView.getFrame().discardAddPage();
+                    myView.getMenuButton().get(1).doClick();
                 }
             }
         }
@@ -506,7 +522,7 @@ public class Controller
         if (indice == 2)
             yPanel += 100;
 
-        if (yPanel < 670)
+        if (yPanel < 660)
             myView.getFrame().getMainPage().hideScroll();
         else
             myView.getFrame().getMainPage().showScroll();

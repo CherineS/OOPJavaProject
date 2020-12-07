@@ -22,6 +22,7 @@ import java.util.Collections;
  */
 public class OrdersDAO extends TablesDAO
 {
+
     private final ArrayList<Orders> myOrders = new ArrayList<>();
     private final ArrayList<Product> myProductSearch = new ArrayList<>();
 
@@ -72,14 +73,12 @@ public class OrdersDAO extends TablesDAO
         if (myProduct != null)
         {
             double price;
-            if(myProduct.getminimumPromotion()!=0)
-            {
+            if (myProduct.getminimumPromotion() != 0)
                 price = (myProduct.getQuantity() / myProduct.getminimumPromotion())
-                    * (myProduct.getPrice() * (1 - (myProduct.getValuePromotion() * 0.01))) * myProduct.getminimumPromotion()
-                    + (myProduct.getQuantity() % myProduct.getminimumPromotion()) * (myProduct.getPrice());
-            }
-            else 
-                price = (myProduct.getQuantity()*myProduct.getPrice());
+                        * (myProduct.getPrice() * (1 - (myProduct.getValuePromotion() * 0.01))) * myProduct.getminimumPromotion()
+                        + (myProduct.getQuantity() % myProduct.getminimumPromotion()) * (myProduct.getPrice());
+            else
+                price = (myProduct.getQuantity() * myProduct.getPrice());
 
             DecimalFormat df = new DecimalFormat("#.##");
             df.setRoundingMode(RoundingMode.HALF_UP);
@@ -100,13 +99,27 @@ public class OrdersDAO extends TablesDAO
                     {
                         myOrders.get(i).getProducts().setQuantity((quantityInt + myOrders.get(i).getProducts().getQuantity()));
                         myOrders.get(i).setPrice(myOrders.get(i).getPrice() + price);
-                            if(myOrders.get(i).getProducts().getQuantity()>=myOrders.get(i).getProducts().getminimumPromotion()&&myOrders.get(i).getProducts().getValuePromotion()!=0)
-                            {
-                                myOrders.get(i).setPrice(myOrders.get(i).getProducts().getQuantity()/ myOrders.get(i).getProducts().getminimumPromotion()
-                                * (myOrders.get(i).getProducts().getPrice() * (1 - (myOrders.get(i).getProducts().getValuePromotion() * 0.01))) * myOrders.get(i).getProducts().getminimumPromotion()
-                                + (myOrders.get(i).getProducts().getQuantity() % myOrders.get(i).getProducts().getminimumPromotion()) * (myOrders.get(i).getProducts().getPrice()));
-                            }
-                            
+
+                        if (myOrders.get(i).getProducts().getQuantity() >= myOrders.get(i).getProducts().getminimumPromotion() && myOrders.get(i).getProducts().getValuePromotion() != 0)
+                        {
+                            double resultPrice = myOrders.get(i).getProducts().getQuantity() / myOrders.get(i).getProducts().getminimumPromotion() * (myOrders.get(i).getProducts().getPrice()
+                                    * (1 - (myOrders.get(i).getProducts().getValuePromotion() * 0.01))) * myOrders.get(i).getProducts().getminimumPromotion()
+                                    + (myOrders.get(i).getProducts().getQuantity() % myOrders.get(i).getProducts().getminimumPromotion()) * (myOrders.get(i).getProducts().getPrice());
+
+                            DecimalFormat dfPrice = new DecimalFormat("#.##");
+                            dfPrice.setRoundingMode(RoundingMode.HALF_UP);
+                            String newPrice = dfPrice.format(resultPrice);
+
+                            char[] myNewPrice = newPrice.toCharArray();
+                            for (int j = 0; j < myPrice.length; j++)
+                                if (myNewPrice[j] == ',')
+                                    myNewPrice[j] = '.';
+
+                            resultPrice = Double.parseDouble(String.copyValueOf(myNewPrice));
+
+                            myOrders.get(i).setPrice(resultPrice);
+                        }
+
                         condition++;
                     }
 
