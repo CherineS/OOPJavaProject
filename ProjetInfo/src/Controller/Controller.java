@@ -16,6 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Model.*;
 import com.mysql.cj.conf.ConnectionUrlParser.Pair;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
 
 /**
  *
@@ -31,6 +35,8 @@ public class Controller
 
     public Controller()
     {
+        ordersDAO.deleteElement();
+        
         for (int i = 0; i < myView.getPeopleButton().size(); i++)
             myView.getPeopleButton().get(i).addActionListener(new PeopleButtonListener());
     }
@@ -58,10 +64,10 @@ public class Controller
                     JOptionPane.showMessageDialog(null, "Mauvais Password");
                 if (peopleDAO.Connection(myView.getFrame().getFirstPage().getEmail(), myView.getFrame().getFirstPage().getPassword()) && peopleDAO.testEmail(myView.getFrame().getFirstPage().getEmail().getText()))
                 {
-                    if (peopleDAO.getstatus(myView.getFrame().getFirstPage().getEmail()).equals("Employee"))
-                        JOptionPane.showMessageDialog(null, "Shop Employee");
-                    if (peopleDAO.getstatus(myView.getFrame().getFirstPage().getEmail()).equals("Customer"))
-                        JOptionPane.showMessageDialog(null, "Shop Customer");
+//                    if (peopleDAO.getstatus(myView.getFrame().getFirstPage().getEmail()).equals("Employee"))
+//                        JOptionPane.showMessageDialog(null, "Shop Employee");
+//                    if (peopleDAO.getstatus(myView.getFrame().getFirstPage().getEmail()).equals("Customer"))
+//                        JOptionPane.showMessageDialog(null, "Shop Customer");
                     
                     myView.setEmail(myView.getFrame().getFirstPage().getEmail().getText());
                     myView.setIsEmployee(peopleDAO.statusPeople(myView.getEmail()));
@@ -89,6 +95,13 @@ public class Controller
                         if (peopleDAO.newinscription(myView.getFrame().getNewInscription().getEmail(), myView.getFrame().getNewInscription().getPassword(), myView.getFrame().getNewInscription().getPassword2(), myView.getFrame().getNewInscription().getTheName(), myView.getFrame().getNewInscription().getFirstname(), myView.getFrame().getNewInscription().getStatus()) == 0)
                         {
                             JOptionPane.showMessageDialog(null, "Nouvelle inscription effectuée");
+                            myView.getFrame().getNewInscription().setEmail();
+                            myView.getFrame().getNewInscription().setFirstname();
+                            myView.getFrame().getNewInscription().setName();
+                            myView.getFrame().getNewInscription().setPassword();
+                            myView.getFrame().getNewInscription().setPassword2();
+                            myView.getFrame().getNewInscription().revalidate();
+                            myView.getFrame().getNewInscription().repaint();
                             myView.getFrame().switchToConnexionPage();
                         } else
                         {
@@ -131,7 +144,7 @@ public class Controller
             } else if (e.getSource() == myView.getMenuButton().get(1)) //Bouton manage
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                myView.getFrame().getMainPage().resetScroll();
+                myView.getFrame().getMainPage().getPanel2().setPreferredSize(new Dimension(1600, 660));
                 myView.getFrame().getMainPage().hideScroll();
                 myView.getManagerButton().clear();
 
@@ -140,6 +153,7 @@ public class Controller
 
                 myView.getManagerButton().add(myView.getFrame().getMainPage().getManagerPage().getManagerSearchButton());
                 myView.getManagerButton().add(myView.getFrame().getMainPage().getManagerPage().getAddButton());
+                myView.getManagerButton().add(new JButton());
 
                 for (int i = 0; i < myView.getManagerButton().size(); i++)
                     myView.getManagerButton().get(i).addActionListener(new ManagerButtonListener());
@@ -315,11 +329,12 @@ public class Controller
             } else if (e.getSource() == myView.getMenuButton().get(7)) //Bouton profil
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                ProfilPage myProfilPage = new ProfilPage(myView.getEmail());
-                myView.getFrame().getMainPage().addInPanel2(myProfilPage);
+                myView.getFrame().setProfilPage(new ProfilPage(myView.getEmail()));
+                myView.getFrame().getMainPage().addInPanel2(myView.getFrame().getProfilPage());
+                myView.getFrame().getMainPage().hideScroll();
                 myView.getFrame().getMainPage().resetScroll();
-                myView.setModifierProfil(myProfilPage.getProfileModif());
-                myView.getModifierProfil().addActionListener(new RadioButtonListener());  
+                myView.setModifierProfil(myView.getFrame().getProfilPage().getProfileModif());
+                myView.getModifierProfil().addActionListener(new RadioButtonListener());
                 myView.getFrame().getMainPage().addPanelInFrame();
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
@@ -330,6 +345,11 @@ public class Controller
                 myView.getFrame().getMainPage().resetScroll();
                 myView.getFrame().getMainPage().hideScroll();
                 myView.getFrame().switchToConnexionPage();
+                ordersDAO.getOrders().clear();
+                myView.getFrame().getFirstPage().setInputEmail();
+                myView.getFrame().getFirstPage().setInputPassword();
+                myView.getFrame().getFirstPage().revalidate();
+                myView.getFrame().getFirstPage().repaint();
             } 
             else if (e.getSource() == myView.getModifierProfil())
             {         
@@ -344,15 +364,15 @@ public class Controller
                         switch (Integer.parseInt(productDAO.getQuantityToBuy().get(0).getText()))
                         {
                             case -2:
-                                myView.setUpdateButton(productDAO.getKeyList().get(i));
+                                myView.getFrame().setUpdateButton(productDAO.getKeyList().get(i));
                                 myView.getFrame().getMainPage().emptyPanel2();
                                 myView.getFrame().getMainPage().hideScroll();
-                                myView.getFrame().getMainPage().addInPanel2(myView.getUpdateButton());
+                                myView.getFrame().getMainPage().addInPanel2(myView.getFrame().getUpdateButton());
                                 productDAO.getQuantityToBuy().clear();
                                 myView.getMyButton().clear();
                                 productDAO.getQuantityToBuy().add(new JTextField("-21"));
-                                myView.getMyButton().add(myView.getUpdateButton().getValidateButton());
-                                myView.getMyButton().add(myView.getUpdateButton().getDeleteButton());
+                                myView.getMyButton().add(myView.getFrame().getUpdateButton().getValidateButton());
+                                myView.getMyButton().add(myView.getFrame().getUpdateButton().getDeleteButton());
                                 myView.getMyButton().get(0).addActionListener(new RadioButtonListener());
                                 myView.getMyButton().get(1).addActionListener(new RadioButtonListener());
                                 myView.getFrame().getMainPage().addPanelInFrame();
@@ -362,25 +382,35 @@ public class Controller
                             case -21:
                                 if (e.getSource() == myView.getMyButton().get(0))
                                 {
-                                    productDAO.changeElement("name", myView.getUpdateButton().getTheName(), myView.getUpdateButton().getProductNo());
-                                    productDAO.changeElement("price", myView.getUpdateButton().getPrice(), myView.getUpdateButton().getProductNo());
-                                    productDAO.changeElement("quantity", myView.getUpdateButton().getQuantity(), myView.getUpdateButton().getProductNo());
-                                    productDAO.changeElement("lienURL", myView.getUpdateButton().getImageURL(), myView.getUpdateButton().getProductNo());
-                                    productDAO.changeElement("description", myView.getUpdateButton().getDescription(), myView.getUpdateButton().getProductNo());
-
-                                    if (Double.parseDouble(myView.getUpdateButton().getValuePromotion().getText()) == 0 || Integer.parseInt(myView.getUpdateButton().getMinPromotion().getText()) == 0)
+                                    if(isAGoodProduct(myView.getFrame().getUpdateButton().getQuantity(), myView.getFrame().getUpdateButton().getPrice(),myView.getFrame().getUpdateButton().getValuePromotion(), myView.getFrame().getUpdateButton().getMinPromotion(), myView.getFrame().getUpdateButton().getImageURL()))
                                     {
-                                        myView.getUpdateButton().deleteMinPromotion();
-                                        myView.getUpdateButton().deleteValuePromotion();
-                                    }
-                                    productDAO.changeElement("minimumPromotion", myView.getUpdateButton().getMinPromotion(), myView.getUpdateButton().getProductNo());
-                                    productDAO.changeElement("valuePromotion", myView.getUpdateButton().getValuePromotion(), myView.getUpdateButton().getProductNo());
+                                        productDAO.changeElement("name", myView.getFrame().getUpdateButton().getTheName(), myView.getFrame().getUpdateButton().getProductNo());
+                                        productDAO.changeElement("price", myView.getFrame().getUpdateButton().getPrice(), myView.getFrame().getUpdateButton().getProductNo());
+                                        productDAO.changeElement("quantity", myView.getFrame().getUpdateButton().getQuantity(), myView.getFrame().getUpdateButton().getProductNo());
+                                        productDAO.changeElement("lienURL", myView.getFrame().getUpdateButton().getImageURL(), myView.getFrame().getUpdateButton().getProductNo());
+                                        productDAO.changeElement("description", myView.getFrame().getUpdateButton().getDescription(), myView.getFrame().getUpdateButton().getProductNo());
 
-                                    JOptionPane.showMessageDialog(null, "Produit mis à jour");
+                                        if (Double.parseDouble(myView.getFrame().getUpdateButton().getValuePromotion().getText()) == 0 || Integer.parseInt(myView.getFrame().getUpdateButton().getMinPromotion().getText()) == 0)
+                                        {
+                                            myView.getFrame().getUpdateButton().deleteMinPromotion();
+                                            myView.getFrame().getUpdateButton().deleteValuePromotion();
+                                        }
+                                        productDAO.changeElement("minimumPromotion", myView.getFrame().getUpdateButton().getMinPromotion(), myView.getFrame().getUpdateButton().getProductNo());
+                                        productDAO.changeElement("valuePromotion", myView.getFrame().getUpdateButton().getValuePromotion(), myView.getFrame().getUpdateButton().getProductNo());
+
+                                        JOptionPane.showMessageDialog(null, "Produit mis à jour");
+
+                                        productDAO.getQuantityToBuy().clear();
+                                        productDAO.getKeyList().clear();
+                                        productDAO.getQuantityToBuy().add(new JTextField("-2"));
+                                        productDAO.getKeyList().add(myView.getFrame().getUpdateButton().getProductNo());
+                                        myView.getMyButton().get(0).doClick();
+                                    }
+                                    
                                 } else if (e.getSource() == myView.getMyButton().get(1))
                                 {
-                                    myView.getUpdateButton().deleteQuantity();
-                                    productDAO.deleteElement(myView.getUpdateButton().getProductNo());
+                                    myView.getFrame().getUpdateButton().deleteQuantity();
+                                    productDAO.deleteElement(myView.getFrame().getUpdateButton().getProductNo());
 
                                     JOptionPane.showMessageDialog(null, "Produit supprimé");
                                 }
@@ -420,10 +450,36 @@ public class Controller
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 myView.getFrame().getMainPage().hideScroll();
-                myView.getFrame().getMainPage().addInPanel2(new AddProductPage());
+                
+                AddProductPage newAddProductPage = new AddProductPage();
+                myView.getFrame().setAddPage(newAddProductPage);
+                myView.getFrame().getMainPage().addInPanel2(newAddProductPage);
+                myView.getManagerButton().set(2,newAddProductPage.getAddValidate());
+                myView.getManagerButton().get(2).addActionListener(new ManagerButtonListener());
+                
                 myView.getFrame().getMainPage().addPanelInFrame();
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
+            }
+            else if (event.getSource() == myView.getManagerButton().get(2)) //Validate add
+            {
+                if(isAGoodProduct(myView.getFrame().getAddPage().getQuantity(), myView.getFrame().getAddPage().getPrice(),myView.getFrame().getAddPage().getValuePromotion(), myView.getFrame().getAddPage().getMinPromotion(), myView.getFrame().getAddPage().getImageURL()))
+                {
+                    if (Double.parseDouble(myView.getFrame().getAddPage().getValuePromotion().getText()) == 0 || Integer.parseInt(myView.getFrame().getAddPage().getMinPromotion().getText()) == 0)
+                    {
+                        myView.getFrame().getAddPage().getMinPromotion().setText("0");
+                        myView.getFrame().getAddPage().getValuePromotion().setText("0");
+                    }
+                    
+                    productDAO.addElement(myView.getFrame().getAddPage().getTheName(), myView.getFrame().getAddPage().getPrice(),
+                            myView.getFrame().getAddPage().getQuantity(), myView.getFrame().getAddPage().getMinPromotion(),
+                            myView.getFrame().getAddPage().getValuePromotion(), myView.getFrame().getAddPage().getImageURL(),
+                            myView.getFrame().getAddPage().getDescription());
+                    JOptionPane.showMessageDialog(null, "Produit ajouté !");
+                    
+                    myView.getFrame().discardAddPage();
+                    myView.getMenuButton().get(1).doClick();
+                }
             }
         }
     }
@@ -466,7 +522,7 @@ public class Controller
         if (indice == 2)
             yPanel += 100;
 
-        if (yPanel < 670)
+        if (yPanel < 660)
             myView.getFrame().getMainPage().hideScroll();
         else
             myView.getFrame().getMainPage().showScroll();
@@ -475,5 +531,75 @@ public class Controller
         myView.getFrame().getMainPage().addPanelInFrame();
         myView.getFrame().getMainPage().revalidate();
         myView.getFrame().getMainPage().repaint();
+    }
+    
+    public boolean isAGoodProduct(JTextField quantity, JTextField price, JTextField valuePromotion, JTextField minPromotion, JTextField imageURL)
+    {
+        try
+        {
+            if(Integer.parseInt(quantity.getText())<0)
+            {
+                JOptionPane.showMessageDialog(null, "Entrée erronée : Quantité négative");
+                return false;
+            }
+        } catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Entrée erronée : Quantité n'est pas un entier");
+            return false;
+        }
+        
+        try
+        {
+            if(Double.parseDouble(price.getText())<0)
+            {
+                JOptionPane.showMessageDialog(null, "Entrée erronée : Prix est négatif");
+                return false;
+            }
+        } catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Entrée erronée : Prix n'est pas un réel");
+            return false;
+        }
+        
+        try
+        {
+            if(Integer.parseInt(minPromotion.getText())<0)
+            {
+                JOptionPane.showMessageDialog(null, "Entrée erronée : Minimum Promotion négatif");
+                return false;
+            }
+            
+        } catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Entrée erronée : Minimum Promotion n'est pas un entier");
+            return false;
+        }
+        
+        try
+        {
+            if(Integer.parseInt(minPromotion.getText())==0)
+                valuePromotion.setText("0");
+            
+            if(Double.parseDouble(valuePromotion.getText())<0 || Double.parseDouble(valuePromotion.getText())>100)
+            {
+                JOptionPane.showMessageDialog(null, "Entrée erronée : Valeur de promotion n'est pas entre 0 et 100");
+                return false;
+            }
+            
+        } catch (NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Entrée erronée : Valeur de promotion n'est pas un réel");
+            return false;
+        }
+        
+        try {
+            URL url = new URL(imageURL.getText());
+            Image image = ImageIO.read(url);
+        } catch (IOException error) {
+            JOptionPane.showMessageDialog(null, "Lien d'image invalide");
+            return false;
+        }
+        
+        return true;
     }
 }

@@ -34,50 +34,51 @@ public class ManagerProduitEnListe extends javax.swing.JPanel
         quantity.setText("N/A");
         price.setText("N/A");
     }
-    
+
     public ManagerProduitEnListe(int productNo)
     {
         initComponents();
         imageDisplay.setLayout(new FlowLayout());
-        imageDisplay.setPreferredSize(new Dimension(146,146));
-        
+        imageDisplay.setPreferredSize(new Dimension(146, 146));
+
         ProductDAO javaProductDAO = new ProductDAO();
         Product searchedProduct = javaProductDAO.createJavaProduct(productNo);
-        
+
         productNoDisplay.setText(productNoDisplay.getText() + Integer.toString(searchedProduct.getProductNo()));
         name.setText(searchedProduct.getName());
-        quantity.setText(Integer.toString(searchedProduct.getQuantity()));
-        price.setText(Double.toString(searchedProduct.getPrice())+ "€");
+        quantity.setText(quantity.getText() + Integer.toString(searchedProduct.getQuantity()));
+        price.setText(price.getText() + Double.toString(searchedProduct.getPrice()) + "€");
         imageURL = searchedProduct.getURL();
-        
-        if(searchedProduct.getValuePromotion()>0)
+
+        if (searchedProduct.getValuePromotion() > 0)
             promotion.setText(promotion.getText() + "Oui");
-        else promotion.setText(promotion.getText() + "Non");
-        
+        else
+            promotion.setText(promotion.getText() + "Non");
+
         Image image = null;
-        
-        try {
+
+        try
+        {
             URL url = new URL(searchedProduct.getURL());
             Image imageBeforeResize = ImageIO.read(url);
             image = imageBeforeResize.getScaledInstance(138, 138, Image.SCALE_SMOOTH);
-        } catch (IOException error) {
+        } catch (IOException error)
+        {
             System.out.println("Erreur image");
         }
-        
+
         JLabel label;
-        if(image!=null)
-        {
+        if (image != null)
             label = new JLabel(new ImageIcon(image));
-        }
-        else 
-            label= new JLabel();
-        
+        else
+            label = new JLabel();
+
         imageDisplay.add(label);
         add(imageDisplay);
         revalidate();
         repaint();
     }
-    
+
     public JButton getUpdateButton()
     {
         return updateButton;

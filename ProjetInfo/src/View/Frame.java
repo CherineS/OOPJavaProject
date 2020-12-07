@@ -19,7 +19,10 @@ public class Frame extends javax.swing.JFrame
     MainPage myMainPage;
     FirstPage connexionPage;
     ProfilPage profilpage;
-    NewInscription myInscription; 
+    AddProductPage myAddPage;
+    NewInscription myInscription;
+    UpdateProductPage updateProductPage;
+
     /**
      * Creates new form testmain
      */
@@ -34,9 +37,9 @@ public class Frame extends javax.swing.JFrame
         connexionPage = new FirstPage();
         connexionPage.setPreferredSize(new Dimension(1600, 800));
         myMainPage = new MainPage();
-        myMainPage.setPreferredSize(new Dimension(1600,800));
+        myMainPage.setPreferredSize(new Dimension(1600, 800));
         myInscription = new NewInscription();
-        myInscription.setPreferredSize(new Dimension(1600,800));
+        updateProductPage = new UpdateProductPage();
         switchToConnexionPage();
 
     }
@@ -46,7 +49,7 @@ public class Frame extends javax.swing.JFrame
         getContentPane().removeAll();
         add(connexionPage);
         revalidate();
-        repaint(); 
+        repaint();
     }
 
     public void switchToMainPage()
@@ -54,48 +57,80 @@ public class Frame extends javax.swing.JFrame
         getContentPane().removeAll();
         add(myMainPage);
         revalidate();
-        repaint(); 
+        repaint();
     }
-    
+
     public void switchToNewInscription()
     {
         getContentPane().removeAll();
         add(myInscription);
         revalidate();
-        repaint(); 
+        repaint();
     }
-    
+
     public void switchToProfilPage()
     {
         getContentPane().removeAll();
         add(profilpage);
         revalidate();
-        repaint(); 
+        repaint();
     }
-    
+
     public void setVisibleMainpage()
     {
         myMainPage.setVisible(true);
+    }
+
+    public void setProfilPage(ProfilPage newProfilPage)
+    {
+        profilpage = newProfilPage;
     }
 
     public MainPage getMainPage()
     {
         return myMainPage;
     }
-    
+
     public FirstPage getFirstPage()
     {
         return connexionPage;
     }
-    
+
     public NewInscription getNewInscription()
     {
         return myInscription;
     }
-    
+
     public ProfilPage getProfilPage()
     {
         return profilpage;
+    }
+
+    public void discardAddPage()
+    {
+        myAddPage.setVisible(false);
+        myAddPage.removeAll();
+    }
+
+    public void setAddPage(AddProductPage newPage)
+    {
+        myAddPage = new AddProductPage();
+        myAddPage = newPage;
+    }
+
+    public AddProductPage getAddPage()
+    {
+        return myAddPage;
+    }
+
+    public void setUpdateButton(int productNo)
+    {
+        updateProductPage = new UpdateProductPage(productNo);
+    }
+
+    public UpdateProductPage getUpdateButton()
+    {
+        return updateProductPage;
     }
 
     /**
