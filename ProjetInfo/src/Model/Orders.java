@@ -76,11 +76,4 @@ public class Orders
     {
         m_email=email;
     }
-    
-    public void display()
-    {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("OrderNumber:" + m_orderNumber + "  Date:" + formatter.format(m_date) + "  Price:" + m_price + "  Email:" + m_email);
-        m_products.display();
-    }
 }
