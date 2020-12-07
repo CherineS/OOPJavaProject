@@ -100,6 +100,13 @@ public class OrdersDAO extends TablesDAO
                     {
                         myOrders.get(i).getProducts().setQuantity((quantityInt + myOrders.get(i).getProducts().getQuantity()));
                         myOrders.get(i).setPrice(myOrders.get(i).getPrice() + price);
+                            if(myOrders.get(i).getProducts().getQuantity()>=myOrders.get(i).getProducts().getminimumPromotion()&&myOrders.get(i).getProducts().getValuePromotion()!=0)
+                            {
+                                myOrders.get(i).setPrice(myOrders.get(i).getProducts().getQuantity()/ myOrders.get(i).getProducts().getminimumPromotion()
+                                * (myOrders.get(i).getProducts().getPrice() * (1 - (myOrders.get(i).getProducts().getValuePromotion() * 0.01))) * myOrders.get(i).getProducts().getminimumPromotion()
+                                + (myOrders.get(i).getProducts().getQuantity() % myOrders.get(i).getProducts().getminimumPromotion()) * (myOrders.get(i).getProducts().getPrice()));
+                            }
+                            
                         condition++;
                     }
 
