@@ -38,7 +38,6 @@ public class Frame extends javax.swing.JFrame
         myMainPage = new MainPage();
         myMainPage.setPreferredSize(new Dimension(1600,800));
         myInscription = new NewInscription();
-        myInscription.setPreferredSize(new Dimension(1600,800));
         updateProductPage = new UpdateProductPage();
         switchToConnexionPage();
 

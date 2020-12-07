@@ -62,10 +62,10 @@ public class Controller
                     JOptionPane.showMessageDialog(null, "Mauvais Password");
                 if (peopleDAO.Connection(myView.getFrame().getFirstPage().getEmail(), myView.getFrame().getFirstPage().getPassword()) && peopleDAO.testEmail(myView.getFrame().getFirstPage().getEmail().getText()))
                 {
-                    if (peopleDAO.getstatus(myView.getFrame().getFirstPage().getEmail()).equals("Employee"))
-                        JOptionPane.showMessageDialog(null, "Shop Employee");
-                    if (peopleDAO.getstatus(myView.getFrame().getFirstPage().getEmail()).equals("Customer"))
-                        JOptionPane.showMessageDialog(null, "Shop Customer");
+//                    if (peopleDAO.getstatus(myView.getFrame().getFirstPage().getEmail()).equals("Employee"))
+//                        JOptionPane.showMessageDialog(null, "Shop Employee");
+//                    if (peopleDAO.getstatus(myView.getFrame().getFirstPage().getEmail()).equals("Customer"))
+//                        JOptionPane.showMessageDialog(null, "Shop Customer");
                     
                     myView.setEmail(myView.getFrame().getFirstPage().getEmail().getText());
                     myView.setIsEmployee(peopleDAO.statusPeople(myView.getEmail()));
