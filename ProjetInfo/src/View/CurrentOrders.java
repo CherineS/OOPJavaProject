@@ -20,7 +20,7 @@ import Model.Orders;
 
 /**
  *
- * @author Gaëtan
+ * CurrentOrders in the cart
  */
 public class CurrentOrders extends javax.swing.JPanel
 {
@@ -40,10 +40,7 @@ public class CurrentOrders extends javax.swing.JPanel
         imageDisplay.setPreferredSize(new Dimension(146, 146));
 
         name.setText(myOrders.getProducts().getName());
-        
-
         double thePrice = myOrders.getPrice();
-
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.HALF_UP);
         String stringPrice = df.format(thePrice);
@@ -57,8 +54,8 @@ public class CurrentOrders extends javax.swing.JPanel
         description.setText(myOrders.getProducts().getDescription());
         jLabel1.setText(jLabel1.getText()+Integer.toString(myOrders.getProducts().getQuantity()));
 
+        // Setup the image
         Image image = null;
-
         try
         {
             URL url = new URL(myOrders.getProducts().getURL());
@@ -81,6 +78,7 @@ public class CurrentOrders extends javax.swing.JPanel
         repaint();
     }
 
+    // Get button
     public JButton getSupprimer()
     {
         return supprimer;

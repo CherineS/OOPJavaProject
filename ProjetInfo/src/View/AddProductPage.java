@@ -21,7 +21,7 @@ public class AddProductPage extends javax.swing.JPanel
 {
 
     /**
-     * Creates new form AddProductPage
+     * Page for a new product
      */
     public AddProductPage()
     {
@@ -252,6 +252,7 @@ public class AddProductPage extends javax.swing.JPanel
         // TODO add your handling code here:
     }//GEN-LAST:event_descriptionActionPerformed
 
+    // Getter
     public JTextField getTheName()
     {
         return name;

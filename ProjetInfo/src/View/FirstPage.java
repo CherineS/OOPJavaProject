@@ -18,10 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-/**
- *
- * @author antoi
- */
+
 public class FirstPage extends javax.swing.JPanel
 {
 

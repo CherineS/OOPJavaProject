@@ -9,10 +9,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.Dimension;
 
-/**
- *
- * @author Utilisateur
- */
+// Frame to display pages
 public class Frame extends javax.swing.JFrame
 {
 
@@ -23,9 +20,6 @@ public class Frame extends javax.swing.JFrame
     NewInscription myInscription;
     UpdateProductPage updateProductPage;
 
-    /**
-     * Creates new form testmain
-     */
     public Frame()
     {
         initComponents();
@@ -44,6 +38,7 @@ public class Frame extends javax.swing.JFrame
 
     }
 
+    // Switch from differents pages
     public void switchToConnexionPage()
     {
         getContentPane().removeAll();
@@ -76,6 +71,7 @@ public class Frame extends javax.swing.JFrame
         repaint();
     }
 
+    // Setter
     public void setVisibleMainpage()
     {
         myMainPage.setVisible(true);
@@ -85,7 +81,19 @@ public class Frame extends javax.swing.JFrame
     {
         profilpage = newProfilPage;
     }
+    
+    public void setAddPage(AddProductPage newPage)
+    {
+        myAddPage = new AddProductPage();
+        myAddPage = newPage;
+    }
+    
+    public void setUpdateButton(int productNo)
+    {
+        updateProductPage = new UpdateProductPage(productNo);
+    }
 
+    // getter
     public MainPage getMainPage()
     {
         return myMainPage;
@@ -106,31 +114,20 @@ public class Frame extends javax.swing.JFrame
         return profilpage;
     }
 
-    public void discardAddPage()
-    {
-        myAddPage.setVisible(false);
-        myAddPage.removeAll();
-    }
-
-    public void setAddPage(AddProductPage newPage)
-    {
-        myAddPage = new AddProductPage();
-        myAddPage = newPage;
-    }
-
     public AddProductPage getAddPage()
     {
         return myAddPage;
     }
 
-    public void setUpdateButton(int productNo)
-    {
-        updateProductPage = new UpdateProductPage(productNo);
-    }
-
     public UpdateProductPage getUpdateButton()
     {
         return updateProductPage;
+    }
+    
+    public void discardAddPage()
+    {
+        myAddPage.setVisible(false);
+        myAddPage.removeAll();
     }
 
     /**

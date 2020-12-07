@@ -22,10 +22,10 @@ import java.util.Collections;
  */
 public class OrdersDAO extends TablesDAO
 {
+    private final ArrayList<Orders> myOrders = new ArrayList<>(); // ArrayList of order to add products before to order them
+    private final ArrayList<Product> myProductSearch = new ArrayList<>(); 
 
-    private final ArrayList<Orders> myOrders = new ArrayList<>();
-    private final ArrayList<Product> myProductSearch = new ArrayList<>();
-
+    // Add a product into the cart
     public boolean AddShop(JTextField quantity, String email, int productNo)
     {
         String inputDate = getDate();
@@ -35,6 +35,7 @@ public class OrdersDAO extends TablesDAO
         int OrderNo = 0, condition = 0;
         int quantityInt = Integer.parseInt(quantity.getText());
 
+        // To have the current date
         try
         {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(inputDate);
@@ -43,6 +44,7 @@ public class OrdersDAO extends TablesDAO
             System.out.println("Error AddShop OrdersDAO date");
         }
 
+        // To add the right product into the order
         getConnection();
         try
         {
@@ -73,7 +75,7 @@ public class OrdersDAO extends TablesDAO
         if (myProduct != null)
         {
             double price;
-            if (myProduct.getminimumPromotion() != 0)
+            if (myProduct.getminimumPromotion() != 0) // Decimal format to have specific price 
                 price = (myProduct.getQuantity() / myProduct.getminimumPromotion())
                         * (myProduct.getPrice() * (1 - (myProduct.getValuePromotion() * 0.01))) * myProduct.getminimumPromotion()
                         + (myProduct.getQuantity() % myProduct.getminimumPromotion()) * (myProduct.getPrice());
@@ -94,7 +96,7 @@ public class OrdersDAO extends TablesDAO
 
             if (result == true)
             {
-                for (int i = 0; i < myOrders.size(); i++) // Si déjà un produit, augmente quantité simplement, n'en créer pas un autre
+                for (int i = 0; i < myOrders.size(); i++) // if there is already this product, it just adds the quantity and the price
                     if (Order.getProducts().getProductNo() == myOrders.get(i).getProducts().getProductNo())
                     {
                         myOrders.get(i).getProducts().setQuantity((quantityInt + myOrders.get(i).getProducts().getQuantity()));
@@ -119,10 +121,10 @@ public class OrdersDAO extends TablesDAO
 
                             myOrders.get(i).setPrice(resultPrice);
                         }
-
                         condition++;
                     }
 
+                // add orders into the arrayList
                 if (condition == 0)
                     myOrders.add(Order);
             }
@@ -131,6 +133,7 @@ public class OrdersDAO extends TablesDAO
         return result;
     }
 
+    // Delete a specific product from the cart
     public void deleteShop(int productNo)
     {
         getConnection();
@@ -162,6 +165,7 @@ public class OrdersDAO extends TablesDAO
         closeConnection();
     }
 
+    // If the customer validate his order, put it into the database thanks to the arrayList we create before
     public void addOrders()
     {
         int numberOrder = OrderNoMax();
@@ -190,6 +194,7 @@ public class OrdersDAO extends TablesDAO
         myProductSearch.clear();
     }
 
+    // To have to biggest OrderNumber of the database
     public int OrderNoMax()
     {
         getConnection();
@@ -214,11 +219,13 @@ public class OrdersDAO extends TablesDAO
         return result;
     }
 
+    // Get the arrayList of orders
     public ArrayList<Orders> getOrders()
     {
         return myOrders;
     }
 
+    // To calculate the most buy product
     public ArrayList<Integer> getOnTrend(ArrayList<Integer> products)
     {
         getConnection();
@@ -243,6 +250,7 @@ public class OrdersDAO extends TablesDAO
         return products;
     }
 
+    // To have old orders that a customer did
     public ArrayList<Orders> getPastOrders(int number)
     {
         ArrayList<Orders> pastOrders = new ArrayList<>();
@@ -269,6 +277,7 @@ public class OrdersDAO extends TablesDAO
         return pastOrders;
     }
 
+    // Delete all orders from the database
     @Override
     public void deleteAllElements()
     {
@@ -285,6 +294,7 @@ public class OrdersDAO extends TablesDAO
         closeConnection();
     }
 
+    // Find the quantity of an order (number of products the customer bought)
     public int findQuantity(String orderProdNo)
     {
         int quantity = 0;
@@ -307,6 +317,7 @@ public class OrdersDAO extends TablesDAO
         return quantity;
     }
 
+    // Delete automatically orders older than 3 months
     public void deleteElement()
     {
         getConnection();
@@ -352,6 +363,7 @@ public class OrdersDAO extends TablesDAO
         closeConnection();
     }
 
+    // Search order or a customer with the Email
     public ArrayList<Orders> searchOrder(String email)
     {
         ArrayList<Orders> myOrdersSearch = new ArrayList<>();

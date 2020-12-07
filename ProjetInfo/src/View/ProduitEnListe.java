@@ -15,16 +15,6 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
-/*
-Sources :
-Read image from URL : https://www.codeflow.site/fr/article/java__how-to-read-an-image-from-file-or-url
-Resize image : https://www.baeldung.com/java-resize-image
-*/
-
-/**
- *
- * @author Utilisateur
- */
 public class ProduitEnListe extends javax.swing.JPanel
 {
     /**

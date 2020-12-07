@@ -10,10 +10,6 @@ import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-/**
- *
- * @author antoi
- */
 public class NewInscription extends javax.swing.JPanel
 {
 

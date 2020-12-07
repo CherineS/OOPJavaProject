@@ -21,8 +21,7 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 /**
- *
- * @author Gaëtan
+ * Jframe form for only one order (pastOrders)
  */
 public class CommandeEnListe extends javax.swing.JPanel
 {
@@ -34,7 +33,6 @@ public class CommandeEnListe extends javax.swing.JPanel
         
         nameProduct.setText("Nom : " + myOrders.getProducts().getName());
         priceProduct.setText("Prix : " + Double.toString(myOrders.getPrice())+"€");
-        
         jScrollPane1.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER); 
         jScrollPane1.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER); 
         jScrollPane1.setBorder(createEmptyBorder());
@@ -43,13 +41,11 @@ public class CommandeEnListe extends javax.swing.JPanel
         descriptionProduct.setLineWrap(true);
         descriptionProduct.setWrapStyleWord(true);
         
-        
-        
         quantity.setText("Quantité : " + Integer.toString(myOrders.getProducts().getQuantity()));
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
         date.setText("Date : " + formatter.format(myOrders.getDate()));
         
-        
+        // Setup the image
         Image image = null;
         
         try {

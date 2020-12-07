@@ -8,26 +8,23 @@ package View;
 import java.util.ArrayList;
 import javax.swing.*;
 
-/**
- *
- * @author Utilisateur
- */
 public class View
 {
-
-    Frame frame = new Frame();
-    String email;
-    boolean isEmployee;
+    Frame frame = new Frame(); // Frame to display things
+    String email; // Current email of the user
+    boolean isEmployee; // Boolean to know if he is employee or customer
+    
+    // All buttons to click 
     ArrayList<JButton> menuButton;
     ArrayList<JButton> myButton;
     ArrayList<JButton> suppButton;
     JButton commander;
     JButton valider;
     JButton modifierProfil;
-    
     ArrayList<JButton> managerButton;
     ArrayList<JButton> peopleButton;
 
+    // add buttons to arrayList
     public View()
     {
         menuButton = new ArrayList<>();
@@ -55,58 +52,34 @@ public class View
         
     }
     
-
+    // Hide manageButton if the user is a customer, else show it
     public void hideManageButton()
     {
         frame.getMainPage().manageButton(isEmployee);
     }
-                
-    public void setVisibleFrame()
+    
+    // Getters
+    public String getEmail()
     {
-        frame.setVisible(true);
+        return email;
     }
-
+        
     public Frame getFrame()
     {
         return frame;
+    }
+    
+    public JButton getCommander()
+    {
+        return commander;
     }
 
     public boolean getIsEmployee()
     {
         return isEmployee;
     }
-
-    public void setIsEmployee(String status)
-    {
-        isEmployee = status.equals("Employee");
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String newEmail)
-    {
-        email = newEmail;
-    }
-
-    public void setCommander(JButton e)
-    {
-        commander = e;
-    }
-
-    public JButton getCommander()
-    {
-        return commander;
-    }
-
-    public void setValider(JButton e)
-    {
-        valider = e;
-    }
-
-    public JButton getValider()
+    
+        public JButton getValider()
     {
         return valider;
     }
@@ -139,6 +112,32 @@ public class View
     public JButton getModifierProfil()
     {
         return modifierProfil;
+    }
+
+     // Setters
+    public void setIsEmployee(String status)
+    {
+        isEmployee = status.equals("Employee");
+    }
+                
+    public void setVisibleFrame()
+    {
+        frame.setVisible(true);
+    }
+
+    public void setEmail(String newEmail)
+    {
+        email = newEmail;
+    }
+
+    public void setCommander(JButton e)
+    {
+        commander = e;
+    }
+
+    public void setValider(JButton e)
+    {
+        valider = e;
     }
 
     public void setModifierProfil(JButton modifierProfil)

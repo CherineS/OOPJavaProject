@@ -21,7 +21,8 @@ public abstract class TablesDAO
     protected Connection con;
     protected Statement stmt;
 
-    public void getConnection() // Etablir la connection
+     // get the connection to the database
+    public void getConnection()
     {
         try
         {
@@ -33,7 +34,8 @@ public abstract class TablesDAO
         }
     }
 
-    public void closeConnection() // Fermer la connection
+    // close the connection to the database
+    public void closeConnection()
     {
         try
         {
@@ -45,6 +47,7 @@ public abstract class TablesDAO
         }
     }
     
+    // get the current date and return it
     public String getDate()
     {  
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  

@@ -14,12 +14,13 @@ import javax.swing.SwingConstants;
 
 /**
  *
- * @author Gaëtan
+ * Page for all orders
  */
 public class AllOrders extends javax.swing.JPanel
 {
     JLabel description;
     
+    // All every orders one by one to it
     public AllOrders()
     {
         initComponents();
