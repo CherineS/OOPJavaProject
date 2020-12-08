@@ -25,7 +25,7 @@ import Model.Orders;
 
 /**
  *
- * @author Gaëtan
+ * Button to validate and to order
  */
 public class OrdersPaymentAndPrice extends javax.swing.JPanel
 {
@@ -35,21 +35,20 @@ public class OrdersPaymentAndPrice extends javax.swing.JPanel
         initComponents();
         priceValue = new JButton();
         price.add(priceValue, BorderLayout.CENTER);
-        
         setLayout(new FlowLayout());
         price();
         totalPrice(myOrders);
         commanderButton();
         setPreferredSize(new Dimension(900, 200));
-        
-
     }
 
+    // Getter button
     public JButton getCommander()
     {
         return commander;
     }
 
+    // Total price of the current order
     public void totalPrice(ArrayList<Orders> myOrders)
     {
         double totalPrice = 0;
@@ -78,6 +77,7 @@ public class OrdersPaymentAndPrice extends javax.swing.JPanel
         priceValue.setHorizontalAlignment(JTextField.CENTER);
     }
 
+    // Image of order
     public void commanderButton()
     {
         String imageURL = "https://i.goopics.net/aW8RG.jpg";
@@ -107,6 +107,8 @@ public class OrdersPaymentAndPrice extends javax.swing.JPanel
         repaint();
     }
 
+
+    // Image of price button
     public void price()
     {
         String imageURL = "https://i.goopics.net/dWxOJ.jpg";
@@ -131,7 +133,6 @@ public class OrdersPaymentAndPrice extends javax.swing.JPanel
         price.setOpaque(false);
         price.setContentAreaFilled(false);
         price.setBorderPainted(false);
-//        price.setBorder(null);
         price.add(label);
         revalidate();
         repaint();
@@ -173,7 +174,6 @@ public class OrdersPaymentAndPrice extends javax.swing.JPanel
                     .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton commander;

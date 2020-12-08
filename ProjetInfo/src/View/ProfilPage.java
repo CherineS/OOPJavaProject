@@ -11,10 +11,6 @@ import Model.PeopleDAO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-/**
- *
- * @author antoi
- */
 public class ProfilPage extends javax.swing.JPanel
 {
 

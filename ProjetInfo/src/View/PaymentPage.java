@@ -17,15 +17,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
- *
- * @author Gaëtan
+ * Payment page
  */
 public class PaymentPage extends javax.swing.JPanel
 {
-
-    /**
-     * Creates new form PaymentPage
-     */
     public PaymentPage()
     {
         initComponents();
@@ -39,7 +34,7 @@ public class PaymentPage extends javax.swing.JPanel
         validate.setContentAreaFilled(false);
         validate.setBorderPainted(false);
 
-        buttonImage = new JButton(); // Bouton image barre de recherche du milieu
+        buttonImage = new JButton(); // Image button middle search bar
         buttonImage.setBounds(0, 0, 1280, 575);
         buttonImage.setOpaque(false);
         buttonImage.setContentAreaFilled(false);
@@ -48,7 +43,7 @@ public class PaymentPage extends javax.swing.JPanel
         image();      
     }
     
-    public void image()
+    public void image() // Image in global
     {
         String imageURL = "https://i.goopics.net/NWlr1.jpg";
         Image image = null;
@@ -75,6 +70,7 @@ public class PaymentPage extends javax.swing.JPanel
         repaint();
     }
     
+    // Get button
     public JButton getValidate()
     {
         return validate;

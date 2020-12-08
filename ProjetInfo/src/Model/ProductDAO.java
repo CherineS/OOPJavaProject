@@ -18,6 +18,7 @@ public class ProductDAO extends TablesDAO
     private ArrayList<Integer> keyList = new ArrayList<>();
     private final ArrayList<JTextField> quantityToBuy = new ArrayList<>();
     
+    // Delete all elements of product into the database
     @Override
     public void deleteAllElements()
     {
@@ -33,7 +34,7 @@ public class ProductDAO extends TablesDAO
         closeConnection();
     }
 
-    //Ajoute un produit dans la BDD
+    // Add a product to the database
     public void addElement(JTextField jName, JTextField jPrice, JTextField jQuantity, JTextField jMinPromotion, JTextField jPromotion, JTextField jImage, JTextField jdescription)
     {
         String name = jName.getText();
@@ -66,7 +67,7 @@ public class ProductDAO extends TablesDAO
         closeConnection();
     }
 
-    //Modifie l'attribut d'un élément
+    // change an attribute of a product
     public void changeElement(String element, JTextField modification, int productNo)
     {
         getConnection();
@@ -96,7 +97,7 @@ public class ProductDAO extends TablesDAO
     }
     
 
-    //Supprime un produit selon son numéro de produit (clé primaire)
+    //Deletes a product according to its product number (primary key)
     public void deleteElement(int productNo)
     {
         getConnection();
@@ -111,7 +112,7 @@ public class ProductDAO extends TablesDAO
         closeConnection();
     }
     
-    //Retourne toutes clés primaires des produits
+    //Returns all primary product keys
     public ArrayList<Integer> returnAllElement()
     {
         ArrayList<Integer> results = new ArrayList<>();
@@ -160,7 +161,7 @@ public class ProductDAO extends TablesDAO
         return results;
     }
 
-    //Recherche d'un produit en fonction de son nom et retourne les clés primaires des résultats
+    //Search for a product by name and returns the primary keys of the results
     public ArrayList<Integer> searchElement(JTextField myName, boolean manager)
     {
         String sqlStatement;
@@ -216,6 +217,7 @@ public class ProductDAO extends TablesDAO
         return results;
     }
     
+    // Search if there is a promotion on the product and if quantity > 0 
     public ArrayList<Integer> searchPromotion()
     {
         String sqlStatement;

@@ -15,17 +15,14 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
-/**
- *
- * @author Utilisateur
- */
 public class MainPage extends javax.swing.JPanel
 {
 
     /**
-     * Creates new form MainPage1
+     * Main page of the shop 
      */
 
+    // init components and add differents images and panel on it
     public MainPage()
     {
         initComponents();
@@ -41,7 +38,7 @@ public class MainPage extends javax.swing.JPanel
     {
         manageProductsPage = new ManageProductsPage();
         
-        //Suppression des bords des boutons
+        //Removing button edges
         shopButton.setBorderPainted(false);
         trendButton.setBorderPainted(false);
         salesButton.setBorderPainted(false);
@@ -58,7 +55,7 @@ public class MainPage extends javax.swing.JPanel
         scroll.getVerticalScrollBar().setUnitIncrement(16);
         scroll.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 
-        searchBar = new JTextField(100); // Barre de recherche
+        searchBar = new JTextField(100); // search bar
         searchBar.setBackground(new Color(242, 242, 242));
         Font font = new Font("Courier", Font.BOLD, 18);
         searchBar.setFont(font);
@@ -69,7 +66,7 @@ public class MainPage extends javax.swing.JPanel
         buttonText.setOpaque(false);
         buttonText.setContentAreaFilled(false);
         buttonText.setBorderPainted(false);
-        buttonText.add(searchBar); // Bouton ajoute barre de recherche
+        buttonText.add(searchBar); //  Button adds search bar
         jPanel1.add(buttonText);
 
         jButtonSearch = new JButton();
@@ -79,35 +76,33 @@ public class MainPage extends javax.swing.JPanel
         jButtonSearch.setBorderPainted(false);
         jPanel1.add(jButtonSearch);
         
-        jButtonCart = new JButton();   // Bouton panier
+        jButtonCart = new JButton();   // Button cart
         jButtonCart.setBounds(1330, 11, 65, 65);
         jButtonCart.setOpaque(false);
         jButtonCart.setContentAreaFilled(false);
         jButtonCart.setBorderPainted(false);
         jPanel1.add(jButtonCart);
         
-        jButtonProfile = new JButton(); // Bouton profil
+        jButtonProfile = new JButton(); // Button profile
         jButtonProfile.setBounds(1420, 11, 65, 65);
         jButtonProfile.setOpaque(false);
         jButtonProfile.setContentAreaFilled(false);
         jButtonProfile.setBorderPainted(false);
         jPanel1.add(jButtonProfile);
         
-        jButtonDisconnect = new JButton(); // Bouton déconnecter
+        jButtonDisconnect = new JButton(); // Bouton disconnect
         jButtonDisconnect.setBounds(1500, 11, 65, 65);
         jButtonDisconnect.setOpaque(false);
         jButtonDisconnect.setContentAreaFilled(false);
         jButtonDisconnect.setBorderPainted(false);
         jPanel1.add(jButtonDisconnect);
 
-        buttonImage = new JButton(); // Bouton image barre de recherche du milieu
+        buttonImage = new JButton(); // Middle search bar image button
         buttonImage.setBounds(555, 6, 450, 70);
         buttonImage.setOpaque(false);
         buttonImage.setContentAreaFilled(false);
         buttonImage.setBorderPainted(false);
 
-        
-    
     }
     
     public void manageButton(boolean visible)
@@ -118,7 +113,7 @@ public class MainPage extends javax.swing.JPanel
             jButtonManageProduct.setVisible(true);
     }
     
-    public void displayText(String message) //Display a message
+    public void displayText(String message) 
     {
         JLabel noResults = new JLabel(message);
         noResults.setPreferredSize(new Dimension(300, 280));
@@ -128,7 +123,7 @@ public class MainPage extends javax.swing.JPanel
         jPanel2.add(noResults);
     }
 
-    public void logoMainPage()
+    public void logoMainPage() // Image logo
     {
         jPanelLogo.setLayout(new FlowLayout());
         jPanelLogo.setPreferredSize(new Dimension(82, 82));
@@ -160,7 +155,7 @@ public class MainPage extends javax.swing.JPanel
         repaint();
     }
     
-    public void decoBarMainPage()
+    public void decoBarMainPage() // Image disconnect
     {
         jPanelDeconnection.setLayout(new FlowLayout());
         jPanelDeconnection.setPreferredSize(new Dimension(65, 65));
@@ -192,7 +187,7 @@ public class MainPage extends javax.swing.JPanel
         repaint();
     }
 
-    public void searchBarMainPage()
+    public void searchBarMainPage() // Image search
     {
         String imageURL = "https://i.goopics.net/4rypZ.jpg";
         Image image = null;
@@ -219,14 +214,11 @@ public class MainPage extends javax.swing.JPanel
         repaint();
     }
 
-    public void cartMainPage()
+    public void cartMainPage() // Image cart
     {
         jPanelCart.setLayout(new FlowLayout());
         jPanelCart.setPreferredSize(new Dimension(65, 65));
-
         String imageURL = "https://i.goopics.net/bWen0.jpg";
-        // https://i.goopics.net/bWen0.jpg avec écriture panier
-        // https://i.goopics.net/oGZlJ.jpg avec écriture mon panier
 
         Image image = null;
 
@@ -253,14 +245,12 @@ public class MainPage extends javax.swing.JPanel
         repaint();
     }
 
-    public void profileMainPage()
+    public void profileMainPage()  // Image profile
     {
         jPanelPeople.setLayout(new FlowLayout());
         jPanelPeople.setPreferredSize(new Dimension(65, 65));
 
         String imageURL = "https://i.goopics.net/w2ARR.jpg"; 
-        // https://i.goopics.net/w2ARR.jpg  avec écriture profil
-        // https://i.goopics.net/0pOxw.jpg avec écriture mon profil
 
         Image image = null;
 
@@ -287,6 +277,7 @@ public class MainPage extends javax.swing.JPanel
         repaint();
     }
 
+    // Actions on panel / frame / scroll bar
     public void addPanelInFrame()
     {
         add(scroll);
@@ -377,7 +368,7 @@ public class MainPage extends javax.swing.JPanel
         return searchBar;
     }
     
-    //Buttons
+    //Buttons getter
     public JButton getButtonSearch()
     {
         return jButtonSearch;
@@ -417,17 +408,18 @@ public class MainPage extends javax.swing.JPanel
     {
         return salesButton;
     }
-
-    //Concerne le manageProductsPage
-    public ManageProductsPage getManagerPage()
-    {
-        return manageProductsPage;
-    }
     
     public JButton getPastOrderButton()
     {
         return pastOrdersButton;
     }
+
+    public ManageProductsPage getManagerPage()
+    {
+        return manageProductsPage;
+    }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.

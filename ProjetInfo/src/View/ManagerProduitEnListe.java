@@ -17,10 +17,6 @@ import javax.swing.JLabel;
 import Model.Product;
 import Model.ProductDAO;
 
-/**
- *
- * @author Utilisateur
- */
 public class ManagerProduitEnListe extends javax.swing.JPanel
 {
 

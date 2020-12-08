@@ -7,6 +7,7 @@ package Model;
 
 public class Product
 {
+    // Attributes of a product
     private int m_productNo;
     private String m_name;
     private double m_price;
@@ -16,6 +17,7 @@ public class Product
     private String m_imageUrl;
     private String m_description;
 
+    // Constructor
     public Product()
     {
         m_productNo = -1;
@@ -28,6 +30,7 @@ public class Product
         m_description = null;
     }
     
+    // Constructor
     public Product(int productNo, String name, double price, int quantity, int minimumPromotion, double valuePromotion, String imageUrl, String description)
     {
         m_productNo = productNo;
@@ -40,6 +43,7 @@ public class Product
         m_description = description;
     }
     
+    // Constructor
     public Product(int productNo, String name, double price, int quantity, int minimumPromotion, double valuePromotion, String description)
     {
         m_productNo = productNo;
@@ -126,11 +130,5 @@ public class Product
     public void setDescription(String description)
     {
         m_description = description;
-    }
-    
-    public void display()
-    {
-        System.out.println("ProductNo:" + m_productNo + "  Name:" + m_name + "  Price:" + m_price + "  Quantity:" + m_quantity
-                            + "  MinimumPromotion:" + m_minimumPromotion + "  ValuePromotion:" + m_valuePromotion + "  Description:" + m_description);
     }
 }

@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 public class PeopleDAO extends TablesDAO
 {
 
+    // add a people into the database
     public void addElement(JTextField email, JTextField FirstName, JTextField lastName, JTextField password, JTextField status)
     {
         String inputEmail = email.getText();
@@ -38,6 +39,7 @@ public class PeopleDAO extends TablesDAO
         closeConnection();
     }
 
+    // change an element of people into the database
     public void changeElement(JTextField name, JTextField password, JTextField firstname, JLabel email)
     {
         String mypassword = password.getText();
@@ -57,6 +59,7 @@ public class PeopleDAO extends TablesDAO
         closeConnection();
     }
 
+    // to have the information of a people
     public ArrayList<String> getinformation(String email)
     {
         ArrayList<String> myinfo = new ArrayList<>();
@@ -79,6 +82,7 @@ public class PeopleDAO extends TablesDAO
         return myinfo;
     }
 
+    // Delete an account
     public void deleteElements(JTextField email)
     {
         String myemail = email.getText();
@@ -98,6 +102,7 @@ public class PeopleDAO extends TablesDAO
         closeConnection();
     }
 
+    // To have the status of the people (employee or customer)
     public String statusPeople(String email)
     {
         String status = null;
@@ -119,6 +124,7 @@ public class PeopleDAO extends TablesDAO
         return status;
     }
 
+    // Try to connect on the first page, test if the conditions are OK
     public boolean Connection(JTextField myemail, JPasswordField mypassword)
     {
         String email = myemail.getText();
@@ -145,6 +151,7 @@ public class PeopleDAO extends TablesDAO
         return false;
     }
 
+    // get the status
     public String getstatus(JTextField email)
     {
         String myemail = email.getText();
@@ -164,6 +171,7 @@ public class PeopleDAO extends TablesDAO
         return "Error";
     }
 
+    // Conditions for the inscription
     public int newinscription(JTextField myemail, JPasswordField mypassword, JPasswordField mypassword2, JTextField name, JTextField firstname, JComboBox<String> status)
     {
         String inputemail = myemail.getText();
@@ -201,6 +209,7 @@ public class PeopleDAO extends TablesDAO
         return 50;
     }
 
+    // Condition on the email
     public boolean testEmail(String email)
     {
         getConnection();
@@ -222,6 +231,7 @@ public class PeopleDAO extends TablesDAO
         return false;
     }
 
+    // Delete all elements of people into the database
     @Override
     public void deleteAllElements()
     {

@@ -18,10 +18,6 @@ import Model.ProductDAO;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
-/**
- *
- * @author Utilisateur
- */
 public class UpdateProductPage extends javax.swing.JPanel
 {
     int currentKey;

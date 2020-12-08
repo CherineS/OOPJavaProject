@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 package Model;
-import java.text.SimpleDateFormat;  
 import java.util.Date;  
+
 /**
  *
- * @author antoine
+ * Attributes of the class orders
  */
 public class Orders
 {
@@ -18,6 +18,8 @@ public class Orders
     private double m_price;
     private String m_email;
 
+
+    // Constructor
     public Orders(int orderNumber, Date date, Product products, double price, String email)
     {
         m_orderNumber = orderNumber;
@@ -27,6 +29,7 @@ public class Orders
         m_email=email;
     }
     
+    // Every getter
     public int getOrderNumber()
     {
         return m_orderNumber;
@@ -46,7 +49,13 @@ public class Orders
     {
         return m_price;
     }
+    
+    public String getEmail()
+    {
+        return m_email;
+    }
 
+    // Every setter
     public void setOrderNumber(int orderNumber)
     {
         m_orderNumber = orderNumber;
@@ -66,21 +75,9 @@ public class Orders
     {
         m_price = price;
     }
-
-    public String getEmail()
-    {
-        return m_email;
-    }
     
     public void setEmail(String email)
     {
         m_email=email;
-    }
-    
-    public void display()
-    {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("OrderNumber:" + m_orderNumber + "  Date:" + formatter.format(m_date) + "  Price:" + m_price + "  Email:" + m_email);
-        m_products.display();
     }
 }

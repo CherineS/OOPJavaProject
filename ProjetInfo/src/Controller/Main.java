@@ -5,6 +5,10 @@
  */
 package Controller;
         
+/**
+ *
+ * Main who calls the controller and add buttons to click on them and to use 
+ */
 public class Main
 {
     public static void main(String[] args) 

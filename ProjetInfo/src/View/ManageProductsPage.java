@@ -4,13 +4,8 @@
  * and open the template in the editor.
  */
 package View;
-
 import javax.swing.*;
 
-/**
- *
- * @author Utilisateur
- */
 public class ManageProductsPage extends javax.swing.JPanel
 {
 
