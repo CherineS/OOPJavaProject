@@ -34,11 +34,11 @@ public class Frame extends javax.swing.JFrame
         myMainPage.setPreferredSize(new Dimension(1600, 800));
         myInscription = new NewInscription();
         updateProductPage = new UpdateProductPage();
-        switchToConnexionPage();
+        switchToConnexionPage();    //display the connexion page first
 
     }
 
-    // Switch from differents pages
+    // Switch to differents pages
     public void switchToConnexionPage()
     {
         getContentPane().removeAll();

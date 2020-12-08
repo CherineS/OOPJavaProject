@@ -90,6 +90,7 @@ public class ProduitEnListe extends javax.swing.JPanel
         repaint();
     }
     
+    //Image to add if there is a promotion
     public void imageButton()
     {
         String imageURL = "https://i.goopics.net/LmrkN.png";

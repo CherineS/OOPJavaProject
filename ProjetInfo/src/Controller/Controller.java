@@ -78,6 +78,7 @@ public class Controller
                 boolean test = false;
                 try
                 {
+                    //If employee, the user needs to enter a specific password
                     if ("Employee".equals((String) myView.getFrame().getNewInscription().getStatus().getSelectedItem()))
                     {
                         String code = JOptionPane.showInputDialog(null, "Entrez le mot de passe des employés");
@@ -101,6 +102,7 @@ public class Controller
                             myView.getFrame().switchToConnexionPage();
                         } else
                         {
+                            //Blindages
                             if (peopleDAO.newinscription(myView.getFrame().getNewInscription().getEmail(), myView.getFrame().getNewInscription().getPassword(), myView.getFrame().getNewInscription().getPassword2(), myView.getFrame().getNewInscription().getTheName(), myView.getFrame().getNewInscription().getFirstname(), myView.getFrame().getNewInscription().getStatus()) == 1)
                                 JOptionPane.showMessageDialog(null, "L'email entré existe déjà");
                             if (peopleDAO.newinscription(myView.getFrame().getNewInscription().getEmail(), myView.getFrame().getNewInscription().getPassword(), myView.getFrame().getNewInscription().getPassword2(), myView.getFrame().getNewInscription().getTheName(), myView.getFrame().getNewInscription().getFirstname(), myView.getFrame().getNewInscription().getStatus()) == 2)
@@ -347,7 +349,7 @@ public class Controller
                 myView.getFrame().getFirstPage().revalidate();
                 myView.getFrame().getFirstPage().repaint();
             } 
-            else if (e.getSource() == myView.getModifierProfil()) // Button change profile
+            else if (e.getSource() == myView.getModifierProfil()) // Button update profile
             {         
              peopleDAO.changeElement(myView.getFrame().getProfilPage().getTheName(), myView.getFrame().getProfilPage().getPassword(), myView.getFrame().getProfilPage().getFirstname(), myView.getFrame().getProfilPage().getEmail());
              JOptionPane.showMessageDialog(null, "Profil mis à jour");
@@ -359,7 +361,7 @@ public class Controller
                     if (e.getSource() == myView.getMyButton().get(i))
                         switch (Integer.parseInt(productDAO.getQuantityToBuy().get(0).getText()))
                         {
-                            case -2:
+                            case -2:    //Modify product button : open the product's page
                                 myView.getFrame().setUpdateButton(productDAO.getKeyList().get(i));
                                 myView.getFrame().getMainPage().emptyPanel2();
                                 myView.getFrame().getMainPage().resetScroll();
@@ -377,7 +379,7 @@ public class Controller
                                 myView.getFrame().getMainPage().repaint();
                                 break;
                             case -21:
-                                if (e.getSource() == myView.getMyButton().get(0))
+                                if (e.getSource() == myView.getMyButton().get(0)) //Validate update button
                                 {
                                     if(isAGoodProduct(myView.getFrame().getUpdateButton().getQuantity(), myView.getFrame().getUpdateButton().getPrice(),myView.getFrame().getUpdateButton().getValuePromotion(), myView.getFrame().getUpdateButton().getMinPromotion(), myView.getFrame().getUpdateButton().getImageURL()))
                                     {
@@ -404,7 +406,7 @@ public class Controller
                                         myView.getMyButton().get(0).doClick();
                                     }
                                     
-                                } else if (e.getSource() == myView.getMyButton().get(1))
+                                } else if (e.getSource() == myView.getMyButton().get(1)) //Delete button
                                 {
                                     myView.getFrame().getUpdateButton().deleteQuantity();
                                     productDAO.deleteElement(myView.getFrame().getUpdateButton().getProductNo());
@@ -412,13 +414,13 @@ public class Controller
                                     JOptionPane.showMessageDialog(null, "Produit supprimé");
                                 }
                                 break;
-                            default:
+                            default:    //Add to cart button
                                 ordersDAO.AddShop(productDAO.getQuantityToBuy().get(i), myView.getEmail(), productDAO.getKeyList().get(i));
                                 JOptionPane.showMessageDialog(null, "Produit ajouté !");
                                 break;
                         }
                 for (int i = 0; i < myView.getSuppButton().size(); i++)
-                    if (e.getSource() == myView.getSuppButton().get(i))
+                    if (e.getSource() == myView.getSuppButton().get(i)) //Delete a product from current order button
                     {
                         ordersDAO.deleteShop(ordersDAO.getOrders().get(i).getProducts().getProductNo());
                         myView.getMenuButton().get(4).doClick();
@@ -458,7 +460,7 @@ public class Controller
                 myView.getFrame().getMainPage().revalidate();
                 myView.getFrame().getMainPage().repaint();
             }
-            else if (event.getSource() == myView.getManagerButton().get(2)) //Button Validate / add
+            else if (event.getSource() == myView.getManagerButton().get(2)) //Button Validate add product
             {
                 if(isAGoodProduct(myView.getFrame().getAddPage().getQuantity(), myView.getFrame().getAddPage().getPrice(),myView.getFrame().getAddPage().getValuePromotion(), myView.getFrame().getAddPage().getMinPromotion(), myView.getFrame().getAddPage().getImageURL()))
                 {
@@ -494,13 +496,13 @@ public class Controller
 
             for (Integer i : listResults)
             {
-                if (indice == 1)
+                if (indice == 1)    //If customer
                 {
                     ProduitEnListe newProduitEnListe = new ProduitEnListe(i);
                     myView.getFrame().getMainPage().addInPanel2(newProduitEnListe);
                     myView.getMyButton().add(newProduitEnListe.getAddToCartButton());
                     productDAO.addQuantityToBuy(newProduitEnListe.getQuantityToBuy());
-                } else if (indice == 2)
+                } else if (indice == 2)     //If employee
                 {
                     productDAO.addQuantityToBuy(new JTextField("-2"));
                     ManagerProduitEnListe newManagerProduitEnListe = new ManagerProduitEnListe(i);
@@ -529,6 +531,7 @@ public class Controller
         myView.getFrame().getMainPage().repaint();
     }
     
+    //Blindage
     public boolean isAGoodProduct(JTextField quantity, JTextField price, JTextField valuePromotion, JTextField minPromotion, JTextField imageURL) // add new product conditions
     {
         try
