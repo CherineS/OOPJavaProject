@@ -36,6 +36,7 @@ public class UpdateProductPage extends javax.swing.JPanel
         ManualInitcomponent(primaryKey);
     }
     
+    //setters to 0
     public void deleteQuantity()
     {
         quantity.setText("0");
@@ -51,6 +52,7 @@ public class UpdateProductPage extends javax.swing.JPanel
         minPromotion.setText("0");
     }
     
+    //getters
     public int getProductNo()
     {
         return currentKey;

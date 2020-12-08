@@ -45,6 +45,7 @@ public class MainPage extends javax.swing.JPanel
         pastOrdersButton.setBorderPainted(false);
         jButtonManageProduct.setBorderPainted(false);
 
+        //Creates "the bottom part of the frame"
         setLayout(new FlowLayout());
         jPanel2 = new JPanel();
         jPanel2.setBackground(Color.white);
@@ -69,7 +70,7 @@ public class MainPage extends javax.swing.JPanel
         buttonText.add(searchBar); //  Button adds search bar
         jPanel1.add(buttonText);
 
-        jButtonSearch = new JButton();
+        jButtonSearch = new JButton();  //Search button
         jButtonSearch.setBounds(910, 17, 60, 50);
         jButtonSearch.setOpaque(false);
         jButtonSearch.setContentAreaFilled(false);
@@ -105,6 +106,7 @@ public class MainPage extends javax.swing.JPanel
 
     }
     
+    //The button is visible only for employees
     public void manageButton(boolean visible)
     {
         if(visible==false)
@@ -113,7 +115,8 @@ public class MainPage extends javax.swing.JPanel
             jButtonManageProduct.setVisible(true);
     }
     
-    public void displayText(String message) 
+    //Display a message
+    public void displayText(String message)
     {
         JLabel noResults = new JLabel(message);
         noResults.setPreferredSize(new Dimension(300, 280));
@@ -303,11 +306,6 @@ public class MainPage extends javax.swing.JPanel
         jPanel2.removeAll();
     }
 
-    public JPanel getPanel2()
-    {
-        return jPanel2;
-    }
-
     public void addInPanel2(ProduitEnListe newProduct)
     {
         jPanel2.add(newProduct);
@@ -361,6 +359,12 @@ public class MainPage extends javax.swing.JPanel
     public void addInPanel2(UpdateProductPage newUpdateProductPage)
     {
         jPanel2.add(newUpdateProductPage);
+    }
+    
+    //getters
+    public JPanel getPanel2()
+    {
+        return jPanel2;
     }
 
     public JTextField getSearchBar()

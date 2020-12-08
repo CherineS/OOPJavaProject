@@ -112,7 +112,7 @@ public class ProductDAO extends TablesDAO
         closeConnection();
     }
     
-    //Returns all primary product keys
+    //Returns all primary product keys that has a quantity>0
     public ArrayList<Integer> returnAllElement()
     {
         ArrayList<Integer> results = new ArrayList<>();
@@ -137,6 +137,7 @@ public class ProductDAO extends TablesDAO
         return results;
     }
     
+    //Returns all primary product keys
     public ArrayList<Integer> returnElements()
     {
         ArrayList<Integer> results = new ArrayList<>();
@@ -170,8 +171,10 @@ public class ProductDAO extends TablesDAO
         name = "%" + name + "%";
 
         getConnection();
-        try
+        try     //Search by name
         {
+            //If customer, display all found elements excluding products where quantity=0.
+            //If employee, display all
             if(!manager)
                 sqlStatement = "SELECT productNo FROM product WHERE name LIKE \""+ name +"\" AND quantity != 0";
             else sqlStatement = "SELECT productNo FROM product WHERE name LIKE \""+ name +"\"";
@@ -188,7 +191,7 @@ public class ProductDAO extends TablesDAO
             System.out.println("Error searchElement ProductDAO");
         }
         
-        try
+        try     //Search by product number
         {
             if(manager)
             {
@@ -217,7 +220,7 @@ public class ProductDAO extends TablesDAO
         return results;
     }
     
-    // Search if there is a promotion on the product and if quantity > 0 
+    // Search every product with promotion where the quantity > 0 
     public ArrayList<Integer> searchPromotion()
     {
         String sqlStatement;
@@ -244,6 +247,8 @@ public class ProductDAO extends TablesDAO
         return results;
     }
     
+    //Create a product for Java manipulation
+    //Mainly used for getters
     public Product createJavaProduct(int productNo)
     {
         Product newJavaProduct = new Product();
