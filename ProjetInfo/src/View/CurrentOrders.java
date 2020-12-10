@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import Model.Orders;
+import static javax.swing.BorderFactory.createEmptyBorder;
 
 /**
  *
@@ -52,6 +53,9 @@ public class CurrentOrders extends javax.swing.JPanel
         thePrice = Double.parseDouble(String.copyValueOf(myPrice));
         price.setText(Double.toString(thePrice) + "€");
         description.setText(myOrders.getProducts().getDescription());
+        description.setBorder(createEmptyBorder());
+        description.setLineWrap(true);
+        description.setWrapStyleWord(true);
         jLabel1.setText(jLabel1.getText()+Integer.toString(myOrders.getProducts().getQuantity()));
 
         // Setup the image
@@ -96,8 +100,9 @@ public class CurrentOrders extends javax.swing.JPanel
         price = new javax.swing.JLabel();
         imageDisplay = new javax.swing.JPanel();
         supprimer = new javax.swing.JButton();
-        description = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        description = new javax.swing.JTextArea();
 
         name.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         name.setText("Name");
@@ -129,14 +134,20 @@ public class CurrentOrders extends javax.swing.JPanel
             }
         });
 
-        description.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        description.setText("Description");
-        description.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        description.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Quantité : ");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jScrollPane1.setBorder(null);
+
+        description.setEditable(false);
+        description.setBackground(new java.awt.Color(240, 240, 240));
+        description.setColumns(20);
+        description.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        description.setRows(5);
+        description.setBorder(null);
+        description.setCaretColor(new java.awt.Color(240, 240, 240));
+        jScrollPane1.setViewportView(description);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -149,12 +160,12 @@ public class CurrentOrders extends javax.swing.JPanel
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
                         .addComponent(price)
                         .addGap(82, 82, 82))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(supprimer)
@@ -178,10 +189,10 @@ public class CurrentOrders extends javax.swing.JPanel
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
                                 .addComponent(supprimer))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(45, 45, 45))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(29, 29, 29))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(imageDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))))
@@ -195,9 +206,10 @@ public class CurrentOrders extends javax.swing.JPanel
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel description;
+    private javax.swing.JTextArea description;
     private javax.swing.JPanel imageDisplay;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
     private javax.swing.JLabel price;
     private javax.swing.JButton supprimer;
