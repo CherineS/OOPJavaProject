@@ -9,10 +9,6 @@ import java.sql.*;
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
 
-/**
- *
- * @author Gaëtan
- */
 public abstract class TablesDAO
 {
     protected String url = "jdbc:mysql://localhost:3306/project?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";

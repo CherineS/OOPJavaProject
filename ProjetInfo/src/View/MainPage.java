@@ -306,12 +306,12 @@ public class MainPage extends javax.swing.JPanel
         jPanel2.removeAll();
     }
 
-    public void addInPanel2(ProduitEnListe newProduct)
+    public void addInPanel2(OneProduct newProduct)
     {
         jPanel2.add(newProduct);
     }
     
-    public void addInPanel2(ProfilPage pp)
+    public void addInPanel2(ProfilePage pp)
     {
         jPanel2.add(pp);
     }
@@ -326,17 +326,17 @@ public class MainPage extends javax.swing.JPanel
         jPanel2.add(newManageProductsPage);
     }
     
-    public void addInPanel2(ManagerProduitEnListe newProduct)
+    public void addInPanel2(ManagerProduct newProduct)
     {   
         jPanel2.add(newProduct);
     }
     
-    public void addInPanel2(AllOrders newOrder)
+    public void addInPanel2(AllPastOrders newOrder)
     {
         jPanel2.add(newOrder);
     }
     
-    public void addInPanel2(CommandeEnListe newOrders)
+    public void addInPanel2(OnePastOrder newOrders)
     {
         jPanel2.add(newOrders);
     }

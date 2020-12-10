@@ -4,19 +4,9 @@
  * and open the template in the editor.
  */
 package View;
-import java.awt.Image;
-import java.io.IOException;
-import java.net.URL;
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
-import Model.ProductDAO;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Utilisateur
- */
 public class AddProductPage extends javax.swing.JPanel
 {
 

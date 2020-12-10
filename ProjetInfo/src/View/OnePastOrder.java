@@ -21,11 +21,11 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 /**
- * Jframe form for only one order (pastOrders)
+ * Jframe form for only one order (pastOrders) of a customer
  */
-public class CommandeEnListe extends javax.swing.JPanel
+public class OnePastOrder extends javax.swing.JPanel
 {
-    public CommandeEnListe(Orders myOrders)
+    public OnePastOrder(Orders myOrders)
     {
         initComponents();
         jPanel2.setLayout(new FlowLayout());

@@ -15,12 +15,12 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
-public class ProduitEnListe extends javax.swing.JPanel
+public class OneProduct extends javax.swing.JPanel
 {
     /**
      * Creates new form FicheProduitClient
      */
-    public ProduitEnListe()
+    public OneProduct()
     {
         initComponents();
         name.setText("N/A");
@@ -28,7 +28,7 @@ public class ProduitEnListe extends javax.swing.JPanel
         setPreferredSize(new Dimension(800, 200));
     }
     
-    public ProduitEnListe(int productNo)
+    public OneProduct(int productNo)
     {
         initComponents();
         imageDisplay.setLayout(new FlowLayout());

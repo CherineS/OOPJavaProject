@@ -21,10 +21,6 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
-/**
- *
- * @author Gaëtan
- */
 public class Controller
 {
     // Attributes of Model and of View
@@ -168,7 +164,7 @@ public class Controller
             {
                 myView.getFrame().getMainPage().emptyPanel2();
                 ArrayList<Orders> myOrdersSearch = ordersDAO.searchOrder(myView.getEmail());
-                ArrayList<AllOrders> pastOrders = new ArrayList<>();
+                ArrayList<AllPastOrders> pastOrders = new ArrayList<>();
 
                 ArrayList<Integer> orderNumber = new ArrayList<>();
                 for (int i = 0; i < myOrdersSearch.size(); i++)
@@ -177,7 +173,7 @@ public class Controller
                 Set<Integer> set = new HashSet<>(orderNumber);
                 orderNumber.clear();
                 orderNumber.addAll(set);
-                AllOrders order = new AllOrders();
+                AllPastOrders order = new AllPastOrders();
 
                 if (!myOrdersSearch.isEmpty())
                 {
@@ -191,12 +187,12 @@ public class Controller
                             String orderProdNo = "" + myOrdersTest.get(j).getOrderNumber() + "-" + myOrdersTest.get(j).getProducts().getProductNo();
                             myProd.setQuantity(ordersDAO.findQuantity(orderProdNo));
                             myOrdersTest.get(j).setProducts(myProd);
-                            order.addPanel(new CommandeEnListe(myOrdersTest.get(j)));
+                            order.addPanel(new OnePastOrder(myOrdersTest.get(j)));
                         }
 
                         pastOrders.add(order);
                         myOrdersTest.clear();
-                        order = new AllOrders();
+                        order = new AllPastOrders();
                     }
 
                     for (int i = 0; i < pastOrders.size(); i++)
@@ -327,7 +323,7 @@ public class Controller
             } else if (e.getSource() == myView.getMenuButton().get(7)) //Button profile
             {
                 myView.getFrame().getMainPage().emptyPanel2();
-                myView.getFrame().setProfilPage(new ProfilPage(myView.getEmail()));
+                myView.getFrame().setProfilPage(new ProfilePage(myView.getEmail()));
                 myView.getFrame().getMainPage().addInPanel2(myView.getFrame().getProfilPage());
                 myView.getFrame().getMainPage().hideScroll();
                 myView.getFrame().getMainPage().resetScroll();
@@ -498,14 +494,14 @@ public class Controller
             {
                 if (indice == 1)    //If customer
                 {
-                    ProduitEnListe newProduitEnListe = new ProduitEnListe(i);
+                    OneProduct newProduitEnListe = new OneProduct(i);
                     myView.getFrame().getMainPage().addInPanel2(newProduitEnListe);
                     myView.getMyButton().add(newProduitEnListe.getAddToCartButton());
                     productDAO.addQuantityToBuy(newProduitEnListe.getQuantityToBuy());
                 } else if (indice == 2)     //If employee
                 {
                     productDAO.addQuantityToBuy(new JTextField("-2"));
-                    ManagerProduitEnListe newManagerProduitEnListe = new ManagerProduitEnListe(i);
+                    ManagerProduct newManagerProduitEnListe = new ManagerProduct(i);
                     myView.getFrame().getMainPage().addInPanel2(newManagerProduitEnListe);
                     myView.getMyButton().add(newManagerProduitEnListe.getUpdateButton());
                 }

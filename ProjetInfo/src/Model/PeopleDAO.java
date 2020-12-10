@@ -12,10 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Gaëtan
- */
 public class PeopleDAO extends TablesDAO
 {
 

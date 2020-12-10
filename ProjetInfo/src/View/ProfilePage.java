@@ -11,10 +11,10 @@ import Model.PeopleDAO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class ProfilPage extends javax.swing.JPanel
+public class ProfilePage extends javax.swing.JPanel
 {
 
-    public ProfilPage(String currentEmail)
+    public ProfilePage(String currentEmail)
     {
         initComponents();
         initcomponent2(currentEmail);

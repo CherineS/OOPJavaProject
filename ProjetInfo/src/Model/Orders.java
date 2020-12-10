@@ -18,7 +18,6 @@ public class Orders
     private double m_price;
     private String m_email;
 
-
     // Constructor
     public Orders(int orderNumber, Date date, Product products, double price, String email)
     {

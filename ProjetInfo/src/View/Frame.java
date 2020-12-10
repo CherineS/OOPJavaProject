@@ -15,7 +15,7 @@ public class Frame extends javax.swing.JFrame
 
     MainPage myMainPage;
     FirstPage connexionPage;
-    ProfilPage profilpage;
+    ProfilePage profilpage;
     AddProductPage myAddPage;
     NewInscription myInscription;
     UpdateProductPage updateProductPage;
@@ -77,7 +77,7 @@ public class Frame extends javax.swing.JFrame
         myMainPage.setVisible(true);
     }
 
-    public void setProfilPage(ProfilPage newProfilPage)
+    public void setProfilPage(ProfilePage newProfilPage)
     {
         profilpage = newProfilPage;
     }
@@ -109,7 +109,7 @@ public class Frame extends javax.swing.JFrame
         return myInscription;
     }
 
-    public ProfilPage getProfilPage()
+    public ProfilePage getProfilPage()
     {
         return profilpage;
     }

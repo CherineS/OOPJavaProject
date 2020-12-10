@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.sql.*;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Gaëtan
- */
 public class ProductDAO extends TablesDAO
 {
     private ArrayList<Integer> keyList = new ArrayList<>();

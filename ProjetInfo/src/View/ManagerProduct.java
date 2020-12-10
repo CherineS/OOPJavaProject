@@ -17,13 +17,13 @@ import javax.swing.JLabel;
 import Model.Product;
 import Model.ProductDAO;
 
-public class ManagerProduitEnListe extends javax.swing.JPanel
+public class ManagerProduct extends javax.swing.JPanel
 {
 
     /**
      * Creates new form ManagerProduitEnListe
      */
-    public ManagerProduitEnListe()
+    public ManagerProduct()
     {
         initComponents();
         name.setText("N/A");
@@ -31,7 +31,7 @@ public class ManagerProduitEnListe extends javax.swing.JPanel
         price.setText("N/A");
     }
 
-    public ManagerProduitEnListe(int productNo)
+    public ManagerProduct(int productNo)
     {
         initComponents();
         imageDisplay.setLayout(new FlowLayout());

@@ -14,14 +14,14 @@ import javax.swing.SwingConstants;
 
 /**
  *
- * Page for all orders
+ * Page for all orders past of a customer
  */
-public class AllOrders extends javax.swing.JPanel
+public class AllPastOrders extends javax.swing.JPanel
 {
     JLabel description;
     
     // All every orders one by one to it
-    public AllOrders()
+    public AllPastOrders()
     {
         initComponents();
         setLayout(new GridBagLayout());
@@ -35,7 +35,7 @@ public class AllOrders extends javax.swing.JPanel
         add(description,gbc);
     }
     
-    public void addPanel(CommandeEnListe myCommandeEnListe)
+    public void addPanel(OnePastOrder myCommandeEnListe)
     {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.NONE;
